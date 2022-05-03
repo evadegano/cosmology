@@ -1,0 +1,6 @@
+.serif {
+  font-family: var(--mainSerifFont);
+}
+.accent {
+  font-family: var(--accentFont);
+}
