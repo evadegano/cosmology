@@ -1,0 +1,13 @@
+#footer {
+  background: var(--dark);
+}
+#footer * {
+  color: var(--white);
+}
+
+#footerNavLinks * {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  color: var(--accentColor);
+}

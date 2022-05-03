@@ -1,8 +1,27 @@
+@font-face {
+  font-family: 'AlRagas-Eagng';
+  src: url('/fonts/AlRagas-Eagng.woff') format('woff');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  --dark: #232323;
+  --white: #FFFFFF;
+  --accentColor: #D69AFF;
+  --themeColor: #D69AFF;
+  --mainFont: 'DM Sans';
+  --mainSerifFont: 'DM Serif Display';
+  --secondaryFont: 'Montserrat';
+  --accentFont: 'AlRagas-Eagng';
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: var(--mainFont), -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
@@ -13,4 +32,11 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+header,
+section,
+footer {
+  padding: 40px;
+  width: 100vw;
 }
