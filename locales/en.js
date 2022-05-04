@@ -4,15 +4,15 @@ export default {
     navLinks: [
       {
         text: "Login",
-        url: "#"
+        url: "/login"
       },
       {
         text: "Set your goals",
-        url: "#"
+        url: "/mygoals"
       },
       {
         text: "About us",
-        url: "#"
+        url: "/info/aboutus"
       }
     ],
     headerText: "Your curated spiritual marketplace and moodboard.",
@@ -20,6 +20,18 @@ export default {
     formButton: "Next",
     sectionOneTitle: "What's meant for you will simply find you",
     sectionOneText: "Curated spiritual resources, content, inspo, connections, and shopping all in one place relevant to your goals, birthchart, and preferences ."
+  },
+  userForm: {
+    navLinks: [
+      {
+        text: "Cosmology",
+        url: "/",
+      },
+      {
+        text: "login",
+        url: "/login"
+      }
+    ]
   },
   footer: {
     socialNavLinks: [
