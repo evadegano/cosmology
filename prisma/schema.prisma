@@ -10,68 +10,67 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Lang {
-  id    Int      @id @default(autoincrement())
-  lang  String
-  items Item[]
-}
-
-model Tag {
-  id    Int      @id @default(autoincrement())
-  tag   String
-}
-
-model ItemType {
-  id    Int      @id @default(autoincrement())
-  type  String
-  items Item[]
-}
-
 model User {
-  id          Int      @id @default(autoincrement())
-  name        String
-  email       String   @unique
-  password    String
-  birthday    DateTime
-  profileImg  String?
-  sunSign     ZodiacSign
-  moonSign    ZodiacSign
-  risingSign  ZodiacSign
-  isPrivate   Boolean  @default(false)
-  role        Role     @default(USER)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  lastSeenAt  DateTime @default(now())
+  id              Int         @id @default(autoincrement())
+  name            String
+  email           String
+  password        String
+  birthYear       Int
+  birthMonth      Int
+  birthDay        Int
+  birthHour       Int
+  birthMin        Int
+  birthChartId    Int?        @unique
+  birthChart      BirthChart? @relation(fields: [birthChartId], references: [id])
+  role            Role        @default(USER)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @default(now())
+  lastSeenAt      DateTime    @default(now())
 }
 
-model Item {
-  id            Int       @id @default(autoincrement())
-  typeId        Int
-  langId        Int
-  tags          ItemTags[]
-  title         String
-  description   String
-  url           String
-  imgUrl        String
-  likes         Int      @default(0)
-  type          ItemType @relation(fields: [typeId], references: [id])
-  lang          Lang     @relation(fields: [langId], references: [id])
+model BirthChart {
+  id              Int         @id @default(autoincrement())
+  user            User?
+  sunSign         SunSign     @relation(fields: [sunSignId], references: [id])
+  sunSignId       Int
+  moonSign        MoonSign    @relation(fields: [moonSignId], references: [id])
+  moonSignId      Int
+  risingSign      RisingSign  @relation(fields: [risingSignId], references: [id])
+  risingSignId    Int
+  northNode       NorthNode   @relation(fields: [northNodeId], references: [id])
+  northNodeId     Int
+  southNode       SouthNode   @relation(fields: [southNodeId], references: [id])
+  southNodeId     Int
 }
 
-model ItemTags {
-  id            Int      @id @default(autoincrement())
-  itemId        Int
-  tagId         Int
-  item          Item     @relation(fields: [itemId], references: [id])
-  tag           Tag      @relation(fields: [tagId], references: [id])
+model SunSign {
+  id              Int         @id @default(autoincrement())
+  sign            ZodiacSign  @unique
+  birthCharts     BirthChart[]
 }
 
-model PinnedItems {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  itemId    Int
-  user      User     @relation(fields: [userId], references: [id])
-  item      Item     @relation(fields: [itemId], references: [id])
+model MoonSign {
+  id              Int         @id @default(autoincrement())
+  sign            ZodiacSign  @unique
+  birthCharts     BirthChart[]
+}
+
+model RisingSign {
+  id              Int         @id @default(autoincrement())
+  sign            ZodiacSign  @unique
+  birthCharts     BirthChart[]
+}
+
+model NorthNode {
+  id              Int         @id @default(autoincrement())
+  sign            ZodiacSign  @unique
+  birthCharts     BirthChart[]
+}
+
+model SouthNode {
+  id              Int         @id @default(autoincrement())
+  sign            ZodiacSign  @unique
+  birthCharts     BirthChart[]
 }
 
 enum Role {
@@ -81,4 +80,15 @@ enum Role {
 
 enum ZodiacSign {
   ARIES
+  TAURUS
+  GEMINI
+  CANCER
+  LEO
+  VIRGO
+  LIBRA
+  SCORPIO
+  SAGITTARIUS
+  CAPRICORN
+  AQUARIUS
+  PISCES
 }

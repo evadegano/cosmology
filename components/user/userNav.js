@@ -7,7 +7,7 @@ export default function UserNav({ navLinks }) {
     <nav>
       <div>logo</div>
       {navLinks.map(link => {
-        return <Link key={link.url} href={link.url}><a>{link.text}</a></Link>
+        return <Link key={link.text} href={link.url}><a>{link.text}</a></Link>
       })}
     </nav>
   )

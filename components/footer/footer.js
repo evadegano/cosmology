@@ -7,9 +7,11 @@ export default function Footer({ navLinks, socialTitle, newsletterText, newslett
     <footer id={styles.footer}>
       {/* nav links */}
       <div id={styles.footerNavLinks}>
+
         {navLinks.map(link => {
-          return <Link key={link.url} href={link.url}><a>{link.text}</a></Link>
+          return <Link key={link.text} href={link.url}><a>{link.text}</a></Link>
         })}
+        
       </div>
 
       <div>
