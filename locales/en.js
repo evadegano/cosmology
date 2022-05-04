@@ -7,6 +7,10 @@ export default {
         url: "#"
       },
       {
+        text: "Set your goals",
+        url: "#"
+      },
+      {
         text: "About us",
         url: "#"
       }

@@ -3,7 +3,7 @@ import { Origin, Horoscope } from 'circular-natal-horoscope-js'
 
 // get latitude and longitude of city and country
 function getGeocode(location) {
-  fetch(`http://api.positionstack.com/v1/forward?access_key=70919206120daec304196613e839c8ba&query=${location}`)
+  fetch(`http://api.positionstack.com/v1/forward?access_key=${process.env.NEXT_PUBLIC_POSITION_STACK_KEY}&query=${location}`)
     .then(promise => promise.json())
     .then(res => {
       const { latitude, longitude } = res.data[0]
