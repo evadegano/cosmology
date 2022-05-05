@@ -10,26 +10,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Account {
-  id                 String  @id @default(cuid())
-  userId             Int
-  user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
-
-  @@unique([provider, providerAccountId])
-}
-
 model Session {
-  id           String   @id @default(cuid())
+  id           Int      @id @default(autoincrement())
   sessionToken String   @unique
   userId       Int
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -42,6 +24,7 @@ model User {
   name            String
   email           String
   password        String
+  gender          Gender
   birthYear       Int
   birthMonth      Int
   birthDay        Int
@@ -49,7 +32,6 @@ model User {
   birthMin        Int
   birthChartId    Int?        @unique
   birthChart      BirthChart? @relation(fields: [birthChartId], references: [id])
-  account         Account?
   session         Session?
   role            Role        @default(USER)
   createdAt       DateTime    @default(now())
@@ -105,6 +87,12 @@ model SouthNode {
 enum Role {
   USER
   ADMIN
+}
+
+enum Gender {
+  FEMALE
+  MALE
+  BOTH
 }
 
 enum ZodiacSign {

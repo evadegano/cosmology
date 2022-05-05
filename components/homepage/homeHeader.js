@@ -8,6 +8,8 @@ export default function HomeHeader({ appName, headerText }) {
     <header id={styles.homeHeader}>
       <h1 className={utilsStyles.accent}>{appName}</h1>
       <p className={utilsStyles.serif}>{headerText}</p>
+
+      <Link href='/mygoals'><a>Start</a></Link>
     </header>
   )
 }
