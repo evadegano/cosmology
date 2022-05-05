@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import * as Yup from 'yup'
-import formLayout from '../components/userForm/formLayout'
+import FormLayout from '../components/userForm/formLayout'
 import StepOne from '../components/userForm/stepOne'
 import StepTwo from '../components/userForm/stepTwo'
 
@@ -38,15 +38,21 @@ export default function MyGoals() {
   }
 
   const steps = [
-    <StepOne key='stepOne' next={handleNextStep} user={user} />, 
-    <StepTwo key='stepTwo' next={handleNextStep} prev={handlePrevStep} user={user} />
+    ["goals"],
+    ["birthDate", "birthTime"],
   ]
 
   console.log('user:', user)
 
   return (
     <div>
-      {steps[currentStep]}
+      <FormLayout 
+        next={handleNextStep} 
+        prev={handlePrevStep} 
+        user={user} 
+        fields={steps[currentStep]} 
+        currentStep={currentStep}
+        totalSteps={steps.length}  />
     </div>
   )
 }
