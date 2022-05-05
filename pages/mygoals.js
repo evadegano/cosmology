@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import * as Yup from 'yup'
 import FormLayout from '../components/userForm/formLayout'
-import StepOne from '../components/userForm/stepOne'
-import StepTwo from '../components/userForm/stepTwo'
 
 
 export default function MyGoals() {
@@ -40,6 +38,8 @@ export default function MyGoals() {
   const steps = [
     ["goals"],
     ["birthDate", "birthTime"],
+    ["gender"],
+    ["name", "email", "password"]
   ]
 
   console.log('user:', user)

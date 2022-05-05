@@ -4,7 +4,9 @@ import FormNav from './formNav'
 
 export default function FormLayout(props) {
   const handleSubmit = (values) => {
-    props.next(values)
+    const finalStep = props.currentStep === props.totalSteps - 1
+    
+    props.next(values, finalStep)
   }
 
   return (
@@ -27,7 +29,11 @@ export default function FormLayout(props) {
             })}
 
             {props.currentStep !== 0 && <button type='button' onClick={(values) => props.prev(values)}>Back</button>}
-            {props.currentStep !== props.totalSteps - 1 && <button type='submit'>Next</button>}
+            {
+              props.currentStep !== props.totalSteps - 1 
+              ? <button type='submit'>Next</button>
+              : <button type='submit'>Create account</button>
+            }
           </Form>
         )}
       </Formik>
