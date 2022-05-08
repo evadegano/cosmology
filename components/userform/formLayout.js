@@ -21,9 +21,9 @@ export default function FormLayout(props) {
           <Form>
             {props.fields.map(field => {
               return (
-                <div key={field}>
-                  <h3>{field}</h3>
-                  <Field name={field} />
+                <div key={field.name}>
+                  <h3>{field.name}</h3>
+                  <Field type={field.type} name={field.name} />
                 </div>
               )
             })}

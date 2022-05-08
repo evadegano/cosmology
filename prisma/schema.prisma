@@ -32,6 +32,8 @@ model User {
   birthMin        Int
   birthChartId    Int?        @unique
   birthChart      BirthChart? @relation(fields: [birthChartId], references: [id])
+  birthLat        Float
+  birthLong       Float
   session         Session?
   role            Role        @default(USER)
   createdAt       DateTime    @default(now())
@@ -42,47 +44,14 @@ model User {
 model BirthChart {
   id              Int         @id @default(autoincrement())
   user            User?
-  sunSign         SunSign     @relation(fields: [sunSignId], references: [id])
-  sunSignId       Int
-  moonSign        MoonSign    @relation(fields: [moonSignId], references: [id])
-  moonSignId      Int
-  risingSign      RisingSign  @relation(fields: [risingSignId], references: [id])
-  risingSignId    Int
-  northNode       NorthNode   @relation(fields: [northNodeId], references: [id])
-  northNodeId     Int
-  southNode       SouthNode   @relation(fields: [southNodeId], references: [id])
-  southNodeId     Int
+  sunSign         ZodiacSign
+  moonSign        ZodiacSign
+  risingSign      ZodiacSign
+  northNode       ZodiacSign
+  southNode       ZodiacSign
+  venus           ZodiacSign
 }
 
-model SunSign {
-  id              Int         @id @default(autoincrement())
-  sign            ZodiacSign  @unique
-  birthCharts     BirthChart[]
-}
-
-model MoonSign {
-  id              Int         @id @default(autoincrement())
-  sign            ZodiacSign  @unique
-  birthCharts     BirthChart[]
-}
-
-model RisingSign {
-  id              Int         @id @default(autoincrement())
-  sign            ZodiacSign  @unique
-  birthCharts     BirthChart[]
-}
-
-model NorthNode {
-  id              Int         @id @default(autoincrement())
-  sign            ZodiacSign  @unique
-  birthCharts     BirthChart[]
-}
-
-model SouthNode {
-  id              Int         @id @default(autoincrement())
-  sign            ZodiacSign  @unique
-  birthCharts     BirthChart[]
-}
 
 enum Role {
   USER

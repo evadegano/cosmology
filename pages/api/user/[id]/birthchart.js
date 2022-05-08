@@ -1,20 +1,66 @@
-// import birthChartGen function
+import { PrismaClient } from "@prisma/client"
+import genBirthChart from '../../../../services/genBirthChart'
 
-export default function handler(req, res) {
+
+const prisma = new PrismaClient()
+
+export default async function handler(req, res) {
   if (req.method === 'GET') {
-    // search for userId in birthChart model
+    try {
+      // search for userId in birthChart model
+      const birthChart = await prisma.birthChart.findFirst({
+        where: {
+          user: req.params.id
+        }
+      })
 
-    res.status(200).json({ 
-      sunSign: 'aries',
-      moonSign: 'aries',
-      risingSign: 'leo'
-    })
+      if (birthChart) {
+        res.status(200).json({ birthChart })
+      }
+
+      res.status(300).json({ message: "You do not have a birth chart yet"})
+
+    } catch(error) {
+      res.json(500).json({ message: error })
+    }
+    
   } else if (req.method === 'POST') {
+    try {
+      // search for user birth info
+      const user = await prisma.user.findFirst({
+        where: {
+          id: req.params.id
+        }
+      })
+
+      // generate birth chart
+      const birthChart = genBirthChart(user.birthYear, user.birthMonth, user.birthDay, user.birthHour, user.birthMin, user.birthLat, user.birthLong)
+
+      // add birth chart to database
+      const birthChartRes = await prisma.birthChart.create({
+        data: {
+          user: user.id,
+          sunSign: birthChart.sunSign,
+          moonSign: birthChart.moonSign,
+          risingSign: birthChart.risingSign,
+          northNode: birthChart.northNode,
+          southNode: birthChart.southNode,
+        }
+      })
+
+      // link birthchart to user in user schema?
+
+      res.status(200).json({ birthChart: birthChartRes })
+
+    } catch(error) {
+      res.status(500).json({ message: error })
+    }
+    
+  } else if (req.method ===  'PUT') {
     // search for userId in birthChart model
 
     // update model
-
-  } else if (req.method ===  'PUT') {
-    // search for userId in birthChart model
+  } else {
+    res.status(500).json({ message: `This action with HTTP ${req.method} is not supported.` })
   }
 }

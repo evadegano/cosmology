@@ -1,3 +1,4 @@
+import { withIronSessionApiRoute } from "iron-session/next";
 import { PrismaClient } from "@prisma/client";
 import { hash } from 'bcrypt'
 
@@ -7,7 +8,7 @@ const prisma = new PrismaClient()
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { name, email, password, passwordConfirm, gender, birthYear, birthMonth, birthDay, birthHour, birthMin } = req.body
+    const { name, email, password, passwordConfirm, gender, birthYear, birthMonth, birthDay, birthHour, birthMin, birthLat, birthLong } = req.body
 
     // check email address format
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -54,11 +55,23 @@ export default async function handler(req, res) {
             birthMonth,
             birthDay,
             birthHour,
-            birthMin
+            birthMin,
+            birthLat,
+            birthLong
           },
         })
   
         res.status(200).json({ user })
+
+        // save user in session
+        req.session.user = {
+          id: user.id,
+          admin: true,
+        };
+        await req.session.save();
+        res.send({ ok: true });
+
+        // send activation email to user
   
       } catch(error) {
         res.status(400).json({ message: error })
@@ -68,11 +81,4 @@ export default async function handler(req, res) {
   } else {
     res.status(500).json({ message: `This action with HTTP ${req.method} is not supported.` })
   }
-
 }
-
-
-
-// store user id and name in session
-
-// send activation email to user

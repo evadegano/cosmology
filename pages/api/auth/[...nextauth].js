@@ -2,7 +2,7 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
-import { hash } from 'bcrypt'
+import { compare } from 'bcrypt'
 
 
 const prisma = new PrismaClient()
@@ -21,30 +21,25 @@ export default NextAuth({
         username: { label: "Email", type: "email", placeholder: "jsmith@example.com" },
         password: {  label: "Password", type: "password" }
       },
+      
       async authorize(credentials, req) {
-        hash(credentials.password, 10, async function(err, hash) {
-          // look up the user from the credentials supplied
-          const user = await prisma.user.findFirst({
-            where: {
-              email: credentials.username
-            }
-          })
-
-          if (user) {
-            // make sure the password is valid
-            if (hash !== user.password) {
-              return null
-            }
-
-            // Any object returned will be saved in `user` property of the JWT
-            return user
-          } else {
-            // If you return null then an error will be displayed advising the user to check their details.
-            return null
-    
-            // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+        const user = await prisma.user.findFirst({
+          where: {
+            email: credentials.username
           }
         })
+
+        if (user) {
+          compare(credentials.password, user.password, function(err, result) {
+            if (!err && result) {
+              return user
+            }
+            
+            return null
+          })
+        } else {
+          return null
+        }
       }
     })
   ],
