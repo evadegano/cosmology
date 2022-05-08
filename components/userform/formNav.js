@@ -5,8 +5,8 @@ import { signIn } from "next-auth/react"
 export default function FormNav(props) {
   return (
     <nav>
-      <Link href='/'><a>{props.appName}</a></Link>
-      <button onClick={() => signIn()}>Sign in</button>
+      <Link href='/'><a>Cosmology</a></Link>
+      <Link href='/login'><a>Sign in</a></Link>
     </nav>
   )
 }

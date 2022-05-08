@@ -4,3 +4,14 @@
 .accent {
   font-family: var(--accentFont);
 }
+.mainBtn {
+  background: var(--white);
+  font-family: var(--mainSerifFont);
+  color: var(--darkAccentColor);
+  padding: 10px 20px;
+  border-radius: 25px;
+}
+
+.mainBtn * {
+  color: var(--darkAccentColor);
+}

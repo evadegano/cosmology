@@ -11,10 +11,8 @@ export default function Home({ lang }) {
   
   return (
     <Layout lang={lang}>
-      <HomeNav navLinks={lang.home.navLinks} />
-
       <main>
-        <HomeHeader appName={appName} headerText={lang.home.headerText} />
+        <HomeHeader appName={appName} lang={lang} />
         <HomeSectionIntro sectionOneTitle={lang.home.sectionOneTitle} sectionOneText={lang.home.sectionOneText} />
       </main>
     </Layout>

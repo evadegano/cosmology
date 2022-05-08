@@ -1,12 +1,14 @@
 #homeHeader {
   background: var(--dark);
-  
+  display: flex;
+  justify-content: space-between;
+  padding-right: 0;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
 }
 #homeHeader h1 {
   color: var(--accentColor);
-}
-#homeHeader * {
-  color: var(--white);
 }
 
 #homeNav {
@@ -25,4 +27,21 @@
 
 #homeSectionIntro {
   text-align: center;
+}
+
+#homeHeaderImgWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: calc(100vh * (776/1201));
+}
+
+#homeTitle {
+  font-size: 60px;
+}
+
+#homeSubTitle {
+  font-size: 30px;
+  color: var(--white);
 }
