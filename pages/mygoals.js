@@ -1,14 +1,45 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import * as Yup from 'yup'
+import styles from '../styles/UserForm.module.css'
+import utilsStyles from '../styles/utils.module.css'
+import FormNav from '../components/userForm/formNav'
 import FormLayout from '../components/userForm/formLayout'
 import getGeocode from '../services/getGeocode'
+import StepBirthday from '../components/userForm/stepBirthday'
+import StepGender from '../components/userForm/stepGender'
+import StepSignup from '../components/userForm/stepSignup'
 
 
 export default function MyGoals({ lang, userForm, setUserForm }) {
-  
+  const router = useRouter()
   const [currentStep, setCurrentStep] = useState(0)
 
-  const submitForm = async (data) => {
+  const handleNextStep = (newData) => {
+    setUserForm(prev => ({ ...prev, ...newData }));
+
+    if (currentStep === steps.length - 1) {
+      submitForm(newData)
+      return
+    }
+
+    setCurrentStep((prev) => prev + 1);
+  }
+
+  const handlePrevStep = (newData) => {
+    setData(prev => ({ ...prev, ...newData }));
+
+    if (currentStep === 0) {
+      router.back()
+      return
+    }
+
+    setCurrentStep((prev) => prev - 1);
+  }
+
+  const submitForm = async (event, data) => {
+    event.preventDefault()
+
     // parse birthday and birthtime
 
     // get birth location geocode
@@ -51,58 +82,22 @@ export default function MyGoals({ lang, userForm, setUserForm }) {
   }
   
   const steps = [
-    [
-      {
-        name: "birthDate",
-        type: "date"
-      },
-      {
-        name: "birthTime",
-        type: "time"
-      },
-      {
-        name: "birthLoc",
-        type: "text"
-      }
-    ],
-    [
-      {
-        name: "female",
-        type: "checkbox"
-      },
-      {
-        name: "male",
-        type: "checkbox"
-      },
-    ],
-    [
-      {
-        name: "name",
-        type: "text"
-      },
-      {
-        name: "email",
-        type: "email"
-      },
-      {
-        name: "password",
-        type: "password"
-      },
-      {
-        name: "passwordConfirm",
-        type: "password"
-      },
-    ],
+    <StepBirthday key='StepBirthday' userForm={userForm} setUserForm={setUserForm} />,
+    <StepGender key='StepGender' setUserForm={setUserForm} />,
+    <StepSignup key='StepSignup' userForm={userForm} setUserForm={setUserForm} />
   ]
 
   return (
-    <div>
-      <FormLayout 
-        fields={steps[currentStep]}
-        userForm={userForm}
-        setUserForm={setUserForm}
-        currentStep={currentStep}
-        totalSteps={steps.length}  />
+    <div id={styles.userForm}>
+      <FormNav prev={handlePrevStep} />
+
+      <main>
+       {steps[currentStep]}
+        <button className={utilsStyles.mainBtn} onClick={handleNextStep}>
+          {currentStep !== steps.length - 1 ? 'Next' : 'Create account'}
+        </button>
+      </main>
+
     </div>
   )
 }

@@ -6,8 +6,11 @@
 }
 .mainBtn {
   background: var(--primaryColor);
-  font-family: var(--mainSerifFont);
+  font-family: var(--mainFont);
+  font-weight: 600;
+  font-size: large;
   color: var(--white);
   padding: 10px 20px;
   border-radius: var(--mid-radius);
+  border: none;
 }
