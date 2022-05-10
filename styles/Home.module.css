@@ -1,11 +1,15 @@
 #homeHeader {
   background: var(--dark);
+  border-bottom: 10px solid var(--primaryColor);
   display: flex;
   justify-content: space-between;
   padding-right: 0;
   height: 100vh;
   width: 100vw;
   position: relative;
+}
+#homeHeader p {
+  color: var(--white);
 }
 #homeHeader h1 {
   color: var(--primaryColor);
@@ -51,4 +55,31 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 40px;
+}
+
+#headerIntro {
+  max-width: 60%;
+}
+
+#goalForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+#goalForm span {
+  color: var(--white);
+  border: 1px solid var(--white);
+  border-radius: var(--mid-radius);
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+#goalForm input {
+  display: none;
+}
+
+#goalForm input:checked ~ span {
+  background: var(--white);
+  color: var(--darkAccentColor)
 }

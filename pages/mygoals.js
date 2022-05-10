@@ -6,17 +6,7 @@ import goals from '../bin/goals'
 
 
 export default function MyGoals() {
-  const [user, setUser] = useState({
-    goals: [],
-    birthDate: "",
-    birthTime: "",
-    birthLoc: "",
-    gender: "",
-    name: "",
-    email: "",
-    password: "",
-    passwordConfirm: ""
-  })
+  
   const [currentStep, setCurrentStep] = useState(0)
 
   const submitForm = async (data) => {

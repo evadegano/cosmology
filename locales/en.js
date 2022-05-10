@@ -7,7 +7,7 @@ export default {
         url: "/login"
       },
       {
-        text: "Set your goals",
+        text: "Get started",
         url: "/mygoals"
       },
       {
@@ -17,7 +17,7 @@ export default {
     ],
     headerText: "Your curated spiritual marketplace and moodboard.",
     formTitle: "What is your goal focus?",
-    formButton: "Next",
+    formButton: "Get Started",
     sectionOneTitle: "What's meant for you will simply find you",
     sectionOneText: "Curated spiritual resources, content, inspo, connections, and shopping all in one place relevant to your goals, birthchart, and preferences .",
     features: [
@@ -159,6 +159,10 @@ export default {
     "reducing PMS",
     "focus",
     "productivity",
-    "mental toughness"
+    "mental toughness",
+    "friendships",
+    "life purpose",
+    "gifts and intuition",
+    "fertility"
   ],
 }
