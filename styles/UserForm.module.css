@@ -1,0 +1,24 @@
+#formNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 20px;
+}
+
+#userForm {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+#userForm main {
+  background: var(--dark);
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 60px;
+}
+#userForm main * {
+  color: var(--white);
+  text-align: center;
+}

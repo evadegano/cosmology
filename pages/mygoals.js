@@ -2,10 +2,9 @@ import { useState } from 'react'
 import * as Yup from 'yup'
 import FormLayout from '../components/userForm/formLayout'
 import getGeocode from '../services/getGeocode'
-import goals from '../bin/goals'
 
 
-export default function MyGoals() {
+export default function MyGoals({ lang, userForm, setUserForm }) {
   
   const [currentStep, setCurrentStep] = useState(0)
 
@@ -50,37 +49,19 @@ export default function MyGoals() {
     
     console.log('Form submitted.', user)
   }
-
-  const handleNextStep = (newData, finalStep=false) => {
-    setUser(prev => ({...prev, ...newData}))
-
-    if (finalStep) {
-      submitForm(newData)
-      return
-    }
-
-    setCurrentStep(prev => prev + 1)
-  }
-
-  const handlePrevStep = (newData) => {
-    setUser(prev => ({...prev, ...newData}))
-    setCurrentStep(prev => prev - 1)
-  }
-
-  const goalFields = []
-  goals.map(goal => {
-    goalFields.push({ name: goal, type:"checkbox"})
-  })
   
   const steps = [
-    goalFields,
     [
       {
         name: "birthDate",
-        type: "datetime-local"
+        type: "date"
       },
       {
-        name: "birth location",
+        name: "birthTime",
+        type: "time"
+      },
+      {
+        name: "birthLoc",
         type: "text"
       }
     ],
@@ -91,16 +72,6 @@ export default function MyGoals() {
       },
       {
         name: "male",
-        type: "checkbox"
-      },
-    ],
-    [
-      {
-        name: "english",
-        type: "checkbox"
-      },
-      {
-        name: "french",
         type: "checkbox"
       },
     ],
@@ -124,15 +95,12 @@ export default function MyGoals() {
     ],
   ]
 
-  console.log('user:', user)
-
   return (
     <div>
       <FormLayout 
-        next={handleNextStep} 
-        prev={handlePrevStep} 
-        user={user} 
-        fields={steps[currentStep]} 
+        fields={steps[currentStep]}
+        userForm={userForm}
+        setUserForm={setUserForm}
         currentStep={currentStep}
         totalSteps={steps.length}  />
     </div>
