@@ -29,7 +29,7 @@ export default function Layout({ lang, children }) {
 
       {children}
 
-      <Footer navLinks={lang.footer.navLinks} socialTitle={lang.footer.socialTitle} newsletterText={lang.footer.newsletterText} newsletterButton={lang.footer.newsletterButton} />
+      <Footer appName={appName} lang={lang.footer} />
     </div>
   )
 }

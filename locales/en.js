@@ -19,7 +19,24 @@ export default {
     formTitle: "What is your goal focus?",
     formButton: "Next",
     sectionOneTitle: "What's meant for you will simply find you",
-    sectionOneText: "Curated spiritual resources, content, inspo, connections, and shopping all in one place relevant to your goals, birthchart, and preferences ."
+    sectionOneText: "Curated spiritual resources, content, inspo, connections, and shopping all in one place relevant to your goals, birthchart, and preferences .",
+    features: [
+      {
+        image: "/images/picture1.png",
+        title: "Explore your Inner Self",
+        text: "Receive content and guidance based on your birth chart. Reconnect to your soul's purpose.",
+      },
+      {
+        image: "/images/picture2.png",
+        title: "Manifest your goals",
+        text: "Get personnalized curated content, products and foods designed to help you manifest your unique goals.",
+      },
+      {
+        image: "/images/picture3.png",
+        title: "Connect with other beautiful souls",
+        text: "Connect with people sharing similar zodiac placements and challenges.",
+      },
+    ]
   },
   userForm: {
     navLinks: [
@@ -34,7 +51,7 @@ export default {
     ]
   },
   footer: {
-    socialNavLinks: [
+    userNavLinks: [
       {
         text: "Get notifications",
         url: "#"
@@ -49,27 +66,48 @@ export default {
       },
     ],
     socialTitle: "Socials",
-    newsletterText: "Bring the good vibes to your inbox",
+    socialLinks: [
+      {
+        text: "Facebook",
+        image: "/icons/facebook.png",
+        url: "#"
+      },
+      {
+        text: "Twitter",
+        image: "/icons/twitter.png",
+        url: "#"
+      },
+      {
+        text: "Instagram",
+        image: "/icons/instagram.png",
+        url: "#"
+      },
+      {
+        text: "Tik Tok",
+        image: "/icons/tiktok.png",
+        url: "#"
+      },
+      {
+        text: "Pinterest",
+        image: "/icons/pinterest.png",
+        url: "#"
+      },
+    ],
+    newsletterTitle: "Bring the good vibes to your inbox",
+    newsletterSubtitle: "Receive weekly positive affirmations to live your week in bliss",
     newsletterButton: "subscribe",
+    copyright: "@2022 Cosmology - All rights reserved",
     navLinks: [
-      {
-        text: "Privacy center",
-        url: "#"
-      },
-      {
-        text:  "Privacy and cookie policy",
-        url: "#"
-      },
-      {
-        text: "Manage cookies",
-        url: "#"
-      },
       {
         text: "Terms & conditions",
         url: "#"
       },
       {
-        text: "Copyright notice",
+        text:  "Privacy & cookie policy",
+        url: "#"
+      },
+      {
+        text: "Contact & help",
         url: "#"
       },
     ],

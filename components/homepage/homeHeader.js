@@ -9,9 +9,10 @@ export default function HomeHeader({ appName, lang }) {
   return (
     <header id={styles.homeHeader}>
       <div>
-        <HomeNav navLinks={lang.home.navLinks} />
+        <HomeNav navLinks={lang.navLinks} />
         <h1 className={utilsStyles.accent} id={styles.homeTitle}>{appName}</h1>
-        <h2 className={utilsStyles.serif} id={styles.homeSubTitle}>{lang.home.headerText}</h2>
+        <h2 className={utilsStyles.serif} id={styles.homeSubTitle}>{lang.headerText}</h2>
+        <p>Whatever your goals are, our mission is to help you live a more purposeful life</p>
 
         <Link href='/mygoals'><a className={utilsStyles.mainBtn}>Start</a></Link>
       </div>

@@ -12,8 +12,8 @@ export default function Home({ lang }) {
   return (
     <Layout lang={lang}>
       <main>
-        <HomeHeader appName={appName} lang={lang} />
-        <HomeSectionIntro sectionOneTitle={lang.home.sectionOneTitle} sectionOneText={lang.home.sectionOneText} />
+        <HomeHeader appName={appName} lang={lang.home} />
+        <HomeSectionIntro appName={appName} lang={lang.home} />
       </main>
     </Layout>
   )
