@@ -1,22 +1,15 @@
-@font-face {
-  font-family: 'AlRagas-Eagng';
-  src: url('/fonts/AlRagas-Eagng.woff') format('woff');
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
+/* #A674FF */
 :root {
-  --dark: #232323;
-  --white: #FFFFFF;
-  --primaryColor: #cba4e4;
-  --accentColor: #6bd4b1;
-  --darkAccentColor: #8C2ACF;
+  --dark: #22231F;
+  --white: #ece2db;
+  --primaryColor: #AFA2E5;
+  --accentColor: #E28A82;
+  --darkAccentColor: #8C7D9A;
   --themeColor: #D69AFF;
   --mainFont: 'DM Sans';
   --mainSerifFont: 'DM Serif Display';
   --secondaryFont: 'Montserrat';
-  --accentFont: 'AlRagas-Eagng';
+  --accentFont: 'Al Ragas';
   --mid-radius: 20px;
 }
 
@@ -30,7 +23,9 @@ body {
   font-weight: 400;
   line-height: 1.5;
   color: var(--dark);
+  background: var(--white);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {
@@ -56,6 +51,6 @@ p {
 header,
 section,
 footer {
-  padding: 60px;
+  padding: 30px 60px;
   width: 100vw;
 }

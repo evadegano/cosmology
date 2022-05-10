@@ -6,15 +6,15 @@ export default function Document() {
       <Head>
         <link
           rel="preload"
-          href="/fonts/AlRagas-Eagng.woff"
+          href="/fonts/Al_Ragas-9898.woff"
           as="font"
           type="font/woff"
           crossOrigin=""
         />
         <link 
-          href="https://fonts.googleapis.com/css2?family=DM+Sans&family=DM+Serif+Display&family=Montserrat:wght@500&display=swap" 
+          href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Playfair+Display&family=DM+Serif+Display&family=Montserrat:wght@500&display=swap" 
           rel="stylesheet" 
-        />
+        />                
       </Head>
       <body>
         <Main />

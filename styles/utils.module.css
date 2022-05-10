@@ -5,13 +5,9 @@
   font-family: var(--accentFont);
 }
 .mainBtn {
-  background: var(--white);
+  background: var(--primaryColor);
   font-family: var(--mainSerifFont);
-  color: var(--darkAccentColor);
+  color: var(--white);
   padding: 10px 20px;
   border-radius: var(--mid-radius);
-}
-
-.mainBtn * {
-  color: var(--darkAccentColor);
 }
