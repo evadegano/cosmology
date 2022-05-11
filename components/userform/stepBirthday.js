@@ -1,4 +1,5 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import Autocomplete from 'react-google-autocomplete'
+import { Formik, Form, Field, ErrorMessage } from "formik"
 
 
 export default function StepBirthday({ userForm, setUserForm }) {
@@ -31,7 +32,11 @@ export default function StepBirthday({ userForm, setUserForm }) {
         <span>
           I was born on <input type='date' name='birthDate' value={userForm.birthDate} onChange={handleChange} /> 
           at <input type='time' name='birthTime' value={userForm.birthTime} onChange={handleChange} />
-          in <input type='text' name='birthLoc' value={userForm.birthLoc} onChange={handleChange} />
+          in <input id='autocomplete' type='text' name='birthLoc' value={userForm.birthLoc} onChange={handleChange} />
+          <Autocomplete
+            apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}
+            onPlaceSelected={(place) => console.log(place)}
+          />
         </span>
       </form>
     </div>

@@ -1,3 +1,6 @@
+import Link from "next/link"
+
+
 export default function StepSignup({ userForm, setUserForm }) {
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -22,6 +25,8 @@ export default function StepSignup({ userForm, setUserForm }) {
 
   return (
     <div>
+      <h1>Create an account to</h1>
+
       <form>
         <label>Your name</label>
         <input type='text' name='name' value={userForm.name} placeholder='' onChange={handleChange} />
@@ -35,6 +40,8 @@ export default function StepSignup({ userForm, setUserForm }) {
         <label>Confirm your password</label>
         <input type='password' name='passwordConfirm' value={userForm.passwordConfirm} placeholder='' onChange={handleChange} />
       </form>
+
+      <p>*We will never share or sell your data. You&rsquo;re welcome to read our <Link href='/privacy-policy'><a>Privacy Policy</a></Link> to learn more.</p>
     </div>
   )
 }

@@ -15,11 +15,12 @@ export default {
         url: "/info/aboutus"
       }
     ],
-    headerText: "Your curated spiritual marketplace and moodboard.",
+    headerSubTitle: "Everything you need to nourish your soul.",
+    headerText: "Cosmology is your curated spiritual marketplace and moodboard.",
     formTitle: "What is your goal focus?",
     formButton: "Get Started",
     sectionOneTitle: "What's meant for you will simply find you",
-    sectionOneText: "Curated spiritual resources, content, inspo, connections, and shopping all in one place relevant to your goals, birthchart, and preferences .",
+    sectionOneText: "Cosmology is all about reconnecting with your Higher Self and sharing with other beautiful souls. Curated spiritual resources, content, inspo, connections, and shopping all in one place relevant to your goals, birthchart, and preferences.",
     features: [
       {
         image: "/images/picture1.png",
@@ -96,7 +97,7 @@ export default {
     newsletterTitle: "Bring the good vibes to your inbox",
     newsletterSubtitle: "Receive weekly positive affirmations to live your week in bliss",
     newsletterButton: "subscribe",
-    copyright: "@2022 Cosmology - All rights reserved",
+    copyright: "@ 2022 Cosmology. All rights reserved.",
     navLinks: [
       {
         text: "Terms & conditions",

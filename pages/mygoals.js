@@ -4,7 +4,6 @@ import * as Yup from 'yup'
 import styles from '../styles/UserForm.module.css'
 import utilsStyles from '../styles/utils.module.css'
 import FormNav from '../components/userForm/formNav'
-import FormLayout from '../components/userForm/formLayout'
 import getGeocode from '../services/getGeocode'
 import StepBirthday from '../components/userForm/stepBirthday'
 import StepGender from '../components/userForm/stepGender'
@@ -94,7 +93,7 @@ export default function MyGoals({ lang, userForm, setUserForm }) {
       <main>
        {steps[currentStep]}
         <button className={utilsStyles.mainBtn} onClick={handleNextStep}>
-          {currentStep !== steps.length - 1 ? 'Next' : 'Create account'}
+          {currentStep !== steps.length - 1 ? 'Next' : 'Save & Create account'}
         </button>
       </main>
 
