@@ -25,12 +25,12 @@ export default function HomeHeader({ appName, lang, goals, userForm, setUserForm
         <HomeNav navLinks={lang.navLinks} />
         <Image 
           src='/logo1.png'
-          width={513}
-          height={129}
+          width={1563/3.5}
+          height={377/3.5}
           alt={appName}
         />
-        <h2 className={utilsStyles.serif} id={styles.homeSubTitle}>{lang.headerText}</h2>
-        <p>Whatever your goals are, our mission is to help you live a more purposeful life</p>
+        <h2 className={utilsStyles.serif} id={styles.homeSubTitle}>{lang.headerSubtitle}</h2>
+        <p>{lang.headerText}</p>
 
         <p>What are your goals?</p>
         <form id={styles.goalForm}>
@@ -46,6 +46,7 @@ export default function HomeHeader({ appName, lang, goals, userForm, setUserForm
         </form>
 
         <Link href='/mygoals'><a className={utilsStyles.mainBtn}>Get started</a></Link>
+        <p>*it&rsquo;s free</p>
       </div>
       
       <div id={styles.homeHeaderImgWrapper}>

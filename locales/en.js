@@ -15,12 +15,12 @@ export default {
         url: "/info/aboutus"
       }
     ],
-    headerSubTitle: "Everything you need to nourish your soul.",
-    headerText: "Cosmology is your curated spiritual marketplace and moodboard.",
+    headerSubtitle: "The app made to nourish your soul.",
+    headerText: "At Cosmology, we curate spiritual content based on your goals and birthchart to assist you in living a more purposeful life. ",
     formTitle: "What is your goal focus?",
     formButton: "Get Started",
     sectionOneTitle: "What's meant for you will simply find you",
-    sectionOneText: "Cosmology is all about reconnecting with your Higher Self and sharing with other beautiful souls. Curated spiritual resources, content, inspo, connections, and shopping all in one place relevant to your goals, birthchart, and preferences.",
+    sectionOneText: "Cosmology is all about living in alignment with your Higher Self and connecting with other beautiful souls... As we believe that those are the two key ingredients to living a purposeful, empowered and blissful life. Hence, our mission is to make those things accessible to each and everyone.",
     features: [
       {
         image: "/images/picture1.png",
