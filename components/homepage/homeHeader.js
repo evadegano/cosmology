@@ -23,7 +23,12 @@ export default function HomeHeader({ appName, lang, goals, userForm, setUserForm
     <header id={styles.homeHeader}>
       <div id={styles.headerIntro}>
         <HomeNav navLinks={lang.navLinks} />
-        <h1 className={utilsStyles.accent} id={styles.homeTitle}>{appName}</h1>
+        <Image 
+          src='/logo1.png'
+          width={513}
+          height={129}
+          alt={appName}
+        />
         <h2 className={utilsStyles.serif} id={styles.homeSubTitle}>{lang.headerText}</h2>
         <p>Whatever your goals are, our mission is to help you live a more purposeful life</p>
 

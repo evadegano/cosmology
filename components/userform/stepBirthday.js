@@ -33,10 +33,10 @@ export default function StepBirthday({ userForm, setUserForm }) {
           I was born on <input type='date' name='birthDate' value={userForm.birthDate} onChange={handleChange} /> 
           at <input type='time' name='birthTime' value={userForm.birthTime} onChange={handleChange} />
           in <input id='autocomplete' type='text' name='birthLoc' value={userForm.birthLoc} onChange={handleChange} />
-          <Autocomplete
+          {/*<Autocomplete
             apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}
             onPlaceSelected={(place) => console.log(place)}
-          />
+          />*/}
         </span>
       </form>
     </div>
