@@ -24,9 +24,23 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     passwordConfirm: ""
   })
 
+  const [birthchart, setBirthchart] = useState({
+    sunSign: "",
+    moonSign: "",
+    risingSign: "",
+    northNode: "",
+    southNode: "",
+    venus: "",
+  })
+
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} lang={lang} userForm={userForm} setUserForm={setUserForm} />
+      <Component 
+        {...pageProps} 
+        lang={lang} 
+        userForm={userForm} setUserForm={setUserForm} 
+        birthchart={birthchart} setBirthchart={setBirthchart} 
+      />
     </SessionProvider>
   )
 }

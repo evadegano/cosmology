@@ -3,7 +3,13 @@ export default function getGeocode(location) {
     .then(promise => promise.json())
     .then(res => {
       const { latitude, longitude } = res.data[0]
-      return { latitude, longitude }
+
+      const geocode = {
+        latitude,
+        longitude
+      }
+
+      return geocode
     })
     .catch(err => err)
 }
