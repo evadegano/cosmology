@@ -2,9 +2,10 @@ import Autocomplete from 'react-google-autocomplete'
 import getGeocode from '../../services/getGeocode'
 import genBirthChart from '../../services/genBirthChart'
 import { Formik, Form, Field, ErrorMessage } from "formik"
+import utilsStyles from '../../styles/utils.module.css'
 
 
-export default function StepBirthday({ userForm, setUserForm, setBirthchart }) {
+export default function StepBirthday({ userForm, next, setUserForm, setBirthchart }) {
   const handleSubmit = (event) => {
     event.preventDefault()
 
@@ -42,7 +43,7 @@ export default function StepBirthday({ userForm, setUserForm, setBirthchart }) {
       risingSign: birthChart.risingSign
     }))
 
-    return
+    next()
   }
 
   const handleChange = (event) => {
@@ -61,8 +62,6 @@ export default function StepBirthday({ userForm, setUserForm, setBirthchart }) {
       default:
         break
     }
-    
-    console.log(userForm);
   }
 
   return (
@@ -77,7 +76,7 @@ export default function StepBirthday({ userForm, setUserForm, setBirthchart }) {
           in <input id='autocomplete' type='text' name='birthLoc' value={userForm.birthLoc} onChange={handleChange} required />
         </span>
 
-        <button type="submit">Next</button>
+        <button className={utilsStyles.mainBtn} type="submit">Next</button>
       </form>
     </div>
   )

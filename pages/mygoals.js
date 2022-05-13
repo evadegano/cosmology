@@ -18,7 +18,6 @@ export default function MyGoals({ lang, userForm, setUserForm, birthchart, setBi
     setUserForm(prev => ({ ...prev, ...newData }));
 
     if (currentStep === steps.length - 1) {
-      submitForm(newData)
       return
     }
 
@@ -26,7 +25,7 @@ export default function MyGoals({ lang, userForm, setUserForm, birthchart, setBi
   }
 
   const handlePrevStep = (newData) => {
-    setData(prev => ({ ...prev, ...newData }));
+    setUserForm(prev => ({ ...prev, ...newData }));
 
     if (currentStep === 0) {
       router.back()
@@ -35,36 +34,12 @@ export default function MyGoals({ lang, userForm, setUserForm, birthchart, setBi
 
     setCurrentStep((prev) => prev - 1);
   }
-
-  const submitForm = async (event, data) => {
-    event.preventDefault()
-
-    
-    // POST signup api
-    const signupRes = await fetch('api/auth/signup', {
-      method: 'POSsT',
-      body: user,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const userData = await signupRes.json()
-
-    // POST birthchart api
-    const birthChartRes = await fetch(`api/user/${userData.id}/birthchart.js`, {
-      method: 'POST',
-      body
-    })
-    // redirect user to their profile
-    
-    console.log('Form submitted.', user)
-  }
   
   const steps = [
-    <StepBirthday key='StepBirthday' userForm={userForm} setUserForm={setUserForm} setBirthchart={setBirthchart} />,
-    <StepBirthchart key='StepBirthchart' birthchart={birthchart}  />,
-    <StepGender key='StepGender' setUserForm={setUserForm} />,
-    <StepSignup key='StepSignup' userForm={userForm} setUserForm={setUserForm} />
+    <StepBirthday key='StepBirthday' userForm={userForm} next={handleNextStep} setUserForm={setUserForm} setBirthchart={setBirthchart} />,
+    <StepBirthchart key='StepBirthchart' birthchart={birthchart} next={handleNextStep} prev={handlePrevStep}  />,
+    <StepGender key='StepGender' setUserForm={setUserForm} next={handleNextStep} />,
+    <StepSignup key='StepSignup' userForm={userForm} setUserForm={setUserForm} birthchart={birthchart} />
   ]
 
   return (
@@ -72,10 +47,13 @@ export default function MyGoals({ lang, userForm, setUserForm, birthchart, setBi
       <FormNav prev={handlePrevStep} />
 
       <main>
-       {steps[currentStep]}
-        <button className={utilsStyles.mainBtn} onClick={handleNextStep}>
-          {currentStep !== steps.length - 1 ? 'Next' : 'Save & Create account'}
-        </button>
+        <div id={styles.stepsCountWrapper}>
+        {steps.map((el, idx) => {
+            return <div key={idx} id={styles.stepsCount} className={idx === currentStep ? styles.active : ''}></div>
+          })}
+        </div>
+        
+        {steps[currentStep]}
       </main>
 
     </div>

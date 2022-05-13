@@ -1,4 +1,7 @@
-export default function StepBirthchart({ birthchart }) {
+import utilsStyles from '../../styles/utils.module.css'
+
+
+export default function StepBirthchart({ birthchart, next, prev }) {
   return (
     <div>
       <h1>We calculated your birthchart</h1>
@@ -7,10 +10,13 @@ export default function StepBirthchart({ birthchart }) {
       <p>Moon sign: {birthchart.moonSign}</p>
       <p>Rising sign: {birthchart.risingSign}</p>
 
-      <p>That&rsquos so awesome!</p>
+      <p>That&rsquo;s so awesome!</p>
 
-      <button>Go back, I made a mistake</button>
-      <button>Next</button>
+      <div>
+        <button className={utilsStyles.mainBtn} onClick={prev}>Go back, I made a mistake</button>
+        <button className={utilsStyles.mainBtn} onClick={next}>Next</button>
+      </div>
+      
     </div>
   )
 }
