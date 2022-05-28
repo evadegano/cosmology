@@ -1,5 +1,12 @@
-const user = req.session.get("user")
+import UserNav from '../../components/user/userNav'
 
-export default function UserProfile() {
-  return <h1>hey beautiful {user.name}</h1>
+
+export default function UserProfile({ lang }) {
+  return (
+    <div>
+      <UserNav navLinks={lang.userNavBar.navLinks} />
+      <h1>hey beautiful soul</h1>
+    </div>
+    
+  )
 }

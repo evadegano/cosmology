@@ -22,13 +22,13 @@ async function handler(req, res) {
 
     // send error message if user not found
     if (!user) {
-      req.status(400).json({ message: "No account linked to this email address." })
+      res.status(400).json({ message: "No account linked to this email address." })
     }
 
     // send error message if passwords don't match
     compare(password, user.password, function(error, result) {
       if (error | !result) {
-        req.status(400).json({ message: "Wrong password." })
+        res.status(400).json({ message: "Wrong password." })
       }
     })
     
