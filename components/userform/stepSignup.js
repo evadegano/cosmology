@@ -1,34 +1,42 @@
 import Link from "next/link"
 import utilsStyles from '../../styles/utils.module.css'
+import Router from 'next/router'
 
 
 export default function StepSignup({ userForm, setUserForm, birthchart }) {
   const handleSubmit = async (event) => {
+    // prevent window from reloading
     event.preventDefault()
 
-    const user = {}
+    // store user data for db instance
+    const user = {
+      name: userForm.name,
+      email: userForm.mail,
+      password: userForm.password,
+      passwordConfirm: userForm.passwordConfirm,
+      gender: userForm.gender,
+      birthDate: userForm.birthDate,
+      birthTime: userForm.birthTime,
+      birthLat: userForm.birthLat,
+      birthLong: userForm.birthLong
+    }
+
+    console.log("user:", user)
     
     // POST signup api
     const signupRes = await fetch('api/auth/signup', {
       method: 'POST',
-      body: user,
+      body: { user, birthchart },
       headers: {
         'Content-Type': 'application/json'
       }
     })
     const userData = await signupRes.json()
 
-    // POST birthchart api
-    const birthChartRes = await fetch(`api/user/${userData.id}/birthchart.js`, {
-      method: 'POST',
-      body: birthchart,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    // redirect user to their profile
+    console.log("User created:", userData)
     
-    console.log('Form submitted.', userData)
+    // redirect user to their profile
+    Router.push(`/user`)
   }
 
   const handleChange = (event) => {
@@ -57,7 +65,7 @@ export default function StepSignup({ userForm, setUserForm, birthchart }) {
       <h1>Save your results and get access to your curated content!</h1>
 
       <form onSubmit={handleSubmit}>
-        <label>Your name</label>
+        <label>Your first name</label>
         <input type='text' name='name' value={userForm.name} placeholder='' onChange={handleChange} required />
 
         <label>Your email address</label>
@@ -71,7 +79,7 @@ export default function StepSignup({ userForm, setUserForm, birthchart }) {
 
         <p>*We will never share or sell your data. You&rsquo;re welcome to read our <Link href='/privacy-policy'><a>Privacy Policy</a></Link> to learn more.</p>
 
-        <button className={utilsStyles.mainBtn} onClick={next} type="submit">Save & create account</button>
+        <button className={utilsStyles.mainBtn} type="submit">Save & create account</button>
       </form>
     </div>
   )

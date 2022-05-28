@@ -7,10 +7,6 @@ export default {
         url: "/login"
       },
       {
-        text: "Get started",
-        url: "/mygoals"
-      },
-      {
         text: "About us",
         url: "/info/aboutus"
       }

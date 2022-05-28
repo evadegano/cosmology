@@ -40,7 +40,15 @@ export default function StepBirthday({ userForm, next, setUserForm, setBirthchar
       ...prev,
       sunSign: birthChart.sunSign,
       moonSign: birthChart.moonSign,
-      risingSign: birthChart.risingSign
+      risingSign: birthChart.risingSign,
+      northNode: birthChart.northNode,
+      southNode: birthChart.southNode,
+      venus: birthChart.venus
+    }))
+
+    // update user state
+    setUserForm(prev => ({
+      ...prev, birthLat: lat, birthLong: long
     }))
 
     next()

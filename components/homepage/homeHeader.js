@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import Router from 'next/router'
+import { useState } from 'react'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import utilsStyles from '../../styles/utils.module.css'
@@ -6,6 +7,8 @@ import HomeNav from './homeNav'
 
 
 export default function HomeHeader({ appName, lang, goals, userForm, setUserForm }) {
+  const [errorMsg, setErrorMsg] = useState("")
+
   const handleChange = (event) => {
     const target = event.target;
     const goalsCopy = [...userForm.goals]
@@ -17,6 +20,17 @@ export default function HomeHeader({ appName, lang, goals, userForm, setUserForm
     }
     
     setUserForm(prev => ({ ...prev, goals: goalsCopy }))
+  }
+
+  const handleClick = () => {
+    // display error message if no goal was selected
+    if (userForm.goals.length === 0) {
+      setErrorMsg('Please select at least one goal.')
+    
+    // else redirect user to the user form
+    } else {
+      Router.push('/mygoals')
+    }
   }
 
   return (
@@ -45,8 +59,9 @@ export default function HomeHeader({ appName, lang, goals, userForm, setUserForm
           })}
         </form>
 
-        <Link href='/mygoals'><a className={utilsStyles.mainBtn}>Get started</a></Link>
+        <button className={utilsStyles.mainBtn} onClick={handleClick}>Get started</button>
         <p>*it&rsquo;s free</p>
+        {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
       </div>
       
       <div id={styles.homeHeaderImgWrapper}>

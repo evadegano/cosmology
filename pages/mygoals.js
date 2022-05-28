@@ -38,7 +38,7 @@ export default function MyGoals({ lang, userForm, setUserForm, birthchart, setBi
   const steps = [
     <StepBirthday key='StepBirthday' userForm={userForm} next={handleNextStep} setUserForm={setUserForm} setBirthchart={setBirthchart} />,
     <StepBirthchart key='StepBirthchart' birthchart={birthchart} next={handleNextStep} prev={handlePrevStep}  />,
-    <StepGender key='StepGender' setUserForm={setUserForm} next={handleNextStep} />,
+    <StepGender key='StepGender' userForm={userForm} setUserForm={setUserForm} next={handleNextStep} />,
     <StepSignup key='StepSignup' userForm={userForm} setUserForm={setUserForm} birthchart={birthchart} />
   ]
 

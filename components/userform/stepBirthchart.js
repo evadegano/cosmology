@@ -9,6 +9,7 @@ export default function StepBirthchart({ birthchart, next, prev }) {
       <p>Sun sign: {birthchart.sunSign}</p>
       <p>Moon sign: {birthchart.moonSign}</p>
       <p>Rising sign: {birthchart.risingSign}</p>
+      <p>and more...</p>
 
       <p>That&rsquo;s so awesome!</p>
 

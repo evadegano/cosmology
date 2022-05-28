@@ -6,9 +6,14 @@ import { hash } from 'bcrypt'
 const prisma = new PrismaClient()
 
 
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    const { name, email, password, passwordConfirm, gender, birthYear, birthMonth, birthDay, birthHour, birthMin, birthLat, birthLong } = req.body
+export default handler(
+  async function signupRoute(req, res) {
+    /*
+      Create user and birthchart instances in the database 
+    */
+
+    const { name, email, password, passwordConfirm, gender, birthDate, birthTime, birthLat, birthLong } = req.body.user
+    const { sunSign, moonSign, risingSign, northNode, southNode, venus } = req.body.birthchart
 
     // check email address format
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -51,34 +56,46 @@ export default async function handler(req, res) {
             email,
             password: hash,
             gender,
-            birthYear,
-            birthMonth,
-            birthDay,
-            birthHour,
-            birthMin,
+            birthDate,
+            birthTime,
+            birthChart: {
+              create: {
+                sunSign: sunSign.toUpperCase(),
+                moonSign: moonSign.toUpperCase(),
+                risingSign: risingSign.toUpperCase(),
+                northNode: northNode.toUpperCase(),
+                southNode: southNode.toUpperCase(),
+                venus: venus.toUpperCase(),
+              }
+            },
             birthLat,
             birthLong
           },
         })
-  
-        res.status(200).json({ user })
 
         // save user in session
         req.session.user = {
           id: user.id,
-          admin: true,
+          name: user.name,
         };
-        await req.session.save();
-        res.send({ ok: true });
+        await req.session.save()
+        console.log("User succesfully created in the database.")
 
         // send activation email to user
-  
+
+        res.status(200).json({ session: req.sessions.user })
+
       } catch(error) {
-        res.status(400).json({ message: error })
+        res.status(500).json({ message: error.message })
       }
     })
-
-  } else {
-    res.status(500).json({ message: `This action with HTTP ${req.method} is not supported.` })
-  }
-}
+  },
+  {
+    cookieName: process.env.NEXT_PUBLIC_COOKIE_NAME,
+    password: process.env.NEXT_PUBLIC_SECRET,
+    // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
+    cookieOptions: {
+      secure: process.env.NEXT_PUBLIC_ENV === "production",
+    },
+  },
+)

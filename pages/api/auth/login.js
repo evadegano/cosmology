@@ -44,11 +44,11 @@ export default withIronSessionApiRoute(
     }
   },
   {
-    cookieName: "myapp_cookiename",
+    cookieName: process.env.NEXT_PUBLIC_COOKIE_NAME,
     password: process.env.NEXT_PUBLIC_SECRET,
     // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
     cookieOptions: {
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NEXT_PUBLIC_ENV === "production",
     },
   },
-);
+)

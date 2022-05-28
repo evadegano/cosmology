@@ -31,6 +31,9 @@ export default function genBirthChart(year, month, day, hour, min, latitude, lon
     sunSign: horoscope.CelestialBodies.sun.Sign.label,
     moonSign: horoscope.CelestialBodies.moon.Sign.label,
     risingSign: horoscope._ascendant.Sign.label,
+    northNode: horoscope.CelestialPoints.northnode.Sign.label,
+    southNode: horoscope.CelestialPoints.southnode.Sign.label,
+    venus: horoscope.CelestialBodies.venus.Sign.label
   }
 
   return userChart
