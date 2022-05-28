@@ -10,7 +10,9 @@ export default function Login({ lang }) {
     password: ""
   })
 
-  handleChange = (event) => {
+  const [errorMsg, setErrorMsg] = useState("")
+
+  const handleChange = (event) => {
     const { name, value } = event.target
 
     switch (name) {
@@ -25,22 +27,31 @@ export default function Login({ lang }) {
     }
   }
 
-  handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     // prevent reload
     event.preventDefault()
 
-    // log user in
-    const loginRes = await fetch('api/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({ email: loginCred.email, password: loginCred.password }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const userData = await loginRes.json()
+    const { email, password } = loginCred
 
-    // redirect user to their profile
-    Router.push(`/user`)
+    try {
+      // log user in
+      const loginRes = await fetch('api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const userData = await loginRes.json()
+      console.log("userData", userData);
+
+      // redirect user to their profile
+      Router.push(`/user/${userData.id}`)
+      
+    } catch(err) {
+      console.log("err:", err)
+      setErrorMsg(err.message)
+    }
   }
 
   return (
@@ -54,6 +65,7 @@ export default function Login({ lang }) {
           <input type='password' name='password' value={loginCred.password} onChange={handleChange} />
           
           <button className={utilsStyles.mainBtn} type="submit">Log in</button>
+          {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
         </form>
       </main>
     </Layout>

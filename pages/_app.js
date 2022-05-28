@@ -1,6 +1,5 @@
 import '../styles/globals.css'
 import '../styles/fonts.css'
-import { SessionProvider } from "next-auth/react"
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import en from '../locales/en'
@@ -36,14 +35,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   })
 
   return (
-    <SessionProvider session={session}>
-      <Component 
-        {...pageProps} 
-        lang={lang} 
-        userForm={userForm} setUserForm={setUserForm} 
-        birthchart={birthchart} setBirthchart={setBirthchart} 
-      />
-    </SessionProvider>
+    <Component 
+      {...pageProps} 
+      lang={lang} 
+      userForm={userForm} setUserForm={setUserForm} 
+      birthchart={birthchart} setBirthchart={setBirthchart} 
+    />
   )
 }
 

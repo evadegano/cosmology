@@ -1,9 +1,12 @@
 import Link from "next/link"
 import utilsStyles from '../../styles/utils.module.css'
 import Router from 'next/router'
+import { useState } from 'react'
 
 
 export default function StepSignup({ userForm, setUserForm, birthchart }) {
+  const [errorMsg, setErrorMsg] = useState('')
+
   const handleSubmit = async (event) => {
     // prevent window from reloading
     event.preventDefault()
@@ -21,18 +24,24 @@ export default function StepSignup({ userForm, setUserForm, birthchart }) {
       birthLong: userForm.birthLong
     }
     
-    // POST signup api
-    const signupRes = await fetch('api/auth/signup', {
-      method: 'POST',
-      body: JSON.stringify({ user, birthchart }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const userData = await signupRes.json()
-    
-    // redirect user to their profile
-    Router.push(`/user`)
+    try {
+      // POST signup api
+      const signupRes = await fetch('api/auth/signup', {
+        method: 'POST',
+        body: JSON.stringify({ user, birthchart }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const userData = await signupRes.json()
+      
+      // redirect user to their profile
+      Router.push(`/user`)
+
+    } catch(err) {
+      console.log(err)
+      setErrorMsg(err.message)
+    }
   }
 
   const handleChange = (event) => {
@@ -76,6 +85,7 @@ export default function StepSignup({ userForm, setUserForm, birthchart }) {
         <p>*We will never share or sell your data. You&rsquo;re welcome to read our <Link href='/privacy-policy'><a>Privacy Policy</a></Link> to learn more.</p>
 
         <button className={utilsStyles.mainBtn} type="submit">Save & create account</button>
+        {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
       </form>
     </div>
   )

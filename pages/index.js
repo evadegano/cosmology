@@ -1,13 +1,9 @@
 import Layout, { appName } from '../components/sitewide/layout'
-import { useSession } from 'next-auth/react'
 import HomeHeader from '../components/homepage/homeHeader'
 import HomeSectionIntro from '../components/homepage/homeSectionIntro'
 
 
-export default function Home({ lang, userForm, setUserForm }) {
-  const { data: session } = useSession()
-  console.log('session:', session)
-  
+export default function Home({ lang, userForm, setUserForm }) {  
   return (
     <Layout lang={lang}>
       <main>

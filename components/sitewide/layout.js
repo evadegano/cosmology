@@ -1,14 +1,11 @@
 import Script from 'next/script'
 import Head from 'next/head'
-import { useSession, signIn, signOut } from "next-auth/react"
 import styles from '../../styles/Layout.module.css'
 import Footer from '../footer/footer'
 
 export const appName = 'Cosmology'
 
 export default function Layout({ lang, children }) {
-  const { data: session } = useSession()
-
   return (
     <div id={styles.layout}>
       <Head>
