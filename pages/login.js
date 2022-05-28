@@ -25,11 +25,19 @@ export default function Login({ lang }) {
     }
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     // prevent reload
     event.preventDefault()
 
     // log user in
+    const loginRes = await fetch('api/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ email: loginCred.email, password: loginCred.password }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const userData = await loginRes.json()
 
     // redirect user to their profile
     Router.push(`/user`)

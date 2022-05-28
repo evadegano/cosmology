@@ -24,12 +24,12 @@ export default function StepGender({ userForm, setUserForm, next }) {
       <form id={utilsStyles.goalForm}>
           
         <label>
-          <input onChange={handleChange} type='checkbox' value='women' name='women' />
+          <input onChange={handleChange} type='checkbox' value='FEMALE' name='women' />
           <span>Women</span>
         </label>
 
         <label>
-          <input onChange={handleChange} type='checkbox' value='men' name='men' />
+          <input onChange={handleChange} type='checkbox' value='MALE' name='men' />
           <span>Men</span>
         </label>
 

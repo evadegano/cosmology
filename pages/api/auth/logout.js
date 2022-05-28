@@ -1,16 +1,16 @@
 import { withIronSessionApiRoute } from "iron-session/next";
 
 export default withIronSessionApiRoute(
-  function logoutRoute(req, res, session) {
+  function logoutRoute(req, res) {
     req.session.destroy();
     res.send({ ok: true });
   },
   {
-    cookieName: "myapp_cookiename",
-    password: "complex_password_at_least_32_characters_long",
+    cookieName: process.env.NEXT_PUBLIC_COOKIE_NAME,
+    password: process.env.NEXT_PUBLIC_SECRET,
     // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
     cookieOptions: {
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NEXT_PUBLIC_ENV === "production",
     },
   },
 );

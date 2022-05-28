@@ -11,7 +11,7 @@ export default function StepSignup({ userForm, setUserForm, birthchart }) {
     // store user data for db instance
     const user = {
       name: userForm.name,
-      email: userForm.mail,
+      email: userForm.email,
       password: userForm.password,
       passwordConfirm: userForm.passwordConfirm,
       gender: userForm.gender,
@@ -20,20 +20,16 @@ export default function StepSignup({ userForm, setUserForm, birthchart }) {
       birthLat: userForm.birthLat,
       birthLong: userForm.birthLong
     }
-
-    console.log("user:", user)
     
     // POST signup api
     const signupRes = await fetch('api/auth/signup', {
       method: 'POST',
-      body: { user, birthchart },
+      body: JSON.stringify({ user, birthchart }),
       headers: {
         'Content-Type': 'application/json'
       }
     })
     const userData = await signupRes.json()
-
-    console.log("User created:", userData)
     
     // redirect user to their profile
     Router.push(`/user`)

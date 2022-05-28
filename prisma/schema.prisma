@@ -27,10 +27,11 @@ model User {
   gender          Gender[]
   birthDate       String
   birthTime       String
-  birthChartId    Int?        @unique
-  birthChart      BirthChart? @relation(fields: [birthChartId], references: [id])
   birthLat        Float
   birthLong       Float
+  birthChartId    Int?        @unique
+  birthChart      BirthChart? @relation(fields: [birthChartId], references: [id])
+  goals           Goal[]      @relation(references: [id])
   session         Session?
   role            Role        @default(USER)
   createdAt       DateTime    @default(now())
@@ -49,9 +50,10 @@ model BirthChart {
   venus           ZodiacSign
 }
 
-model Goals {
+model Goal {
   id              Int         @id @default(autoincrement())
   goal            String      @unique
+  users           User[]      @relation(references: [id])
 }
 
 enum Role {

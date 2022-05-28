@@ -24,6 +24,11 @@ export default function StepBirthday({ userForm, next, setUserForm, setBirthchar
 
         lat = latitude
         long = longitude
+
+        // update user state
+        setUserForm(prev => ({
+          ...prev, birthLat: lat, birthLong: long
+        }))
       })
       .catch(err => err)
 
@@ -44,11 +49,6 @@ export default function StepBirthday({ userForm, next, setUserForm, setBirthchar
       northNode: birthChart.northNode,
       southNode: birthChart.southNode,
       venus: birthChart.venus
-    }))
-
-    // update user state
-    setUserForm(prev => ({
-      ...prev, birthLat: lat, birthLong: long
     }))
 
     next()
