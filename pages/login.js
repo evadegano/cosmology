@@ -52,7 +52,7 @@ export default function Login({ lang }) {
       }
 
       // redirect user to their profile
-      Router.push(`/user/${userData.id}`)
+      Router.push(`/user/${userData.user.id}`)
       
     } catch(err) {
       setErrorMsg(err.message)

@@ -13,6 +13,7 @@ export default function StepSignup({ userForm, setUserForm, birthchart }) {
 
     // store user data for db instance
     const user = {
+      goals: userForm.goals,
       name: userForm.name,
       email: userForm.email,
       password: userForm.password,
@@ -43,7 +44,7 @@ export default function StepSignup({ userForm, setUserForm, birthchart }) {
       }
       
       // redirect user to their profile
-      Router.push(`/user/${userData.id}`)
+      Router.push(`/user/${userData.user.id}`)
 
     } catch(err) {
       console.log(err)

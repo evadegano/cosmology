@@ -1,10 +1,14 @@
 import { withIronSessionApiRoute } from "iron-session/next"
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient, Gender, ZodiacSign } from "@prisma/client"
 import { sessionOptions } from '../../../lib/session'
 import { hash } from 'bcrypt'
 
 
 const prisma = new PrismaClient()
+
+const zodiacSign = {
+
+}
 
 
 export default withIronSessionApiRoute(handler, sessionOptions)
@@ -15,15 +19,16 @@ async function handler(req, res) {
   */
 
   if (req.method === 'POST') {
-    const { goals, name, email, password, passwordConfirm, gender, birthDate, birthTime, birthLat, birthLong } = req.body.user
-    const { sunSign, moonSign, risingSign, northNode, southNode, venus } = req.body.birthchart
+    let { goals, name, email, password, passwordConfirm, gender, birthDate, birthTime, birthLat, birthLong } = req.body.user
+    let { sunSign, moonSign, risingSign, northNode, southNode, venus } = req.body.birthchart
 
-   
-    // turn data into valid instances for db
-    let gendersForDB = JSON.parse(gender)   
+    console.log("goals:", goals);
+    console.log("genders:", gender);
 
-    let goalsForDB = JSON.parse(goals)
-    goalsForDB = goalsForDB.map(goal => {
+    // clean data for db
+    name = name.toLowerCase().trim()
+    email = email.toLowerCase().trim()
+    goals = goals.map(goal => {
       return { goal }
     })
 
@@ -68,7 +73,7 @@ async function handler(req, res) {
             email,
             password: hash,
             gender: {
-              set: gendersForDB
+              set: gender 
             },
             birthDate,
             birthTime,
@@ -85,7 +90,7 @@ async function handler(req, res) {
               }
             },
             goals: {
-              create: goalsForDB
+              create: goals
             }
           },
         })
