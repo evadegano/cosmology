@@ -1,0 +1,21 @@
+#userLayout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100vw;
+}
+
+#sideNav {
+  width: 40%;
+  height: 100vh;
+  background: var(--dark);
+  color: var(--white);
+}
+
+#mainContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+}

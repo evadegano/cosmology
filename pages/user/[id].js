@@ -1,12 +1,12 @@
 import UserNav from '../../components/user/userNav'
+import UserLayout from "../../components/user/userLayout"
 
 
 export default function UserProfile({ lang }) {
   return (
-    <div>
-      <UserNav navLinks={lang.userNavBar.navLinks} />
-      <h1>hey beautiful soul</h1>
-    </div>
+    <UserLayout lang={lang}>
+      
+    </UserLayout>
     
   )
 }
