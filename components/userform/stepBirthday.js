@@ -1,20 +1,30 @@
 import Autocomplete from 'react-google-autocomplete'
-import getGeocode from '../../services/getGeocode'
+import { useState } from 'react'
 import genBirthChart from '../../services/genBirthChart'
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import utilsStyles from '../../styles/utils.module.css'
 
 
 export default function StepBirthday({ userForm, next, setUserForm, setBirthchart }) {
+  const [errorMsg, setErrorMsg] = useState('')
+  
   const handleSubmit = (event) => {
+    // prevent window from reloading
     event.preventDefault()
 
     const { birthDate, birthTime, birthLoc } = userForm
+
+    // make sure all fields have been filled in
+    if (!birthDate || !birthTime || !birthLoc) {
+      setErrorMsg("Please fill in all fields.")
+    }
     
     // parse birthday and birthtime
     const [birthYear, birthMonth, birthDay] = birthDate.split("-").map(el => Number(el))
     const [birthHour, birthMin] = birthTime.split(":").map(el => Number(el))
 
+    // turn birth location into latitude and longitude
+    birthLoc = birthLoc.toLowerCase()
     let lat, long
 
     fetch(`http://api.positionstack.com/v1/forward?access_key=${process.env.NEXT_PUBLIC_POSITION_STACK_KEY}&query=${birthLoc}`)
@@ -25,17 +35,18 @@ export default function StepBirthday({ userForm, next, setUserForm, setBirthchar
         lat = latitude
         long = longitude
 
+        // make sure that lat and long 
+        if (lat === undefined || long === undefined) {
+          setErrorMsg("We're sorry but we couldn't find your city. Please make sure it was written correctly.")
+          return
+        }
+
         // update user state
         setUserForm(prev => ({
           ...prev, birthLat: lat, birthLong: long
         }))
       })
-      .catch(err => err)
-
-    // get birth location geocode
-    const geocode = getGeocode(birthLoc)
-
-    console.log("geocode", geocode);
+      .catch(err => setErrorMsg(err.message))
 
     // get zodiac signs
     const birthChart = genBirthChart(birthYear, birthMonth, birthDay, birthHour, birthMin, lat, long)
@@ -51,6 +62,7 @@ export default function StepBirthday({ userForm, next, setUserForm, setBirthchar
       venus: birthChart.venus
     }))
 
+    // go to next form step
     next()
   }
 
@@ -85,6 +97,8 @@ export default function StepBirthday({ userForm, next, setUserForm, setBirthchar
         </span>
 
         <button className={utilsStyles.mainBtn} type="submit">Next</button>
+
+        {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
       </form>
     </div>
   )

@@ -7,7 +7,7 @@ import HomeNav from './homeNav'
 
 
 export default function HomeHeader({ appName, lang, goals, userForm, setUserForm }) {
-  const [errorMsg, setErrorMsg] = useState("")
+  const [errorMsg, setErrorMsg] = useState('')
 
   const handleChange = (event) => {
     const target = event.target;

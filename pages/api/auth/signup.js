@@ -1,12 +1,15 @@
-import { withIronSessionApiRoute } from "iron-session/next";
-import { PrismaClient } from "@prisma/client";
+import { withIronSessionApiRoute } from "iron-session/next"
+import { PrismaClient } from "@prisma/client"
+import { sessionOptions } from '../../../lib/session'
 import { hash } from 'bcrypt'
 
 
 const prisma = new PrismaClient()
 
 
-export default async function handler(req, res) {
+export default withIronSessionApiRoute(handler, sessionOptions)
+
+async function handler(req, res) {
   /*
     Create user and birthchart instances in the database 
   */
@@ -14,6 +17,15 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { goals, name, email, password, passwordConfirm, gender, birthDate, birthTime, birthLat, birthLong } = req.body.user
     const { sunSign, moonSign, risingSign, northNode, southNode, venus } = req.body.birthchart
+
+   
+    // turn data into valid instances for db
+    let gendersForDB = JSON.parse(gender)   
+
+    let goalsForDB = JSON.parse(goals)
+    goalsForDB = goalsForDB.map(goal => {
+      return { goal }
+    })
 
     // check email address format
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -55,7 +67,9 @@ export default async function handler(req, res) {
             name,
             email,
             password: hash,
-            gender,
+            gender: {
+              set: gendersForDB
+            },
             birthDate,
             birthTime,
             birthLat,
@@ -71,9 +85,7 @@ export default async function handler(req, res) {
               }
             },
             goals: {
-              create: [ goals.map(goal => {
-                return { goal: goal }
-              }) ]
+              create: goalsForDB
             }
           },
         })
@@ -85,7 +97,7 @@ export default async function handler(req, res) {
         };
         await req.session.save()
 
-        console.log("User succesfully created in the database.")
+        console.log("User succesfully created in the database.", req.session)
 
         // send activation email to user
 

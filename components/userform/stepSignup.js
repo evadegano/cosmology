@@ -34,9 +34,16 @@ export default function StepSignup({ userForm, setUserForm, birthchart }) {
         }
       })
       const userData = await signupRes.json()
+      console.log("userData", userData);
+      
+      // return if error
+      if (userData.message) {
+        setErrorMsg(userData.message)
+        return
+      }
       
       // redirect user to their profile
-      Router.push(`/user`)
+      Router.push(`/user/${userData.id}`)
 
     } catch(err) {
       console.log(err)

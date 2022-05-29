@@ -1,8 +1,27 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import utilsStyles from '../../styles/utils.module.css'
+import { useState } from 'react'
 
 
 export default function StepGender({ userForm, setUserForm, next }) {
+  const [errorMsg, setErrorMsg] = useState('')
+  
+  const handleSubmit = (event) => {
+    // prevent window from reloading
+    event.preventDefault()
+
+    const { gender } = userForm
+
+    // make sure that at least one gender has been chosen
+    if (gender.length === 0) {
+      setErrorMsg("Please choose at least one gender.")
+      return
+    }
+
+    // go to next form step
+    next()
+  }
+
   const handleChange = (event) => {
     const value  = event.target.value
     const genderCopy = [...userForm.gender]
@@ -21,7 +40,7 @@ export default function StepGender({ userForm, setUserForm, next }) {
       <h1>Would you like your content to be for...</h1>
       <p>Select one or both</p>
 
-      <form id={utilsStyles.goalForm}>
+      <form id={utilsStyles.goalForm} onSubmit={handleSubmit}>
           
         <label>
           <input onChange={handleChange} type='checkbox' value='FEMALE' name='women' />
@@ -33,7 +52,9 @@ export default function StepGender({ userForm, setUserForm, next }) {
           <span>Men</span>
         </label>
 
-        <button className={utilsStyles.mainBtn} onClick={next}>Next</button>
+        <button className={utilsStyles.mainBtn} type='submit'>Next</button>
+
+        {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
       </form>
     </div>
   )

@@ -45,11 +45,16 @@ export default function Login({ lang }) {
       const userData = await loginRes.json()
       console.log("userData", userData);
 
+      // return if error
+      if (userData.message) {
+        setErrorMsg(userData.message)
+        return
+      }
+
       // redirect user to their profile
       Router.push(`/user/${userData.id}`)
       
     } catch(err) {
-      console.log("err:", err)
       setErrorMsg(err.message)
     }
   }
@@ -65,6 +70,7 @@ export default function Login({ lang }) {
           <input type='password' name='password' value={loginCred.password} onChange={handleChange} />
           
           <button className={utilsStyles.mainBtn} type="submit">Log in</button>
+
           {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
         </form>
       </main>
