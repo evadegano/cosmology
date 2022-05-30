@@ -9,11 +9,10 @@ const prisma = new PrismaClient()
 export default withIronSessionApiRoute(handler, sessionOptions)
 
 async function handler(req, res) {
-  console.log("hey");
   const { email, password } = req.body
 
   try {
-    // search user from database 
+    // search user in database 
     const user = await prisma.user.findFirst({
       where: {
         email
@@ -30,6 +29,16 @@ async function handler(req, res) {
       if (error | !result) {
         res.status(400).json({ message: "Wrong password." })
       }
+    })
+
+    // update user's last seen field
+    const updateUser = await prisma.user.update({
+      where: {
+        email
+      },
+      data: {
+        lastSeenAt: Date.now()
+      } 
     })
     
     // save user in session

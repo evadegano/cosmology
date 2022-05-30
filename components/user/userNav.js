@@ -1,8 +1,12 @@
+import React, { useContext } from 'react'
+import { Context } from '../../context'
 import Router from 'next/router'
 import Image from "next/image"
 
 
 export default function UserNav() {
+  const { lang } = useContext(Context)
+
   const logout = async (event) => {
     // prevent window reload
     event.preventDefault()

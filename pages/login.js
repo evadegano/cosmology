@@ -1,16 +1,18 @@
+import React, { useContext } from 'react'
+import { Context } from '../../context'
 import Router from 'next/router'
 import Layout, { appName } from '../components/sitewide/layout'
 import { useState } from 'react'
 import utilsStyles from '../styles/utils.module.css'
 
 
-export default function Login({ lang }) {
+export default function Login() {
+  const { lang, errorMsg, setErrorMsg } = useContext(Context)
+
   const [loginCred, setLoginCred] = useState({
     email: "",
     password: ""
   })
-
-  const [errorMsg, setErrorMsg] = useState("")
 
   const handleChange = (event) => {
     const { name, value } = event.target

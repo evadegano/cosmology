@@ -23,13 +23,14 @@ model User {
   birthChart      BirthChart? 
   goals           Goal[]      @relation(references: [id])
   role            Role        @default(USER)
+  messages        Message[]
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @default(now())
   lastSeenAt      DateTime    @default(now())
 }
 
 model BirthChart {
-  id              Int         @id @default(autoincrement())
+  id              Int        @id @default(autoincrement())
   user            User       @relation(fields: [userId], references: [id])
   userId          Int        @unique
   sunSign         ZodiacSign
@@ -44,6 +45,15 @@ model Goal {
   id              Int         @id @default(autoincrement())
   goal            String      @unique
   users           User[]      @relation(references: [id])
+}
+
+model Message {
+  id              Int         @id @default(autoincrement())
+  message         String
+  sender          User        @relation(fields: [senderId], references: [id])
+  senderId        Int         
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @default(now())
 }
 
 enum Role {

@@ -1,16 +1,10 @@
 import '../styles/globals.css'
 import '../styles/fonts.css'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
-import en from '../locales/en'
-import fr from '../locales/fr'
+import { ContextProvider } from '../context'
 
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-  const router = useRouter()
-  const { locale } = router
-  const lang = locale === 'en' ? en : fr
-
+function MyApp({ Component, pageProps }) {
   const [userForm, setUserForm] = useState({
     goals: [],
     birthDate: "",
@@ -35,12 +29,13 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   })
 
   return (
-    <Component 
-      {...pageProps} 
-      lang={lang} 
-      userForm={userForm} setUserForm={setUserForm} 
-      birthchart={birthchart} setBirthchart={setBirthchart} 
-    />
+    <ContextProvider>
+      <Component 
+        {...pageProps} 
+        userForm={userForm} setUserForm={setUserForm} 
+        birthchart={birthchart} setBirthchart={setBirthchart} 
+      />
+    </ContextProvider>
   )
 }
 

@@ -1,9 +1,13 @@
+import React, { useContext } from 'react'
+import { Context } from '../context'
 import Layout, { appName } from '../components/sitewide/layout'
 import HomeHeader from '../components/homepage/homeHeader'
 import HomeSectionIntro from '../components/homepage/homeSectionIntro'
 
 
-export default function Home({ lang, userForm, setUserForm }) {  
+export default function Home({ userForm, setUserForm }) {  
+  const { lang } = useContext(Context)
+
   return (
     <Layout lang={lang}>
       <main>

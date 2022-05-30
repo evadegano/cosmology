@@ -1,7 +1,12 @@
-export default function UserActions({ actionButtons }) {
+import React, { useContext } from 'react'
+import { Context } from '../../context'
+
+export default function UserActions() {
+  const { lang } = useContext(Context)
+  
   return (
     <div>
-      {actionButtons.map(btn => {
+      {lang.profile.actionButtons.map(btn => {
         return <button key={btn}>{btn}</button>
       })}
     </div>
