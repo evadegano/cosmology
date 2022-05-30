@@ -3,6 +3,7 @@ import { Context } from '../../../context'
 import { PrismaClient } from '@prisma/client'
 import UserLayout from "../../../components/user/userLayout"
 import SendMsg from '../../../components/chat/sendMsg'
+import ChatScreen from '../../../components/chat/chatScreen'
 import utilsStyles from '../../../styles/utils.module.css'
 
 
@@ -14,10 +15,13 @@ export async function getServerSideProps(context) {
     // get last ten messages
     const messages = await prisma.message.findMany({
       select: {
+        id: true,
         message: true,
         sender: {
           select: {
-            id: true
+            id: true,
+            name: true,
+            profilePic: true
           }
         }
       },
@@ -47,14 +51,15 @@ export async function getServerSideProps(context) {
 
 export default function Chat(props) {
   const { lang } = useContext(Context)
+  const messages = JSON.parse(props.messages)
 
   return (
     <UserLayout>
       <h1>Chat with the community</h1>
 
       {
-        props.messages.length > 0
-        ? <p>{props.messages}</p>
+        messages.length > 0
+        ? <ChatScreen messages={messages} />
         : <p>No new message</p>
       }
       
