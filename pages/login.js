@@ -34,11 +34,11 @@ export default function Login() {
     event.preventDefault()
 
     try {
-      // log user in
-      await login(loginCred.email, loginCred.password)
+      // log user in using Firebase
+      const loginRes = await login(loginCred.email, loginCred.password)
 
       // redirect user to their profile
-      Router.push(`/user/${user.uid}`)
+      Router.push(`/user/${loginRes.user.uid}`)
       
     } catch(err) {
       setErrorMsg(err.message)

@@ -12,15 +12,8 @@ export default async function handler(req, res) {
     let { id, goals, name, gender, lang, birthDate, birthTime, birthLat, birthLong } = req.body.user
     let { sunSign, moonSign, risingSign, northNode, southNode, venus } = req.body.birthchart
 
-    console.log("goals:", goals);
-    console.log("genders:", gender);
-
-    // prep data for db
-    name = name.toLowerCase().trim()
-    goals = JSON.parse(goals)
-    gender = JSON.parse(gender)
     goals = goals.map(goal => {
-      return { goal }
+      return { id: goal }
     })
 
     try {
@@ -28,7 +21,7 @@ export default async function handler(req, res) {
       const user = await prisma.user.create({
         data: {
           id,
-          name,
+          name: name.toLowerCase().trim(),
           gender: {
             set: gender
           },
@@ -47,9 +40,7 @@ export default async function handler(req, res) {
               venus: venus.toUpperCase(),
             }
           },
-          goals: {
-            create: goals
-          }
+          goals: { connect: goals }
         },
       })
 

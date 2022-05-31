@@ -7,8 +7,9 @@ import utilsStyles from '../../styles/utils.module.css'
 import HomeNav from './homeNav'
 
 
-export default function HomeHeader({ appName }) {
+export default function HomeHeader({ appName, goals }) {
   const { lang, userForm, setUserForm, errorMsg, setErrorMsg } = useContext(Context)
+  goals = JSON.parse(goals)
 
   const handleChange = (event) => {
     const target = event.target;
@@ -50,11 +51,11 @@ export default function HomeHeader({ appName }) {
         <p>What are your goals?</p>
         <form id={styles.goalForm}>
           
-          {lang.goals.map(goal => {
+          {goals.map(goal => {
             return (
-              <label key={goal}>
-                <input onChange={handleChange} type='checkbox' value={goal} name={goal} />
-                <span>{goal}</span>
+              <label key={goal.id}>
+                <input onChange={handleChange} type='checkbox' value={goal.id} name={goal.goal} />
+                <span>{goal.goal}</span>
               </label>
               )
           })}
