@@ -1,7 +1,11 @@
+import { useContext } from 'react'
+import { Context } from '../../context'
 import utilsStyles from '../../styles/utils.module.css'
 
 
-export default function StepBirthchart({ birthchart, next, prev }) {
+export default function StepBirthchart({ next, prev }) {
+  const { lang, birthchart } = useContext(Context)
+
   return (
     <div>
       <h1>We calculated your birthchart</h1>

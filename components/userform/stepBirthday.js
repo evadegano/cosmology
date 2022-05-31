@@ -1,12 +1,12 @@
 import Autocomplete from 'react-google-autocomplete'
-import { useState } from 'react'
+import { useContext } from 'react'
+import { Context } from '../../context'
 import genBirthChart from '../../services/genBirthChart'
-import { Formik, Form, Field, ErrorMessage } from "formik"
 import utilsStyles from '../../styles/utils.module.css'
 
 
-export default function StepBirthday({ userForm, next, setUserForm, setBirthchart }) {
-  const [errorMsg, setErrorMsg] = useState('')
+export default function StepBirthday({ next }) {
+  const { lang, userForm, setUserForm, setBirthchart, errorMsg, setErrorMsg } = useContext(Context)
   
   const handleSubmit = (event) => {
     // prevent window from reloading

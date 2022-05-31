@@ -1,35 +1,23 @@
 import React, { userEffect, useContext } from 'react'
 import { Context } from '../../../context'
-import { PrismaClient } from '@prisma/client'
 import UserLayout from "../../../components/user/userLayout"
 import SendMsg from '../../../components/chat/sendMsg'
 import ChatScreen from '../../../components/chat/chatScreen'
 import utilsStyles from '../../../styles/utils.module.css'
-
-
-const prisma = new PrismaClient()
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 
 export async function getServerSideProps(context) {
   try {
     // get last ten messages
-    const messages = await prisma.message.findMany({
-      select: {
-        id: true,
-        message: true,
-        sender: {
-          select: {
-            id: true,
-            name: true,
-            profilePic: true
-          }
-        }
-      },
-      orderBy: {
-        createdAt: 'desc'
-      },
-      take: 10
-    })
+    
+    const messages = [ {
+      id: 1,
+      message: 'this is a message',
+      sender: { name: "eva", id: 3, profilePic: "jifore"}
+    }]
 
     // return messages as props
     return {

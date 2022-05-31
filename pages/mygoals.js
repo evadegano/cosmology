@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useRouter } from 'next/router'
-import * as Yup from 'yup'
+import { Context } from '../context'
 import styles from '../styles/UserForm.module.css'
 import utilsStyles from '../styles/utils.module.css'
 import FormNav from '../components/userForm/formNav'
@@ -10,7 +10,8 @@ import StepGender from '../components/userForm/stepGender'
 import StepSignup from '../components/userForm/stepSignup'
 
 
-export default function MyGoals({ lang, userForm, setUserForm, birthchart, setBirthchart }) {
+export default function MyGoals() {
+  const { lang, userForm, setUserForm, birthchart, setBirthchart } = useContext(Context)
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(0)
 
@@ -36,10 +37,10 @@ export default function MyGoals({ lang, userForm, setUserForm, birthchart, setBi
   }
   
   const steps = [
-    <StepBirthday key='StepBirthday' userForm={userForm} next={handleNextStep} setUserForm={setUserForm} setBirthchart={setBirthchart} />,
-    <StepBirthchart key='StepBirthchart' birthchart={birthchart} next={handleNextStep} prev={handlePrevStep}  />,
-    <StepGender key='StepGender' userForm={userForm} setUserForm={setUserForm} next={handleNextStep} />,
-    <StepSignup key='StepSignup' userForm={userForm} setUserForm={setUserForm} birthchart={birthchart} />
+    <StepBirthday key='StepBirthday' next={handleNextStep} />,
+    <StepBirthchart key='StepBirthchart' next={handleNextStep} prev={handlePrevStep}  />,
+    <StepGender key='StepGender' next={handleNextStep} />,
+    <StepSignup key='StepSignup'/>
   ]
 
   return (

@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react'
-import { Context } from '../context'
+import React, { useContext } from 'react'
+import { Context } from '../../context'
 import Router from 'next/router'
-import Link from 'next/link'
 import Layout, { appName } from '../components/sitewide/layout'
+import { useState } from 'react'
 import utilsStyles from '../styles/utils.module.css'
 
 
 export default function Login() {
-  const { lang, user, login, errorMsg, setErrorMsg } = useContext(Context)
+  const { lang, errorMsg, setErrorMsg } = useContext(Context)
 
   const [loginCred, setLoginCred] = useState({
     email: "",
@@ -33,12 +33,28 @@ export default function Login() {
     // prevent reload
     event.preventDefault()
 
+    const { email, password } = loginCred
+
     try {
       // log user in
-      await login(loginCred.email, loginCred.password)
+      const loginRes = await fetch('api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const userData = await loginRes.json()
+      console.log("userData", userData);
+
+      // return if error
+      if (userData.message) {
+        setErrorMsg(userData.message)
+        return
+      }
 
       // redirect user to their profile
-      Router.push(`/user/${user.uid}`)
+      Router.push(`/user/${userData.user.id}`)
       
     } catch(err) {
       setErrorMsg(err.message)
@@ -47,10 +63,6 @@ export default function Login() {
 
   return (
     <Layout lang={lang}>
-      <nav>
-        <Link href='/'><a>Cosmology</a></Link>
-      </nav>
-
       <main>
         <form onSubmit={handleSubmit}>
           <label>Your email address:</label>

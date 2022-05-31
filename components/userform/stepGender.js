@@ -1,10 +1,11 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import utilsStyles from '../../styles/utils.module.css'
-import { useState } from 'react'
+import { useContext } from 'react'
+import { Context } from "../../context";
 
 
-export default function StepGender({ userForm, setUserForm, next }) {
-  const [errorMsg, setErrorMsg] = useState('')
+export default function StepGender({ next }) {
+  const { lang, userForm, setUserForm, errorMsg, setErrorMsg } = useContext(Context)
   
   const handleSubmit = (event) => {
     // prevent window from reloading

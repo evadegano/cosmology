@@ -1,13 +1,14 @@
 import Router from 'next/router'
-import { useState } from 'react'
+import { useContext } from 'react'
+import { Context } from '../../context'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import utilsStyles from '../../styles/utils.module.css'
 import HomeNav from './homeNav'
 
 
-export default function HomeHeader({ appName, lang, goals, userForm, setUserForm }) {
-  const [errorMsg, setErrorMsg] = useState('')
+export default function HomeHeader({ appName }) {
+  const { lang, userForm, setUserForm, errorMsg, setErrorMsg } = useContext(Context)
 
   const handleChange = (event) => {
     const target = event.target;
@@ -36,20 +37,20 @@ export default function HomeHeader({ appName, lang, goals, userForm, setUserForm
   return (
     <header id={styles.homeHeader}>
       <div id={styles.headerIntro}>
-        <HomeNav navLinks={lang.navLinks} />
+        <HomeNav navLinks={lang.home.navLinks} />
         <Image 
           src='/logo1.png'
           width={1563/3.5}
           height={377/3.5}
           alt={appName}
         />
-        <h2 className={utilsStyles.serif} id={styles.homeSubTitle}>{lang.headerSubtitle}</h2>
-        <p>{lang.headerText}</p>
+        <h2 className={utilsStyles.serif} id={styles.homeSubTitle}>{lang.home.headerSubtitle}</h2>
+        <p>{lang.home.headerText}</p>
 
         <p>What are your goals?</p>
         <form id={styles.goalForm}>
           
-          {goals.map(goal => {
+          {lang.goals.map(goal => {
             return (
               <label key={goal}>
                 <input onChange={handleChange} type='checkbox' value={goal} name={goal} />
@@ -61,6 +62,7 @@ export default function HomeHeader({ appName, lang, goals, userForm, setUserForm
 
         <button className={utilsStyles.mainBtn} onClick={handleClick}>Get started</button>
         <p>*it&rsquo;s free</p>
+
         {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
       </div>
       

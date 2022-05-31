@@ -11,11 +11,10 @@ datasource db {
 }
 
 model User {
-  id              Int         @id @default(autoincrement())
+  id              String      @id @unique
   name            String
-  email           String
-  password        String
   gender          Gender[]
+  lang            Lang
   birthDate       String
   birthTime       String
   birthLat        Float
@@ -23,8 +22,6 @@ model User {
   birthChart      BirthChart? 
   goals           Goal[]      @relation(references: [id])
   role            Role        @default(USER)
-  messages        Message[]
-  profilePic      String?
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @default(now())
   lastSeenAt      DateTime    @default(now())
@@ -33,7 +30,7 @@ model User {
 model BirthChart {
   id              Int        @id @default(autoincrement())
   user            User       @relation(fields: [userId], references: [id])
-  userId          Int        @unique
+  userId          String     @unique
   sunSign         ZodiacSign
   moonSign        ZodiacSign
   risingSign      ZodiacSign
@@ -45,16 +42,8 @@ model BirthChart {
 model Goal {
   id              Int         @id @default(autoincrement())
   goal            String      @unique
+  lang            Lang        @default(EN)
   users           User[]      @relation(references: [id])
-}
-
-model Message {
-  id              Int         @id @default(autoincrement())
-  message         String
-  sender          User        @relation(fields: [senderId], references: [id])
-  senderId        Int         
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @default(now())
 }
 
 enum Role {
@@ -80,4 +69,9 @@ enum ZodiacSign {
   CAPRICORN
   AQUARIUS
   PISCES
+}
+
+enum Lang {
+  EN
+  FR
 }
