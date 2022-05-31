@@ -1,42 +1,30 @@
 import React, { useContext, useState } from 'react'
-import { useRouter } from 'next/router'
 import { Context } from '../../context'
+import { collection, addDoc } from 'firebase/firestore'
+import { auth, firestore } from '../../config/firebase'
 import utilsStyles from '../../styles/utils.module.css'
 
 
 export default function SendMsg() {
-  const router = useRouter()
-  const { id } = router.query
   const { lang, errorMsg, setErrorMsg } = useContext(Context)
-  const [chatMsg, setChatMsg] = useState()
+  const [chatMsg, setChatMsg] = useState('')
 
   const handleSubmit = async (event) => {
     // prevent window from reloading
     event.preventDefault()
 
-    try {
-      // add message to database
-      const messageRes = await fetch(`/api/user/${id}/message`, {
-        method: 'POST',
-        body: JSON.stringify({ message: chatMsg }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      const messageData = await messageRes.json()
+    // add display name and profile pic
+    const { uid } = auth.currentUser
 
-      // return error if any
-      if (messageData.message) {
-        setErrorMsg(messageData.message)
-        return
-      }
+    // create new doc in firestore
+    await addDoc(collection(firestore, 'messages'), {
+      message: chatMsg,
+      senderId: uid,
+      createdAt: Date.now()
+    })
 
-      // reset chatMsg state
-      setChatMsg('')
-
-    } catch(err) {
-      setErrorMsg(err.message)
-    }
+    // reset state 
+    setChatMsg('')
   }
 
   const handleChange = (event) => {

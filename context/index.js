@@ -1,6 +1,11 @@
 import React, { useState, createContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { 
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+  signOut } from 'firebase/auth'
 import { auth } from '../config/firebase'
 import en from '../locales/en'
 import fr from '../locales/fr'
@@ -59,7 +64,18 @@ export const ContextProvider = (props) => {
     return () => unsubscribe()
   }, [])
 
-  const signup = (email, password) => {
+  const signup = async (email, password, name) => {
+    // try {
+    //   await createUserWithEmailAndPassword(auth, email, password)
+    //   await sendEmailVerification(auth.currentUser)
+    //   await updateProfile(auth.currentUser, { displayName: name })
+
+    //   return
+
+    // } catch(err) {
+    //   setErrorMsg(err.message)
+    // }
+
     return createUserWithEmailAndPassword(auth, email, password)
   }
 

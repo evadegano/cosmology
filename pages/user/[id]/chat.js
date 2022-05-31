@@ -1,59 +1,36 @@
-import React, { userEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Context } from '../../../context'
 import UserLayout from "../../../components/user/userLayout"
 import SendMsg from '../../../components/chat/sendMsg'
-import ChatScreen from '../../../components/chat/chatScreen'
+import Msg from '../../../components/chat/msg'
 import utilsStyles from '../../../styles/utils.module.css'
-import firebase from 'firebase/app'
-import 'firebase/firestore'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { collection, query, orderBy, limit } from 'firebase/firestore'
+import { firestore } from '../../../config/firebase'
 
 
-export async function getServerSideProps(context) {
-  try {
-    // get last ten messages
-    
-    const messages = [ {
-      id: 1,
-      message: 'this is a message',
-      sender: { name: "eva", id: 3, profilePic: "jifore"}
-    }]
-
-    // return messages as props
-    return {
-      props: {
-        messages: JSON.stringify(messages)
-      }
-    }
-
-  } catch(err) {
-    // return error as props
-    return {
-      props: {
-        error: JSON.stringify(err.message)
-      }
-    }
-  }
-}
-
-
-export default function Chat(props) {
+export default function Chat() {
   const { lang } = useContext(Context)
-  const messages = JSON.parse(props.messages)
+  
+  const messagesRef = collection(firestore, 'messages') // ref the messages firestore collection
+  const q = query(messagesRef, orderBy('createdAt', 'desc'), limit(25)) // set get messages query
+  const [messages] = useCollectionData(q, { idField: 'id' }) // listen to message data with a hook
 
   return (
     <UserLayout>
       <h1>Chat with the community</h1>
 
       {
-        messages.length > 0
-        ? <ChatScreen messages={messages} />
-        : <p>No new message</p>
+        !messages
+        ? <p>No new messages</p>
+        : messages.map(msg => {
+          return (
+            <Msg key={msg.createdAt} message={msg} />
+          )
+        })
       }
-      
-      {props.error && <p className={utilsStyles.error}>{props.error}</p>}
 
-      <SendMsg/>
+      <SendMsg messagesRef={messagesRef} />
     </UserLayout>
   )
 }
