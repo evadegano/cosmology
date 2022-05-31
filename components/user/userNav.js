@@ -2,28 +2,36 @@ import React, { useContext } from 'react'
 import { Context } from '../../context'
 import Router from 'next/router'
 import Image from "next/image"
+import utilsStyles from '../../styles/utils.module.css'
 
 
 export default function UserNav() {
-  const { lang } = useContext(Context)
+  const { lang, setUser, logout, errorMsg, setErrorMsg } = useContext(Context)
 
-  const logout = async (event) => {
+  const handleClick = async (event) => {
     // prevent window reload
     event.preventDefault()
 
-    // log user out
-    const logoutRes = await fetch('/api/auth/logout', {
-      method: 'POST',
-    })
+    try {
+      const logoutRes = await logout()
 
-    // redirect user to homepage
-    Router.push('/')
+      // rester user state
+      setUser('')
+
+      // redirect user to homepage
+      Router.push('/')
+
+    } catch(err) {
+      setErrorMsg(err.errorMsg)
+    }
   }
 
   return (
     <nav>
       <div>logo</div>
-      <button onClick={logout}>Logout</button>
+      <button onClick={handleClick}>Logout</button>
+
+      {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
     </nav>
   )
 }

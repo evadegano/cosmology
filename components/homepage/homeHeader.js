@@ -10,10 +10,12 @@ import HomeNav from './homeNav'
 export default function HomeHeader({ appName, goals }) {
   const { lang, userForm, setUserForm, errorMsg, setErrorMsg } = useContext(Context)
   goals = JSON.parse(goals)
-
+  
   const handleChange = (event) => {
     const target = event.target;
     const goalsCopy = [...userForm.goals]
+
+    console.log('goalsCopy:', goalsCopy);
 
     if (target.checked) {
       goalsCopy.push(target.value)

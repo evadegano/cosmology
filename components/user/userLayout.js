@@ -8,7 +8,7 @@ import UserHeader from './userHeader'
 import UserActions from './userActions'
 
 
-export default function UserLayout({ lang, children }) {
+export default function UserLayout({ children }) {
   const router = useRouter()
   const { id } = router.query
 
@@ -21,7 +21,7 @@ export default function UserLayout({ lang, children }) {
       <main id={styles.userLayout}>
         <section id={styles.sideNav}>
           <UserNav/>
-          <UserHeader/>
+          <UserHeader />
           <UserActions/>
           <UserAstro/>
         </section>

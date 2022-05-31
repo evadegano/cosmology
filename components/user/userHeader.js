@@ -1,7 +1,11 @@
 import Image from "next/image"
+import { useContext } from 'react'
+import { Context } from "../../context"
 
 
 export default function UserHeader() {
+  const { user } = useContext(Context)
+
   return (
     <header>
       <Image
@@ -11,7 +15,7 @@ export default function UserHeader() {
         alt="Your Name"
       />
 
-      <h1>user name</h1>
+      <h1>{user.email}</h1>
 
       <div>
         loop through signs

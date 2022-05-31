@@ -6,10 +6,10 @@ import HomeHeader from '../components/homepage/homeHeader'
 import HomeSectionIntro from '../components/homepage/homeSectionIntro'
 
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   try {
     // fetch goals from db
-    const goalsRes = await fetch('/api/goal?lang=en', ({
+    const goalsRes = await fetch('http://localhost:3000//api/goal?lang=en', ({
       method: 'GET',
       headers: {
         'Content-Type':'application/json'
@@ -29,10 +29,10 @@ export async function getServerSideProps() {
 
     return {
       props: {
-        goals: JSON.stringify(goals)
+        goals: JSON.stringify(goalsResData.goals)
       }
     }
-    
+
   } catch(err) {
     // return error as props
     return {
@@ -59,7 +59,7 @@ export default function Home({ goals }) {
     <Layout lang={lang}>
       <main>
         <HomeHeader appName={appName} goals={goals} />
-        <HomeSectionIntro appName={appName} lang={lang.home} />
+        <HomeSectionIntro appName={appName} />
       </main>
     </Layout>
   )
