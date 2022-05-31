@@ -1,0 +1,39 @@
+.sentMsg {
+  background: var(--primaryColor);
+  border-radius: var(--mid-radius) var(--mid-radius) var(--small-radius) var(--mid-radius);
+  padding: 5px 15px;
+  max-width: 60%;
+  float: right;
+}
+
+.receivedMsg {
+  background: var(--darkAccentColor);
+  border-radius: var(--mid-radius);
+  color: var(--white);
+  padding: 5px 15px;
+  max-width: 60%;
+}
+
+#chat {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 3px;
+}
+
+#msgForm {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+}
+
+#msgForm button {
+  width: 60px;
+}
+
+#msgForm input {
+  flex: 1;
+  height: 40px;
+}

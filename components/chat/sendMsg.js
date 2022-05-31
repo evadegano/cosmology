@@ -3,6 +3,7 @@ import { Context } from '../../context'
 import { collection, addDoc } from 'firebase/firestore'
 import { auth, firestore } from '../../config/firebase'
 import utilsStyles from '../../styles/utils.module.css'
+import styles from '../../styles/Chat.module.css'
 
 
 export default function SendMsg() {
@@ -36,10 +37,11 @@ export default function SendMsg() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form id={styles.msgForm} onSubmit={handleSubmit}>
         <input placeholder='Send a message...' name='chatMsg' value={chatMsg} onChange={handleChange} />
 
         <button type='submit'>Send</button>
+
         {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
       </form>
     </div>

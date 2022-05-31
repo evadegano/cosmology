@@ -4,6 +4,7 @@ import UserLayout from "../../../components/user/userLayout"
 import SendMsg from '../../../components/chat/sendMsg'
 import Msg from '../../../components/chat/msg'
 import utilsStyles from '../../../styles/utils.module.css'
+import styles from '../../../styles/Chat.module.css'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { collection, query, orderBy, limit } from 'firebase/firestore'
 import { firestore } from '../../../config/firebase'
@@ -18,19 +19,22 @@ export default function Chat() {
 
   return (
     <UserLayout>
-      <h1>Chat with the community</h1>
+      <div id={styles.chat}>
+        <h1>Chat with the community</h1>
 
-      {
-        !messages
-        ? <p>No new messages</p>
-        : messages.map(msg => {
-          return (
-            <Msg key={msg.createdAt} message={msg} />
-          )
-        })
-      }
+        {
+          !messages
+          ? <p>No new messages</p>
+          : messages.map(msg => {
+            return (
+              <Msg key={msg.createdAt} message={msg} />
+            )
+          })
+        }
 
-      <SendMsg messagesRef={messagesRef} />
+        <SendMsg messagesRef={messagesRef} />
+      </div>
+      
     </UserLayout>
   )
 }
