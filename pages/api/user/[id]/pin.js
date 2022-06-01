@@ -11,12 +11,13 @@ export default async function handler(req, res) {
 
       const newPins = []
 
-      for (let pin of pins ) {
+      for (let pin of pins) {
+        console.log("pin.goals:", pin.goals)
         let goals = pin.goals.map(goal => {
           return { id: goal }
         })
 
-        let types = pin.types.map(type => {
+        let types = pin.type.map(type => {
           return { id: type }
         })
 
@@ -26,8 +27,8 @@ export default async function handler(req, res) {
             description: pin.description.toLowerCase().trim(),
             pictureUrl: pin.pictureUrl,
             redirection: pin.redirection.toLowerCase().trim(),
-            creatorId: { connect: { id }},
-            lang,
+            creator: { connect: { id }},
+            lang: lang.toUpperCase(),
             gender: pin.gender,
             goals: { connect: goals },
             type: { connect: types },

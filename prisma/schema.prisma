@@ -62,7 +62,7 @@ model Pin {
   pictureUrl      String
   redirection     String
   creator         User       @relation(fields: [creatorId], references: [id])
-  creatorId       String     @unique
+  creatorId       String
   lang            Lang
   gender          Gender[]
   goals           Goal[]      @relation(references: [id])

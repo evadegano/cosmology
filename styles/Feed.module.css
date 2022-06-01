@@ -1,6 +1,6 @@
 #pinTypes {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 20px;
 }
@@ -21,4 +21,15 @@
 .myMasonryGrid_column > div { /* change div to reference your elements you put in <Masonry> */
   background: grey;
   margin-bottom: 30px;
+}
+
+.pinDesc {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  max-height: 100px;
+}
+
+.pinImg {
+  border-radius: var(--mid-radius);
 }
