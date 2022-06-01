@@ -50,6 +50,7 @@ export default async function handler(req, res) {
     try {
       const pins = await prisma.pin.findMany({
         select: {
+          id: true,
           title: true,
           description: true,
           pictureUrl: true,
