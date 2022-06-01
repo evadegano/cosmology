@@ -18,25 +18,49 @@ const breakpointObj = {
 export default function Feed() {
   const router = useRouter()
   const { id } = router.query
-  const [errorMsg, setErrorMsg] = useState()
+  const [errorMsg, setErrorMsg] = useState('')
+  const [activeBtn, setActiveBtn] = useState('')
+  let pinTypes, filteredPins
 
-  // get pins
+  // get pins data
   const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${id}/pin?lang=en`)
   if (error) setErrorMsg(error)
-  
-  // get unique pin types
-  const allTypes = []
-  data.pins.map(pin => {
-    pin.type.map(type => {
-      allTypes.push(type.type)
-    })
-  })
-  const uniqueTypes = [...new Set(allTypes)]
 
+  console.log("data:", data.pins)
+  
+  // once data was fetched, get unique pin types
+  if (data) {
+    const allTypes = []
+    data.pins.map(pin => {
+      pin.type.map(type => {
+        allTypes.push(type.type)
+      })
+    })
+    pinTypes = [...new Set(allTypes)]
+
+    filteredPins = data.pins
+  }
+  
+  // filter pins by type
   const filterPins = (event) => {
     event.preventDefault()
 
-    // filter props on their type
+    const { value } = event.target
+    console.log("value:", value)
+
+    if (value === 'all') {
+      filteredPins = data.pins
+    } else {
+      filteredPins = data.pins.filter(pin => {
+        for (let type of pin.type) {
+          return type.type === "reading" 
+        }
+      })
+    }
+
+    console.log("filteredPins", filteredPins)
+    // set button to active 
+    setActiveBtn(value)
   }
 
 
@@ -44,13 +68,13 @@ export default function Feed() {
     <div>
 
       {
-        !uniqueTypes
+        !pinTypes
         ? <p></p>
         : <div id={styles.pinTypes}>
-            <button onClick={filterPins}>All</button>
+            <button value='all' onClick={filterPins}>All</button>
 
-            {uniqueTypes.map(type => {
-              return <button key={type} onClick={filterPins}>{type}</button>
+            {pinTypes.map(type => {
+              return <button key={type} value={type} onClick={filterPins}>{type}</button>
             })}
           </div>
       }
@@ -64,7 +88,7 @@ export default function Feed() {
       {
         !data
         ? <p>We are fetching new pins for you!</p>
-        : data.pins.map(pin => {
+        : filteredPins.map(pin => {
           return <Pin key={pin.id} pin={pin} />
         })
       }

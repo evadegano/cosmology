@@ -16,7 +16,7 @@ export default function Pin({ pin }) {
         />
 
         <h2>{pin.title}</h2>
-        <p className={styles.pinDesc}>{pin.description}</p>
+        <p className={styles.pinDesc}><span>{pin.description}</span></p>
       </a>
     </Link>
   )

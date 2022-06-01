@@ -56,8 +56,16 @@ export default async function handler(req, res) {
           pictureUrl: true,
           redirection: true,
           creatorId: true,
-          goals: true,
-          type: true,
+          goals: {
+            select: {
+              goal: true
+            }
+          },
+          type: {
+            select: { 
+              type: true 
+            }
+          },
         }
       })
 

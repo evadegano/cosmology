@@ -30,6 +30,10 @@
   max-height: 100px;
 }
 
+.pinDesc span {
+  display: block;
+}
+
 .pinImg {
   border-radius: var(--mid-radius);
 }
