@@ -22,6 +22,7 @@ model User {
   birthChart      BirthChart? 
   goals           Goal[]      @relation(references: [id])
   pins            Pin[]
+  savedPins       SavedPins?
   role            Role        @default(USER)
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @default(now())
@@ -60,14 +61,21 @@ model Pin {
   description     String
   pictureUrl      String
   redirection     String
-  creator          User       @relation(fields: [creatorId], references: [id])
+  creator         User       @relation(fields: [creatorId], references: [id])
   creatorId       String     @unique
   lang            Lang
   gender          Gender[]
   goals           Goal[]      @relation(references: [id])
-  type            PinType     @relation(fields: [typeId], references: [id])
-  typeId          Int
+  type            PinType[]   
+  savedIn         SavedPins[]
   createdAt       DateTime    @default(now())
+}
+
+model SavedPins {
+  id              Int          @id @default(autoincrement())
+  user            User         @relation(fields: [userId], references: [id])
+  userId          String
+  pins            Pin[]
 }
 
 enum Role {

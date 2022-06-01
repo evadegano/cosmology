@@ -56,10 +56,6 @@ export default async function handler(req, res) {
       res.status(500).json({ message: error })
     }
     
-  } else if (req.method ===  'PUT') {
-    // search for userId in birthChart model
-
-    // update model
   } else {
     res.status(500).json({ message: `This action with HTTP ${req.method} is not supported.` })
   }

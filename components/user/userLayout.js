@@ -29,6 +29,7 @@ export default function UserLayout({ children }) {
         <section id={styles.mainContent}>
           <div>
             <Link href={`/user/${id}`}><a>Feed</a></Link>
+            <Link href={`/user/${id}/profile`}><a>Profile</a></Link>
             <Link href={`/user/${id}/chat`}><a>Chat</a></Link>
           </div>
           
