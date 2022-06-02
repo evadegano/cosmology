@@ -66,7 +66,12 @@ export default async function handler(req, res) {
               type: true 
             }
           },
-          savedIn: {
+          savedBy: {
+            select: {
+              userId: true
+            }
+          },
+          likedBy: {
             select: {
               userId: true
             }

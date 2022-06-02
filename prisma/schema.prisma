@@ -22,6 +22,7 @@ model User {
   birthChart      BirthChart? 
   goals           Goal[]      @relation(references: [id])
   pins            Pin[]
+  likedPins       LikedPin[]
   savedPins       SavedPin[]
   role            Role        @default(USER)
   createdAt       DateTime    @default(now())
@@ -31,7 +32,7 @@ model User {
 
 model BirthChart {
   id              Int        @id @default(autoincrement())
-  user            User       @relation(fields: [userId], references: [id])
+  user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId          String     @unique
   sunSign         ZodiacSign
   moonSign        ZodiacSign
@@ -66,18 +67,28 @@ model Pin {
   lang            Lang
   gender          Gender[]
   goals           Goal[]      @relation(references: [id])
-  types           PinType[]   
-  likes           Int         @default(0)
-  savedIn         SavedPin[]
+  types           PinType[]
+  likedBy         LikedPin[]   
+  savedBy         SavedPin[]
   createdAt       DateTime    @default(now())
 }
 
 model SavedPin {
   id              Int          @id @default(autoincrement())
-  user            User         @relation(fields: [userId], references: [id])
+  user            User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId          String
-  pin             Pin          @relation(fields: [pinId], references: [id])
+  pin             Pin          @relation(fields: [pinId], references: [id], onDelete: Cascade)
   pinId           Int
+  createdAt       DateTime     @default(now())
+}
+
+model LikedPin {
+  id              Int          @id @default(autoincrement())
+  user            User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String
+  pin             Pin          @relation(fields: [pinId], references: [id], onDelete: Cascade)
+  pinId           Int
+  createdAt       DateTime     @default(now())
 }
 
 enum Role {

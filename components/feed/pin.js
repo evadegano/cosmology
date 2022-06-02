@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import styles from '../../styles/Feed.module.css'
 import SaveBtn from './saveBtn'
+import LikeBtn from './likeBtn'
 
 
 export default function Pin({ pin }) {
@@ -41,7 +42,7 @@ export default function Pin({ pin }) {
             <SaveBtn pin={pin} />
             <div>
               <button onClick={sharePin}>share</button>
-              <button onClick={likePin}>like</button>
+              <LikeBtn pin={pin} />
             </div>
           </div>
         )}
