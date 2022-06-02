@@ -27,13 +27,12 @@ export default async function handler(req, res) {
     const { id } = req.query
 
     try {
-      const savedPins = await prisma.savedPin.findMany({
+      const pins = await prisma.savedPin.findMany({
         where: {
           userId: id
         },
         select: {
           id: true,
-          userId: true,
           pin: {
             select: {
               id: true,
@@ -51,13 +50,23 @@ export default async function handler(req, res) {
                 select: { 
                   type: true 
                 }
+              },
+              savedBy: {
+                select: {
+                  userId: true
+                }
+              },
+              likedBy: {
+                select: {
+                  userId: true
+                }
               }
             }
           }
         }
       })
 
-      res.status(200).json({ savedPins })
+      res.status(200).json({ pins })
 
     } catch(err) {
       res.status(500).json({ message: err.message })
@@ -80,8 +89,7 @@ export default async function handler(req, res) {
     } catch(err) {
       res.status(500).json({ message: err.message })
     }
-
-  } else {
+  }  else {
     res.status(500).json({ message: 'Method not supported for this API endpoint.'})
   }
 }

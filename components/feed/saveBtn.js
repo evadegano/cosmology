@@ -25,7 +25,7 @@ export default function SaveBtn({ pin }) {
     
     // update pin's instance in db
    try {
-    const res = await fetch(`/api/user/${user.uid}/savepin?pinid=${pin.id}`, ({
+    const res = await fetch(`/api/user/${user.uid}/savedpin?pinid=${pin.id}`, ({
       method: 'POST',
       headers: {
         'Content-Type':'application/json'
@@ -51,7 +51,7 @@ export default function SaveBtn({ pin }) {
     event.preventDefault()
 
     try {
-      const res = await fetch(`/api/user/${user.uid}/savepin?pinid=${pin.id}`, ({
+      const res = await fetch(`/api/user/${user.uid}/savedpin?pinid=${pin.id}`, ({
         method: 'DELETE',
         headers: {
           'Content-Type':'application/json'

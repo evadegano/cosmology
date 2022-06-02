@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
+import { Context } from '../../context'
 import styles from '../../styles/User.module.css'
 import UserAstro from './userAstro'
 import Head from 'next/head'
@@ -9,8 +11,8 @@ import UserActions from './userActions'
 
 
 export default function UserLayout({ children }) {
+  const { user } = useContext(Context)
   const router = useRouter()
-  const { id } = router.query
 
   return (
     <div>
@@ -31,9 +33,9 @@ export default function UserLayout({ children }) {
         
         <section id={styles.mainContent}>
           <div>
-            <Link href={`/user/${id}`}><a>Feed</a></Link>
-            <Link href={`/user/${id}/profile`}><a>Profile</a></Link>
-            <Link href={`/user/${id}/chat`}><a>Chat</a></Link>
+            <Link href={`/user/${user.uid}`}><a>Feed</a></Link>
+            <Link href={`/user/${user.uid}/profile`}><a>Profile</a></Link>
+            <Link href={`/user/${user.uid}/chat`}><a>Chat</a></Link>
           </div>
           
           

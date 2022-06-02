@@ -1,17 +1,17 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
-import { Context } from '../../../../context'
+import { Context } from '../../context'
 import useSWR from 'swr'
-import PinMasonry from "../../../../components/feed/pinMasonry"
+import PinMasonry from "../../components/feed/pinMasonry"
 
 
-export default function Feed() {
-  const router = useRouter()
+export default function SavedPins() {
   const { user } = useContext(Context)
-  let pinTypes, filteredPins
+  const router = useRouter()
+  let pinTypes, filteredPins = []
 
   // fetch data from api
-  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${user.uid}/pin?lang=en`)
+  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${user.uid}/savedpin`)
 
   // check for fetching error
   if (error) {
@@ -27,23 +27,24 @@ export default function Feed() {
       // get unique pin types
       const allTypes = []
       data.pins.map(pin => {
-        pin.types.map(type => {
+        filteredPins.push(pin.pin)
+
+        pin.pin.types.map(type => {
           allTypes.push(type.type)
         })
       })
       pinTypes = [...new Set(allTypes)]
   
-      filteredPins = data.pins
+      console.log(filteredPins)
     }
   }
-  
+
   return (
     <div>
       <PinMasonry 
-        inTypes={pinTypes}
+        pinTypes={pinTypes}
         filteredPins={filteredPins} 
-        data={data}
-      />
+        data={data} />
     </div>
-   )
+  )
 }
