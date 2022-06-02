@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { Context } from '../../context'
 import Router from 'next/router'
 import Image from "next/image"
 import Link from "next/link"
@@ -8,15 +9,16 @@ import LikeBtn from './likeBtn'
 
 
 export default function Pin({ pin }) {
+  const { setPinPageData } = useContext(Context)
   const [isPinHovered, setIsPinHovered] = useState(false)
-  const [savingPin, setSavingPin] = useState(false)
 
-  const sharePin = (event) => {
+  const goToPinPage = (event) => {
     event.preventDefault()
-    event.stopPropagation()
+    setPinPageData(pin)
+    Router.push(`/pin/${pin.id}`)
   }
 
-  const likePin = (event) => {
+  const sharePin = (event) => {
     event.preventDefault()
     event.stopPropagation()
   }
@@ -25,7 +27,7 @@ export default function Pin({ pin }) {
     <div 
       onMouseEnter={() => setIsPinHovered(true)}
       onMouseLeave={() => setIsPinHovered(false)}
-      onClick={() => Router.push(`/pin/${pin.id}`)}
+      onClick={goToPinPage}
     >
       
       <div className={styles.pinInnerWrapper} >

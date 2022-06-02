@@ -18,6 +18,7 @@ export const ContextProvider = (props) => {
   const lang = locale === 'en' ? en : fr
 
   const [user, setUser] = useState("")
+  const [pinPageData, setPinPageData] = useState("")
   const [loading, setLoading] = useState(true)
   const [errorMsg, setErrorMsg] = useState('')
   const [userForm, setUserForm] = useState({
@@ -105,7 +106,9 @@ export const ContextProvider = (props) => {
     userForm, 
     setUserForm,
     birthchart, 
-    setBirthchart
+    setBirthchart,
+    pinPageData,
+    setPinPageData
   }
 
   return (

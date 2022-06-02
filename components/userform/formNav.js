@@ -1,6 +1,5 @@
 import styles from '../../styles/UserForm.module.css'
 import Link from "next/link"
-import { signIn } from "next-auth/react"
 
 
 export default function FormNav({ prev }) {
