@@ -61,11 +61,16 @@ export default async function handler(req, res) {
               goal: true
             }
           },
-          type: {
+          types: {
             select: { 
               type: true 
             }
           },
+          savedIn: {
+            select: {
+              userId: true
+            }
+          }
         }
       })
 

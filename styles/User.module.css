@@ -4,11 +4,19 @@
   align-items: flex-start;
   width: 100vw;
 }
-
+#sideNavWrapper {
+  width: 40%;
+  max-width: 400px;
+  background: var(--dark);
+}
 #sideNav {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 40%;
   max-width: 400px;
   height: 100vh;
+  padding: 20px;
   background: var(--dark);
   color: var(--white);
 }

@@ -19,11 +19,14 @@ export default function UserLayout({ children }) {
       </Head>
       
       <main id={styles.userLayout}>
-        <section id={styles.sideNav}>
-          <UserNav/>
-          <UserHeader />
-          <UserActions/>
-          <UserAstro/>
+        <section id={styles.sideNavWrapper}>
+          <div id={styles.sideNav}>
+            <UserNav/>
+            <UserHeader />
+            <UserActions/>
+            <UserAstro/>
+          </div>
+          
         </section>
         
         <section id={styles.mainContent}>

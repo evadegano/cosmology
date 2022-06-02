@@ -22,23 +22,31 @@ export default function Feed() {
   const [activeBtn, setActiveBtn] = useState('')
   let pinTypes, filteredPins
 
-  // get pins data
+  // fetch data from api
   const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${id}/pin?lang=en`)
-  if (error) setErrorMsg(error)
 
-  console.log("data:", data.pins)
-  
-  // once data was fetched, get unique pin types
-  if (data) {
-    const allTypes = []
-    data.pins.map(pin => {
-      pin.type.map(type => {
-        allTypes.push(type.type)
+  // check for fetching error
+  if (error) {
+    setErrorMsg(error)
+
+  } else if (data) {
+    console.log("data:", data)
+
+    // check for error message
+    if (data.message) {
+      setErrorMsg(data.message)
+    } else {
+      // get unique pin types
+      const allTypes = []
+      data.pins.map(pin => {
+        pin.types.map(type => {
+          allTypes.push(type.type)
+        })
       })
-    })
-    pinTypes = [...new Set(allTypes)]
-
-    filteredPins = data.pins
+      pinTypes = [...new Set(allTypes)]
+  
+      filteredPins = data.pins
+    }
   }
   
   // filter pins by type
@@ -52,7 +60,7 @@ export default function Feed() {
       filteredPins = data.pins
     } else {
       filteredPins = data.pins.filter(pin => {
-        for (let type of pin.type) {
+        for (let type of pin.types) {
           return type.type === "reading" 
         }
       })
@@ -63,13 +71,12 @@ export default function Feed() {
     setActiveBtn(value)
   }
 
-
   return (
     <div>
 
       {
-        !pinTypes
-        ? <p></p>
+        !pinTypes || errorMsg
+        ? <p>{errorMsg}</p>
         : <div id={styles.pinTypes}>
             <button value='all' onClick={filterPins}>All</button>
 
@@ -86,7 +93,7 @@ export default function Feed() {
       >
 
       {
-        !data
+        !data || errorMsg
         ? <p>We are fetching new pins for you!</p>
         : filteredPins.map(pin => {
           return <Pin key={pin.id} pin={pin} />

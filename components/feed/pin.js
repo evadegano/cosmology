@@ -1,12 +1,33 @@
+import { useState } from 'react'
+import Router from 'next/router'
 import Image from "next/image"
 import Link from "next/link"
 import styles from '../../styles/Feed.module.css'
+import SaveBtn from './saveBtn'
 
 
 export default function Pin({ pin }) {
+  const [isPinHovered, setIsPinHovered] = useState(false)
+  const [savingPin, setSavingPin] = useState(false)
+
+  const sharePin = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+
+  const likePin = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+
   return (
-    <Link href={pin.redirection}>
-      <a>
+    <div 
+      onMouseEnter={() => setIsPinHovered(true)}
+      onMouseLeave={() => setIsPinHovered(false)}
+      onClick={() => Router.push(`/pin/${pin.id}`)}
+    >
+      
+      <div className={styles.pinInnerWrapper} >
         <Image
           className={styles.pinImg}
           src={pin.pictureUrl}
@@ -15,9 +36,20 @@ export default function Pin({ pin }) {
           height={500}
         />
 
-        <h2>{pin.title}</h2>
-        <p className={styles.pinDesc}><span>{pin.description}</span></p>
-      </a>
-    </Link>
+        {isPinHovered && (
+          <div className={styles.onHoverFeat} >
+            <SaveBtn pin={pin} />
+            <div>
+              <button onClick={sharePin}>share</button>
+              <button onClick={likePin}>like</button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <h2 className={styles.pinTitle}>{pin.title}</h2>
+      {pin.goals.map(goal => <p key={goal.goal}>{goal.goal}</p>)}
+
+    </div>
   )
 }

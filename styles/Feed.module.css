@@ -19,14 +19,19 @@
 
 /* Style your items */
 .myMasonryGrid_column > div { /* change div to reference your elements you put in <Masonry> */
-  background: grey;
   margin-bottom: 30px;
 }
 
+.pinInnerWrapper {
+  position: relative;
+}
+.pinTitle {
+  font-size: 18px;
+}
 .pinDesc {
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 200px;
+  max-width: 100%;
   max-height: 100px;
 }
 
@@ -36,4 +41,14 @@
 
 .pinImg {
   border-radius: var(--mid-radius);
+}
+
+.onHoverFeat {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
