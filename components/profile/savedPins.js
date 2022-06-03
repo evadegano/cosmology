@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { Context } from '../../context'
 import useSWR from 'swr'
@@ -7,7 +6,6 @@ import PinMasonry from "../../components/feed/pinMasonry"
 
 export default function SavedPins() {
   const { user } = useContext(Context)
-  const router = useRouter()
   let pinTypes, filteredPins = []
 
   // fetch data from api
