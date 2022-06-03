@@ -7,7 +7,6 @@ import UserAstro from './userAstro'
 import Head from 'next/head'
 import UserNav from './userNav'
 import UserHeader from './userHeader'
-import UserActions from './userActions'
 
 
 export default function UserLayout({ children }) {
@@ -25,7 +24,6 @@ export default function UserLayout({ children }) {
           <div id={styles.sideNav}>
             <UserNav/>
             <UserHeader />
-            <UserActions/>
             <UserAstro/>
           </div>
           
@@ -34,7 +32,7 @@ export default function UserLayout({ children }) {
         <section id={styles.mainContent}>
           <div>
             <Link href={`/user/${user.uid}`}><a>Feed</a></Link>
-            <Link href={`/user/${user.uid}/profile`}><a>Profile</a></Link>
+            <Link href={`/user/${user.uid}/profile`}><a>Saved Pins</a></Link>
             <Link href={`/user/${user.uid}/chat`}><a>Chat</a></Link>
           </div>
           

@@ -66,18 +66,18 @@ export const ContextProvider = (props) => {
   }, [])
 
   const signup = async (email, password, name) => {
-    // try {
-    //   await createUserWithEmailAndPassword(auth, email, password)
-    //   await sendEmailVerification(auth.currentUser)
-    //   await updateProfile(auth.currentUser, { displayName: name })
+    try {
+      await createUserWithEmailAndPassword(auth, email, password)
+      await sendEmailVerification(auth.currentUser)
+      await updateProfile(auth.currentUser, { displayName: name })
 
-    //   return
+      return
 
-    // } catch(err) {
-    //   setErrorMsg(err.message)
-    // }
+    } catch(err) {
+      setErrorMsg(err.message)
+    }
 
-    return createUserWithEmailAndPassword(auth, email, password)
+    // return createUserWithEmailAndPassword(auth, email, password)
   }
 
   const login = (email, password) => {

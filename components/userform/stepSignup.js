@@ -25,7 +25,7 @@ export default function StepSignup() {
     
     try {
       // sign user up
-      const signupRes = await signup(signupCred.email, signupCred.password)
+      const signupRes = await signup(signupCred.email, signupCred.password, userForm.name)
 
       // store user data for db instance
       const userForDB = {
