@@ -23,7 +23,6 @@ export const ContextProvider = (props) => {
   const [errorMsg, setErrorMsg] = useState('')
   const [userForm, setUserForm] = useState({
     goals: [],
-    name: "",
     birthDate: "",
     birthTime: "",
     birthLoc: "",

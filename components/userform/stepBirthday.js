@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { Context } from '../../context'
 import genBirthChart from '../../services/genBirthChart'
 import utilsStyles from '../../styles/utils.module.css'
+import styles from '../../styles/UserForm.module.css'
 
 
 export default function StepBirthday({ next }) {
@@ -86,15 +87,15 @@ export default function StepBirthday({ next }) {
 
   return (
     <div>
-      <h1>Tell us more about your birthday</h1>
-      <p>It’s not law but your birth sign will help us get real specific</p>
+      <h1 className={utilsStyles.serif}>Tell us more about your birthday</h1>
+      <p className={utilsStyles.subtitle + " " + utilsStyles.serif}>It’s not law but your birth sign will help us get real specific</p>
 
       <form onSubmit={handleSubmit}>
-        <span>
-          I was born on <input type='date' name='birthDate' value={userForm.birthDate} onChange={handleChange} required /> 
-          at <input type='time' name='birthTime' value={userForm.birthTime} onChange={handleChange} required />
-          in <input id='autocomplete' type='text' name='birthLoc' value={userForm.birthLoc} onChange={handleChange} required />
-        </span>
+        <p id={styles.birthdayForm}>
+          I was born on <input type='date' name='birthDate' value={userForm.birthDate} onChange={handleChange} required />
+          &nbsp;at <input type='time' name='birthTime' value={userForm.birthTime} onChange={handleChange} required />
+          &nbsp;in <input id='autocomplete' type='text' name='birthLoc' placeholder='city, country' value={userForm.birthLoc} onChange={handleChange} required />
+        </p>
 
         <button className={utilsStyles.mainBtn} type="submit">Next</button>
 

@@ -46,7 +46,7 @@ export default function Footer({ appName, lang }) {
         <div>
           <h3>{lang.newsletterTitle}</h3>
           <form id={styles.nlForm}>
-            <input type="email" />
+            <input type="email" placeholder='your.email@gmail.com' />
             <button type="submit" className={utilsStyles.mainBtn}>{lang.newsletterButton}</button>
           </form>
           <p>Receive positive affirmations weekly to live in bliss</p>

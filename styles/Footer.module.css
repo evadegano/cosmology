@@ -46,6 +46,10 @@
   padding: 10px 15px;
   border-radius: var(--mid-radius);
   border: none;
+  color: var(--dark)
+}
+#nlForm input:focus {
+  outline: 3px solid var(--primaryColor);
 }
 
 #nlForm button {

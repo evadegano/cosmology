@@ -9,7 +9,7 @@
 :root {
   --dark: #22231F;
   --white: #ffffff;
-  --primaryColor: #D69AFF;
+  --primaryColor: #d69aff;
   --accentColor: #E28A82;
   --darkAccentColor: #9568FF;
   --themeColor: #D69AFF;
@@ -73,4 +73,17 @@ footer {
 
 button {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+input {
+  font-size: inherit;
+  font-family: inherit;
+}
+
+input::placeholder {
+  color: inherit;
 }

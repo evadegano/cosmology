@@ -8,6 +8,7 @@ import Router from 'next/router'
 export default function StepSignup() {
   const { lang, user, signup, errorMsg, setErrorMsg, userForm, setUserForm, birthchart } = useContext(Context)
   const [signupCred, setSignupCred] = useState({
+    name: "",
     email: "",
     password: "",
     passwordConfirm: ""
@@ -25,13 +26,12 @@ export default function StepSignup() {
     
     try {
       // sign user up
-      const signupRes = await signup(signupCred.email, signupCred.password, userForm.name)
+      const signupRes = await signup(signupCred.email, signupCred.password, signupCred.name)
 
       // store user data for db instance
       const userForDB = {
         id: signupRes.user.uid,
         goals: userForm.goals,
-        name: userForm.name,
         gender: userForm.gender,
         lang: lang,
         birthDate: userForm.birthDate,
@@ -71,7 +71,7 @@ export default function StepSignup() {
 
     switch (name) {
       case 'name':
-        setUserForm(prev => ({ ...prev, name: value }))
+        setSignupCred(prev => ({ ...prev, name: value }))
         break
       case 'email':
         setSignupCred(prev => ({ ...prev, email: value }))

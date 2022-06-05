@@ -2,8 +2,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
-  padding: 20px;
+  padding: 10px 20px;
+}
+
+#formNav button {
+  background: none;
+  border: none;
+  font-size: 1em;
+  margin: 0;
 }
 
 #userForm {
@@ -25,8 +31,49 @@
   text-align: center;
 }
 
-#userForm button {
-  margin-top: 30px;
+#userForm h1 {
+  margin-bottom: 10px;
+}
+
+#userForm form {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#userForm form button {
+  margin-top: 40px;
+}
+
+#birthdayForm {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  row-gap: 20px;
+  line-height: 30px;
+  max-width: 90%;
+}
+
+#birthdayForm input {
+  padding: 5px;
+  border: none;
+  border-bottom: 1px solid var(--white);
+  background: none;
+  margin: 0 10px;
+}
+
+#birthdayForm input[type="date"]::-webkit-calendar-picker-indicator,
+#birthdayForm input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+#birthdayForm input:focus {
+  outline: none;
+  border-bottom: 1px solid var(--primaryColor);
 }
 
 #stepsCountWrapper {
