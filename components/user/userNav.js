@@ -13,10 +13,7 @@ export default function UserNav() {
     event.preventDefault()
 
     try {
-      const logoutRes = await logout()
-
-      // rester user state
-      setUser('')
+      await logout()
 
       // redirect user to homepage
       Router.push('/')

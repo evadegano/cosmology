@@ -4,15 +4,8 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <link
-          rel="preload"
-          href="/fonts/Al_Ragas-9898.woff"
-          as="font"
-          type="font/woff"
-          crossOrigin=""
-        />
         <link 
-          href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Playfair+Display&family=DM+Serif+Display&family=Montserrat:wght@500&display=swap" 
+          href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Noto+Serif+JP:wght@600&family=DM+Serif+Text&family=Montserrat:wght@500&display=swap" 
           rel="stylesheet" 
         />                
       </Head>

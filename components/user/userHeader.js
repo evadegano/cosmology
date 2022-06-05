@@ -3,6 +3,7 @@ import useSWR from 'swr'
 import { useState, useContext } from 'react'
 import { Context } from "../../context"
 import { getAuth, updateProfile } from "firebase/auth"
+import styles from '../../styles/User.module.css'
 import utilsStyles from '../../styles/utils.module.css'
 
 
@@ -50,7 +51,7 @@ export default function UserHeader() {
 
   return (
     <header>
-      <div>
+      <div className={styles.profilePic}>
         <Image
           src="/images/profile.png"
           height={144}

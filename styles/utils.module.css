@@ -1,8 +1,11 @@
 .serif {
   font-family: var(--mainSerifFont);
 }
-.accent {
-  font-family: var(--accentFont);
+.accentColor {
+  color: var(--accentColor);
+}
+.primaryColor {
+  color: var(--primaryColor);
 }
 .mainBtn {
   background: var(--primaryColor);

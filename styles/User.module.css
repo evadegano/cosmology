@@ -28,3 +28,10 @@
   align-items: center;
   flex: 1;
 }
+
+.profilePic {
+  width: 144px;
+  height: 144px;
+  border-radius: 50%;
+  border: 2px solid var(--white)
+}

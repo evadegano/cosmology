@@ -1,15 +1,21 @@
-/* #A674FF */
-:root {
-  --dark: #22231F;
-  --white: #ffffff;
-  --primaryColor: #AFA2E5;
+/* 
+  --primaryColor: #AFA2E5, #ABA9FE;
   --accentColor: #E28A82;
   --darkAccentColor: #8C7D9A;
   --themeColor: #D69AFF;
+  gradient: #B8C1E0, #E18854
+ */
+
+:root {
+  --dark: #22231F;
+  --white: #ffffff;
+  --primaryColor: #D69AFF;
+  --accentColor: #E28A82;
+  --darkAccentColor: #9568FF;
+  --themeColor: #D69AFF;
   --mainFont: 'DM Sans';
-  --mainSerifFont: 'DM Serif Display';
+  --mainSerifFont: 'DM Serif Text';
   --secondaryFont: 'Montserrat';
-  --accentFont: 'Al Ragas';
   --mid-radius: 20px;
   --small-radius: 5px;
 }
@@ -33,6 +39,10 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
+h3 {
+  font-size: 25px;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -43,13 +53,13 @@ p {
   margin-block-end: 1em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
+  font-size: 18px;
 }
 
 * {
   box-sizing: border-box;
 }
 
-header,
 section,
 footer {
   padding: 30px 60px;

@@ -39,34 +39,36 @@ export default function HomeHeader({ appName, goals }) {
 
   return (
     <header id={styles.homeHeader}>
-      <div id={styles.headerIntro}>
+      <div>
         <HomeNav navLinks={lang.home.navLinks} />
-        <Image 
-          src='/logo1.png'
-          width={1563/3.5}
-          height={377/3.5}
-          alt={appName}
-        />
-        <h2 className={utilsStyles.serif} id={styles.homeSubTitle}>{lang.home.headerSubtitle}</h2>
-        <p>{lang.home.headerText}</p>
+        
+        <div id={styles.headerIntro}>
+          <Image 
+            src='/logo.png'
+            width={1563/3.5}
+            height={377/3.5}
+            alt={appName}
+          />
 
-        <p>What are your goals?</p>
-        <form id={styles.goalForm}>
-          
-          {goals.map(goal => {
-            return (
-              <label key={goal.id}>
-                <input onChange={handleChange} type='checkbox' value={goal.id} name={goal.goal} />
-                <span>{goal.goal}</span>
-              </label>
-              )
-          })}
-        </form>
+          <h2 className={utilsStyles.serif} id={styles.homeSubTitle}>{lang.home.headerSubtitle}</h2>
+          <p>At Cosmology, we curate spiritual content based on your goals and birthchart to assist you in living a more purposeful life.</p>
 
-        <button className={utilsStyles.mainBtn} onClick={handleClick}>Get started</button>
-        <p>*it&rsquo;s free</p>
+          <h3 className={utilsStyles.serif}>What are your goals?</h3>
+          <form id={styles.goalForm}>
+            
+            {goals.map(goal => {
+              return (
+                <label key={goal.id}>
+                  <input onChange={handleChange} type='checkbox' value={goal.id} name={goal.goal} />
+                  <span>{goal.goal}</span>
+                </label>
+                )
+            })}
+          </form>
+          <button className={utilsStyles.mainBtn} onClick={handleClick}>Get started (it&rsquo;s free)</button>
 
-        {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
+          {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
+        </div>
       </div>
       
       <div id={styles.homeHeaderImgWrapper}>
