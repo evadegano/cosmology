@@ -6,46 +6,7 @@ import HomeHeader from '../components/homepage/homeHeader'
 import HomeSectionIntro from '../components/homepage/homeSectionIntro'
 
 
-export async function getServerSideProps(context) {
-  try {
-    // fetch goals from db
-    const goalsRes = await fetch('http://localhost:3000//api/goal?lang=en', ({
-      method: 'GET',
-      headers: {
-        'Content-Type':'application/json'
-      }
-    }))
-    const goalsResData = await goalsRes.json()
-
-    if (goalsResData.message) {
-      console.log("error:", goalsResData.message)
-      // return error as props
-      return {
-        props: {
-          error: JSON.stringify(goalsResData.message)
-        }
-      } 
-    }
-
-    return {
-      props: {
-        goals: JSON.stringify(goalsResData.goals)
-      }
-    }
-
-  } catch(err) {
-    // return error as props
-    return {
-      props: {
-        error: JSON.stringify(err.message)
-      }
-    } 
-  }
-  
-}
-
-
-export default function Home({ goals }) {  
+export default function Home() {  
   const { lang, user } = useContext(Context)
 
   console.log('user:', user);
@@ -58,7 +19,7 @@ export default function Home({ goals }) {
   return (
     <Layout lang={lang}>
       <main>
-        <HomeHeader appName={appName} goals={goals} />
+        <HomeHeader appName={appName} />
         <HomeSectionIntro appName={appName} />
       </main>
     </Layout>

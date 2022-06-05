@@ -6,12 +6,21 @@
 }
 #footer > div {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 #footer * {
   color: var(--white);
 }
 
-#footerNavLinks * {
+.footerTitle {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+#footerNavLinks a {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -40,9 +49,10 @@
 }
 
 #nlForm button {
-  background: var(--primaryColor);
-  color: var(--white);
   padding: 10px 15px;
-  border-radius: var(--mid-radius);
-  border: none;
+  font-size: medium;
+}
+
+#copyright {
+  font-size: 14px;
 }

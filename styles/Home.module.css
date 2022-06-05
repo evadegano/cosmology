@@ -41,9 +41,7 @@
 }
 
 #homeSubTitle {
-  font-size: 35px;
   color: var(--white);
-  letter-spacing: 1px;
   margin: 0;
 }
 
@@ -52,6 +50,12 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 40px;
+}
+.featImg {
+  box-shadow: var(--shadow);
+  width: 20vw;
+  height: calc(20vw * 1.7);
+  border-radius: var(--mid-radius);
 }
 
 #headerIntro {
@@ -64,7 +68,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 30px 20px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 #goalForm span {

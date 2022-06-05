@@ -7,9 +7,8 @@ import utilsStyles from '../../styles/utils.module.css'
 import HomeNav from './homeNav'
 
 
-export default function HomeHeader({ appName, goals }) {
+export default function HomeHeader({ appName }) {
   const { lang, userForm, setUserForm, errorMsg, setErrorMsg } = useContext(Context)
-  goals = JSON.parse(goals)
   
   const handleChange = (event) => {
     const target = event.target;
@@ -65,7 +64,7 @@ export default function HomeHeader({ appName, goals }) {
                 )
             })}
           </form>
-          <button className={utilsStyles.mainBtn} onClick={handleClick}>Get started (it&rsquo;s free)</button>
+          <button className={utilsStyles.mainBtn} onClick={handleClick}>Get started <i>*it&rsquo;s free</i></button>
 
           {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
         </div>
@@ -82,3 +81,78 @@ export default function HomeHeader({ appName, goals }) {
     </header>
   )
 }
+
+const goals = [
+  {
+      id: 1,
+      goal: "weight loss"
+  },
+  {
+      id: 2,
+      goal: "mental toughness"
+  },
+  {
+      id: 3,
+      goal: "gifts and intuition"
+  },
+  {
+      id: 4,
+      goal: "earning more money"
+  },
+  {
+      id: 5,
+      goal: "life purpose"
+  },
+  {
+      id: 10,
+      goal: "clarity"
+  },
+  {
+      id: 12,
+      goal: "positivity"
+  },
+  {
+      id: 13,
+      goal: "finding love"
+  },
+  {
+      id: 14,
+      goal: "relationship improvement"
+  },
+  {
+      id: 15,
+      goal: "physical healing"
+  },
+  {
+      id: 16,
+      goal: "reducing pms"
+  },
+  {
+      id: 17,
+      goal: "focus"
+  },
+  {
+      id: 18,
+      goal: "productivity"
+  },
+  {
+      id: 19,
+      goal: "friendships"
+  },
+  {
+      id: 20,
+      goal: "fertility"
+  },
+  {
+      id: 21,
+      goal: "confidence"
+  },
+  {
+      id: 22,
+      goal: "self care"
+  },
+  {
+      id: 23,
+      goal: "mindfulness"
+  }
+]
