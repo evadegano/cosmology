@@ -31,13 +31,13 @@ export default function StepSignup() {
       // store user data for db instance
       const userForDB = {
         id: signupRes.user.uid,
-        goals: userForm.goals,
-        gender: userForm.gender,
+        goals: localStorage.getItem('goals'),
+        gender: localStorage.getItem('gender'),
         lang: lang,
-        birthDate: userForm.birthDate,
-        birthTime: userForm.birthTime,
-        birthLat: userForm.birthLat,
-        birthLong: userForm.birthLong
+        birthDate: localStorage.getItem('birthDate'),
+        birthTime:localStorage.getItem('birthTime'),
+        birthLat: localStorage.getItem('birthLat'),
+        birthLong: localStorage.getItem('birthLong')
       }
 
       // add user to database

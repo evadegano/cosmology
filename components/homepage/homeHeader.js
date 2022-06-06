@@ -14,14 +14,13 @@ export default function HomeHeader({ appName }) {
     const target = event.target;
     const goalsCopy = [...userForm.goals]
 
-    console.log('goalsCopy:', goalsCopy);
-
     if (target.checked) {
       goalsCopy.push(target.value)
     } else {
       goalsCopy = goalsCopy.filter(goal => goal !== target.value)
     }
     
+    console.log('goalsCopy:', goalsCopy)
     setUserForm(prev => ({ ...prev, goals: goalsCopy }))
   }
 
@@ -32,6 +31,10 @@ export default function HomeHeader({ appName }) {
     
     // else redirect user to the user form
     } else {
+      // store goals in local storage
+      localStorage.setItem("goals", JSON.stringify(userForm.goals))
+      console.log('localStorage:', localStorage)
+
       Router.push('/mygoals')
     }
   }

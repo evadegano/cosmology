@@ -28,9 +28,7 @@ export const ContextProvider = (props) => {
     birthLoc: "",
     birthLat: "",
     birthLong: "",
-    gender: [],
-    password: "",
-    passwordConfirm: ""
+    gender: []
   })
 
   const [birthchart, setBirthchart] = useState({

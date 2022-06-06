@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Context } from '../context'
 import styles from '../styles/UserForm.module.css'
@@ -15,6 +15,17 @@ export default function MyGoals() {
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(0)
 
+  useEffect(() => {
+    // get current set from session storage
+    let currentStepFromStorage = sessionStorage.getItem("currentStep")
+    console.log("currentStepFromStorage", currentStepFromStorage)
+
+    if (currentStepFromStorage) {
+      currentStepFromStorage = Number(currentStepFromStorage)
+      setCurrentStep(currentStepFromStorage)
+    }
+  }, [])
+
   const handleNextStep = (newData) => {
     setUserForm(prev => ({ ...prev, ...newData }));
 
@@ -22,7 +33,9 @@ export default function MyGoals() {
       return
     }
 
-    setCurrentStep((prev) => prev + 1);
+    setCurrentStep((prev) => prev + 1)
+     // store current step in session storage
+     sessionStorage.setItem("currentStep", JSON.stringify(currentStep))
   }
 
   const handlePrevStep = (newData) => {
@@ -33,7 +46,9 @@ export default function MyGoals() {
       return
     }
 
-    setCurrentStep((prev) => prev - 1);
+    setCurrentStep((prev) => prev - 1)
+    // store current step in session storage
+    sessionStorage.setItem("currentStep", JSON.stringify(currentStep))
   }
   
   const steps = [

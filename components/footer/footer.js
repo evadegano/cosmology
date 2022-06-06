@@ -44,12 +44,12 @@ export default function Footer({ appName, lang }) {
         
         {/* newsletter form */}
         <div>
-          <h3>{lang.newsletterTitle}</h3>
+          <h3>Bring the good vibes to your inbox</h3>
           <form id={styles.nlForm}>
             <input type="email" placeholder='your.email@gmail.com' />
             <button type="submit" className={utilsStyles.mainBtn}>{lang.newsletterButton}</button>
           </form>
-          <p>Receive positive affirmations weekly to live in bliss</p>
+          <p>Receive our weekly positive affirmations</p>
         </div>
       </div>
     </footer>
