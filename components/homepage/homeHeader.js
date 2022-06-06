@@ -79,6 +79,7 @@ export default function HomeHeader({ appName }) {
           layout='fill'
           objectFit='contain'
           alt=""
+          priority={true}
         />
       </div>
     </header>

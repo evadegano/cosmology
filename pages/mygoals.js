@@ -13,23 +13,10 @@ import StepSignup from '../components/userForm/stepSignup'
 export default function MyGoals() {
   const { lang, userForm, setUserForm, birthchart, setBirthchart } = useContext(Context)
   const router = useRouter()
-  const [currentStep, setCurrentStep] = useState(0)
   const [firstLoad, setFirstLoad] = useState(true)
+  let currentStep = Number(sessionStorage.getItem('currentStep'))
 
-  console.log("currentStep", currentStep)
-  console.log("currentStepFromStorage", sessionStorage.getItem("currentStep"))
-  console.log("firstLoad:", firstLoad)
-
-  useEffect(() => {
-    // get current set from session storage
-    let currentStepFromStorage = sessionStorage.getItem("currentStep")
-    console.log("currentStepFromStorage", currentStepFromStorage)
-
-    if (currentStepFromStorage) {
-      currentStepFromStorage = Number(currentStepFromStorage)
-      setCurrentStep(currentStepFromStorage)
-    }
-  }, [])
+  console.log("currentStep", sessionStorage.getItem('currentStep'))
 
   const handleNextStep = (newData) => {
     setUserForm(prev => ({ ...prev, ...newData }));
@@ -38,10 +25,10 @@ export default function MyGoals() {
       return
     }
 
-    setCurrentStep((prev) => prev + 1)
-    console.log(currentStep)
-     // store current step in session storage
-     sessionStorage.setItem("currentStep", JSON.stringify(currentStep))
+    // update current step in session storage
+    currentStep += 1
+    sessionStorage.setItem('currentStep', currentStep)
+    console.log("currentStep updated", currentStep)
   }
 
   const handlePrevStep = (newData) => {
@@ -52,9 +39,10 @@ export default function MyGoals() {
       return
     }
 
-    setCurrentStep((prev) => prev - 1)
-    // store current step in session storage
-    sessionStorage.setItem("currentStep", JSON.stringify(currentStep))
+    // update current step in session storage
+    currentStep -= 1
+    sessionStorage.setItem('currentStep', currentStep)
+    console.log("currentStep updated", currentStep)
   }
   
   const steps = [
@@ -66,7 +54,7 @@ export default function MyGoals() {
 
   return (
     <div id={styles.userForm}>
-      <FormNav prev={handlePrevStep} setFirstLoad={setFirstLoad} />
+      <FormNav prev={handlePrevStep} setFirstLoad={setFirstLoad}/>
 
       <main>
         <div id={styles.stepsCountWrapper}>

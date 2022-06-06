@@ -1,4 +1,3 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import utilsStyles from '../../styles/utils.module.css'
 import { useContext } from 'react'
 import { Context } from "../../context";
@@ -39,19 +38,22 @@ export default function StepGender({ next }) {
   return (
     <div>
       <h1>Would you like your content to be for...</h1>
-      <p>Select one or both</p>
+      <p className={utilsStyles.subtitle + " " + utilsStyles.serif}>Select one or both</p>
 
-      <form id={utilsStyles.goalForm} onSubmit={handleSubmit}>
-          
-        <label>
-          <input onChange={handleChange} type='checkbox' value='FEMALE' name='women' />
-          <span>Women</span>
-        </label>
+      <form className={utilsStyles.checkboxForm} onSubmit={handleSubmit}>
+        
+        <div className={utilsStyles.inline_centered}>
+          <label>
+            <input onChange={handleChange} type='checkbox' value='FEMALE' name='women' />
+            <span>Women</span>
+          </label>
 
-        <label>
-          <input onChange={handleChange} type='checkbox' value='MALE' name='men' />
-          <span>Men</span>
-        </label>
+          <label>
+            <input onChange={handleChange} type='checkbox' value='MALE' name='men' />
+            <span>Men</span>
+          </label>
+        </div>
+        
 
         <button className={utilsStyles.mainBtn} type='submit'>Next</button>
 

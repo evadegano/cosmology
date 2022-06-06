@@ -5,7 +5,7 @@ import styles from '../../styles/UserForm.module.css'
 import utilsStyles from '../../styles/utils.module.css'
 
 
-export default function StepBirthchart({ next, prev, astroMsg }) {
+export default function StepBirthchart({ next, prev }) {
   const { lang } = useContext(Context)
   const sunSign = localStorage.getItem('sunSign')
   const moonSign = localStorage.getItem('moonSign')
@@ -14,40 +14,50 @@ export default function StepBirthchart({ next, prev, astroMsg }) {
   return (
     <div>
       <h1>We calculated your birthchart</h1>
-      <p className={utilsStyles.subtitle + " " + utilsStyles.serif}>Those are your main signs</p>
+      <p className={utilsStyles.subtitle + " " + utilsStyles.serif}>Your main signs are...</p>
 
       <div className={utilsStyles.flexCol}>
-        <div className={utilsStyles.inline_centered}>
-          <Image 
-            src='/astro/sun.png'
-            width={30}
-            height={30}
-            alt='sun astrological symbol'
-          />
-          {sunSign}
-        </div>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <Image 
+                  src='/astro/sun.png'
+                  width={30}
+                  height={30}
+                  alt='sun astrological symbol'
+                />
+              </td>
+              <td>{sunSign}</td>
+            </tr>
 
-        <div className={utilsStyles.inline_centered}>
-          <Image 
+            <tr>
+              <td>
+              <Image 
             src='/astro/moon.png'
             width={30}
             height={30}
-            alt='sun astrological symbol'
+            alt='moon astrological symbol'
           />
-          {moonSign}
-        </div>
+              </td>
+              <td>{moonSign}</td>
+            </tr>
 
-        <div className={utilsStyles.inline_centered}>
-          <Image 
+            <tr>
+              <td>
+              <Image 
             src='/astro/rising.png'
             width={30}
             height={30}
-            alt='sun astrological symbol'
+            alt='rising astrological symbol'
           />
-          {risingSign}
-        </div>
+              </td>
+              <td>{risingSign}</td>
+            </tr>
+          </tbody>
+        </table>
 
-        <p>We&rsquo;ve got so much more to tell you, we can&rsquo;t wait!</p>
+        <p>But we&rsquo;ve got so much more to tell you, we can&rsquo;t wait!</p>
       </div>
 
       <div className={utilsStyles.inline_centered}>
@@ -58,11 +68,3 @@ export default function StepBirthchart({ next, prev, astroMsg }) {
     </div>
   )
 }
-
-
-const astroMsg = [
-  {
-    sign: "",
-    msg: ""
-  }
-]

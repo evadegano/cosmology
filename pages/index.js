@@ -9,7 +9,7 @@ import HomeSectionIntro from '../components/homepage/homeSectionIntro'
 export default function Home() {  
   const { lang, user } = useContext(Context)
 
-  console.log('user:', user);
+  sessionStorage.setItem('currentStep', 0)
 
   // if user is logged in, redirect them to their profile
   if (user) {

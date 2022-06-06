@@ -24,8 +24,7 @@ export default function FormNav({ prev, setFirstLoad }) {
 
       <Link href='/'>
         <a onClick={() => { 
-            sessionStorage.removeItem("currentStep")
-            setUserForm("")
+            setUserForm('')
             setFirstLoad(true)
           }}>
           <Image 

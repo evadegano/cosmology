@@ -16,8 +16,8 @@ export default function StepBirthday({ next, firstLoad, setFirstLoad }) {
       var birthLoc = localStorage.getItem('birthLoc')
     }
 
-    // check if user birth data was already stored
-    if (birthDate && birthTime && birthLoc) {
+    // if user birth data was stored, update user form state
+    if (!userForm.birthDate && birthDate) {
       setUserForm(prev => ({ ...prev, birthDate, birthTime, birthLoc }))
     }
   })
@@ -174,7 +174,7 @@ export default function StepBirthday({ next, firstLoad, setFirstLoad }) {
             </p>
 
             <div className={utilsStyles.inline_centered}>
-              <button className={utilsStyles.mainBtn} onClick={resetBirthData}>No</button>
+              <button className={utilsStyles.secondaryBtn} onClick={resetBirthData}>No</button>
               <button className={utilsStyles.mainBtn} onClick={handleSubmit}>Yes</button>
             </div>
           </div>

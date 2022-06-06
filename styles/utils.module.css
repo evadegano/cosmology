@@ -38,12 +38,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 .inline_centered {
   display: flex;
   justify-content: center;
-  gap: 20px;
   align-items: center;
+  gap: 20px;
 }
 .flexCol {
   display: flex;
@@ -51,4 +52,29 @@
   justify-content: flex-start;
   align-items: center;
   row-gap: 20px;
+}
+
+.checkboxForm {
+  flex: 0 !important;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px 20px;
+  margin-bottom: 30px;
+}
+
+.checkboxForm span {
+  color: var(--white);
+  border: 1px solid var(--white);
+  border-radius: var(--mid-radius);
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.checkboxForm input {
+  display: none;
+}
+
+.checkboxForm input:checked ~ span {
+  background: var(--white);
+  color: var(--darkAccentColor) !important;
 }
