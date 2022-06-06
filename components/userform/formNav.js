@@ -1,10 +1,14 @@
+import { useContext } from 'react'
+import { Context } from '../../context'
 import styles from '../../styles/UserForm.module.css'
 import utilsStyles from '../../styles/utils.module.css'
 import Link from "next/link"
 import Image from 'next/image'
 
 
-export default function FormNav({ prev }) {
+export default function FormNav({ prev, setFirstLoad }) {
+  const { setUserForm } = useContext(Context)
+
   return (
     <nav id={styles.formNav}>
       <button type='button' onClick={prev}>
@@ -19,7 +23,11 @@ export default function FormNav({ prev }) {
       </button>
 
       <Link href='/'>
-        <a>
+        <a onClick={() => { 
+            sessionStorage.removeItem("currentStep")
+            setUserForm("")
+            setFirstLoad(true)
+          }}>
           <Image 
             src='/logo.png'
             width={1563/8.5}

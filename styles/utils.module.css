@@ -27,7 +27,7 @@
   font-weight: 400;
   font-size: large;
   color: var(--primaryColor) !important;
-  padding: 10px 15px;
+  padding: 8px 20px;
   border-radius: var(--mid-radius);
   border: 2px solid var(--primaryColor);
 }

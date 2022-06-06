@@ -14,6 +14,11 @@ export default function MyGoals() {
   const { lang, userForm, setUserForm, birthchart, setBirthchart } = useContext(Context)
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(0)
+  const [firstLoad, setFirstLoad] = useState(true)
+
+  console.log("currentStep", currentStep)
+  console.log("currentStepFromStorage", sessionStorage.getItem("currentStep"))
+  console.log("firstLoad:", firstLoad)
 
   useEffect(() => {
     // get current set from session storage
@@ -34,6 +39,7 @@ export default function MyGoals() {
     }
 
     setCurrentStep((prev) => prev + 1)
+    console.log(currentStep)
      // store current step in session storage
      sessionStorage.setItem("currentStep", JSON.stringify(currentStep))
   }
@@ -52,7 +58,7 @@ export default function MyGoals() {
   }
   
   const steps = [
-    <StepBirthday key='StepBirthday' next={handleNextStep} />,
+    <StepBirthday key='StepBirthday' next={handleNextStep} firstLoad={firstLoad} setFirstLoad={setFirstLoad} />,
     <StepBirthchart key='StepBirthchart' next={handleNextStep} prev={handlePrevStep}  />,
     <StepGender key='StepGender' next={handleNextStep} />,
     <StepSignup key='StepSignup'/>
@@ -60,7 +66,7 @@ export default function MyGoals() {
 
   return (
     <div id={styles.userForm}>
-      <FormNav prev={handlePrevStep} />
+      <FormNav prev={handlePrevStep} setFirstLoad={setFirstLoad} />
 
       <main>
         <div id={styles.stepsCountWrapper}>

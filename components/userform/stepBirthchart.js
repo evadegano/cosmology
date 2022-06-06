@@ -14,7 +14,7 @@ export default function StepBirthchart({ next, prev, astroMsg }) {
   return (
     <div>
       <h1>We calculated your birthchart</h1>
-      <p className={utilsStyles.subtitle + " " + utilsStyles.serif}>Those are your main signs but we&rsquo;ve got more</p>
+      <p className={utilsStyles.subtitle + " " + utilsStyles.serif}>Those are your main signs</p>
 
       <div className={utilsStyles.flexCol}>
         <div className={utilsStyles.inline_centered}>

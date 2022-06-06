@@ -32,7 +32,7 @@ export default function HomeHeader({ appName }) {
     // else redirect user to the user form
     } else {
       // store goals in local storage
-      localStorage.setItem("goals", JSON.stringify(userForm.goals))
+      localStorage.setItem("goals", userForm.goals)
       console.log('localStorage:', localStorage)
 
       Router.push('/mygoals')

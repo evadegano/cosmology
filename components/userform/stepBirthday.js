@@ -6,9 +6,8 @@ import utilsStyles from '../../styles/utils.module.css'
 import styles from '../../styles/UserForm.module.css'
 
 
-export default function StepBirthday({ next }) {
+export default function StepBirthday({ next, firstLoad, setFirstLoad }) {
   const { lang, userForm, setUserForm, setBirthchart, errorMsg, setErrorMsg } = useContext(Context)
-  const [firstLoad, setFirstLoad] = useState(true)
 
   useEffect(() => {
     if (firstLoad) {
@@ -16,10 +15,6 @@ export default function StepBirthday({ next }) {
       var birthTime = localStorage.getItem('birthTime')
       var birthLoc = localStorage.getItem('birthLoc')
     }
-
-    setFirstLoad(false)
-
-    console.log("firstLoad:", firstLoad)
 
     // check if user birth data was already stored
     if (birthDate && birthTime && birthLoc) {
@@ -39,9 +34,9 @@ export default function StepBirthday({ next }) {
     }
 
     // update local storage
-    localStorage.setItem('birthDate', JSON.stringify(birthDate))
-    localStorage.setItem('birthTime', JSON.stringify(birthTime))
-    localStorage.setItem('birthLoc', JSON.stringify(birthLoc))
+    localStorage.setItem('birthDate', birthDate)
+    localStorage.setItem('birthTime', birthTime)
+    localStorage.setItem('birthLoc', birthLoc)
 
     // parse birthday and birthtime
     const [birthYear, birthMonth, birthDay] = birthDate.split("-").map(el => Number(el))
@@ -54,6 +49,7 @@ export default function StepBirthday({ next }) {
 
     // get birth latitude and longitude from database if not stored yet
     if (!birthLat || !birthLong) {
+      console.log("Calculating birth geocode...")
       // turn birth location into latitude and longitude
       birthLoc = birthLoc.toLowerCase()
 
@@ -83,7 +79,6 @@ export default function StepBirthday({ next }) {
       .catch(err => setErrorMsg(err.message))
     }
 
-    
     let sunSign = localStorage.getItem('sunSign')
     let moonSign = localStorage.getItem('moonSign')
     let risingSign = localStorage.getItem('risingSign')
@@ -93,6 +88,7 @@ export default function StepBirthday({ next }) {
 
     // calcuate zodiac signs if not already stored
     if (!sunSign || !moonSign || !risingSign || !northNode || !southNode || !venus) {
+      console.log("Calculating birthchart...")
       const birthChart = genBirthChart(birthYear, birthMonth, birthDay, birthHour, birthMin, lat, long)
 
       sunSign = birthChart.sunSign
@@ -103,12 +99,12 @@ export default function StepBirthday({ next }) {
       venus = birthChart.venus
 
       // update local storage
-      localStorage.setItem('sunSign', JSON.stringify(sunSign))
-      localStorage.setItem('moonSign', JSON.stringify(moonSign))
-      localStorage.setItem('risingSign', JSON.stringify(risingSign))
-      localStorage.setItem('northNode', JSON.stringify(northNode))
-      localStorage.setItem('southNode', JSON.stringify(southNode))
-      localStorage.setItem('venus', JSON.stringify(venus))
+      localStorage.setItem('sunSign', sunSign)
+      localStorage.setItem('moonSign', moonSign)
+      localStorage.setItem('risingSign', risingSign)
+      localStorage.setItem('northNode', northNode)
+      localStorage.setItem('southNode', southNode)
+      localStorage.setItem('venus', venus)
     }
     
     // update birthchart state
@@ -124,9 +120,13 @@ export default function StepBirthday({ next }) {
 
     // go to next form step
     next()
+
+    // reset first load state
+    setFirstLoad(true)
   }
 
   const handleChange = (event) => {
+    setFirstLoad(false)
     const { name, value }  = event.target
 
     switch (name) {
