@@ -1,5 +1,5 @@
 import Autocomplete from 'react-google-autocomplete'
-import { useContext, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { Context } from '../../context'
 import genBirthChart from '../../services/genBirthChart'
 import utilsStyles from '../../styles/utils.module.css'
@@ -8,17 +8,23 @@ import styles from '../../styles/UserForm.module.css'
 
 export default function StepBirthday({ next }) {
   const { lang, userForm, setUserForm, setBirthchart, errorMsg, setErrorMsg } = useContext(Context)
+  const [firstLoad, setFirstLoad] = useState(true)
 
   useEffect(() => {
-    const birthDate = localStorage.getItem('birthDate')
-    const birthTime = localStorage.getItem('birthTime')
-    const birthLoc = localStorage.getItem('birthLoc')
+    if (firstLoad) {
+      var birthDate = localStorage.getItem('birthDate')
+      var birthTime = localStorage.getItem('birthTime')
+      var birthLoc = localStorage.getItem('birthLoc')
+    }
+
+    setFirstLoad(false)
+
+    console.log("firstLoad:", firstLoad)
 
     // check if user birth data was already stored
     if (birthDate && birthTime && birthLoc) {
       setUserForm(prev => ({ ...prev, birthDate, birthTime, birthLoc }))
     }
-
   })
   
   const handleSubmit = (event) => {
@@ -33,9 +39,9 @@ export default function StepBirthday({ next }) {
     }
 
     // update local storage
-    localStorage.setItem('birthDate', JSON.stringify(value))
-    localStorage.setItem('birthTime', JSON.stringify(value))
-    localStorage.setItem('birthLoc', JSON.stringify(value))
+    localStorage.setItem('birthDate', JSON.stringify(birthDate))
+    localStorage.setItem('birthTime', JSON.stringify(birthTime))
+    localStorage.setItem('birthLoc', JSON.stringify(birthLoc))
 
     // parse birthday and birthtime
     const [birthYear, birthMonth, birthDay] = birthDate.split("-").map(el => Number(el))
@@ -160,7 +166,7 @@ export default function StepBirthday({ next }) {
       <p className={utilsStyles.subtitle + " " + utilsStyles.serif}>It&rsquo;s not law but your birth sign will help us get real specific</p>
 
       {
-        userForm.birthDate && userForm.birthTime && userForm.birthLoc
+        firstLoad && userForm.birthDate && userForm.birthTime && userForm.birthLoc
         ? (
           <div>
             <p>
