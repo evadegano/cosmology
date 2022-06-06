@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   */
 
   if (req.method === 'POST') {
-    let { id, goals, name, gender, lang, birthDate, birthTime, birthLat, birthLong } = req.body.user
+    let { id, goals, gender, lang, birthDate, birthTime, birthLat, birthLong } = req.body.user
     let { sunSign, moonSign, risingSign, northNode, southNode, venus } = req.body.birthchart
 
     goals = goals.map(goal => {
@@ -21,23 +21,22 @@ export default async function handler(req, res) {
       const user = await prisma.user.create({
         data: {
           id,
-          name: name.toLowerCase().trim(),
           gender: {
             set: gender
           },
-          lang: lang.toUpperCase(),
+          lang,
           birthDate,
           birthTime,
           birthLat,
           birthLong,
           birthChart: {
             create: {
-              sunSign: sunSign.toUpperCase(),
-              moonSign: moonSign.toUpperCase(),
-              risingSign: risingSign.toUpperCase(),
-              northNode: northNode.toUpperCase(),
-              southNode: southNode.toUpperCase(),
-              venus: venus.toUpperCase(),
+              sunSign,
+              moonSign,
+              risingSign,
+              northNode,
+              southNode,
+              venus
             }
           },
           goals: { connect: goals }

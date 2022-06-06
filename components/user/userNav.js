@@ -13,10 +13,10 @@ export default function UserNav() {
     event.preventDefault()
 
     try {
-      await logout()
-
       // redirect user to homepage
       Router.push('/')
+
+      await logout()
 
     } catch(err) {
       setErrorMsg(err.errorMsg)

@@ -78,3 +78,56 @@
   background: var(--white);
   color: var(--darkAccentColor) !important;
 }
+.lineSeparator {
+  height: 20px;
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+}
+.lineSeparator hr {
+  width: 100%;
+  opacity: 0.5;
+}
+.lineSeparator span {
+  padding-left: 10px;
+  padding-right: 10px;
+  opacity: 0.5;
+}
+.authForm {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+.authForm input {
+  border-radius: 15px;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  width: 100%;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.authForm input:focus {
+  outline: none;
+}
+.authWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.authWrapper h1 {
+  margin-bottom: 40px !important;
+}
+.authWrapper form {
+  margin-top: 10px !important;
+}
+.authWrapper .mainBtn {
+  margin-top: 0 !important;
+}
+.authBtn {
+  width: 100%;
+}

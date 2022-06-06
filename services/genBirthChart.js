@@ -1,40 +1,52 @@
-import { Origin, Horoscope } from 'circular-natal-horoscope-js'
 
+export default async function genBirthChart(signupRes, lang='en') {  
+  // prep data for database
+  let goals = localStorage.getItem('goals')
+  goals = goals.split(',').map(goal => Number(goal))
 
-export default function genBirthChart(year, month, day, hour, min, latitude, longitude) {  
-  // create origin instance from user data
-  const origin = new Origin({
-    year: year,
-    month: month - 1, // 0 = January, 11 = December!
-    date: day,
-    hour: hour,
-    minute: min,
-    latitude: latitude,
-    longitude: longitude,
-  });
+  let gender = localStorage.getItem('gender')
+  gender = gender.split(',')
 
-  // create birth chart from origin
-  const horoscope = new Horoscope({
-    origin: origin,
-    houseSystem: 'whole-sign',
-    zodiac: 'tropical',
-    aspectPoints: ['bodies', 'moon', 'sun'],
-    aspectWithPoints: ['bodies', 'moon'],
-    aspectTypes: [],
-    customOrbs: {},
-    language: 'en',
-  });
+  let birthLat = parseFloat(localStorage.getItem('birthLat'))
+  let birthLong = parseFloat(localStorage.getItem('birthLong'))
 
-  console.log("horoscope", horoscope)
-
-  const userChart = {
-    sunSign: horoscope.CelestialBodies.sun.Sign.label,
-    moonSign: horoscope.CelestialBodies.moon.Sign.label,
-    risingSign: horoscope._ascendant.Sign.label,
-    northNode: horoscope.CelestialPoints.northnode.Sign.label,
-    southNode: horoscope.CelestialPoints.southnode.Sign.label,
-    venus: horoscope.CelestialBodies.venus.Sign.label
+  // store user data for db instance
+  const user = {
+    id: signupRes.user.uid,
+    goals,
+    gender,
+    lang: lang.toUpperCase(),
+    birthDate: localStorage.getItem('birthDate'),
+    birthTime: localStorage.getItem('birthTime'),
+    birthLat,
+    birthLong
   }
 
-  return userChart
+  const birthchart = {
+    sunSign: localStorage.getItem('sunSign').toUpperCase(),
+    moonSign: localStorage.getItem('moonSign').toUpperCase(),
+    risingSign: localStorage.getItem('risingSign').toUpperCase(),
+    northNode: localStorage.getItem('northNode').toUpperCase(),
+    southNode: localStorage.getItem('southNode').toUpperCase(),
+    venus: localStorage.getItem('venus').toUpperCase(),
+  }
+
+  console.log("user", user)
+  console.log("birthchart", birthchart)
+
+  // add user to database
+  const userRes = await fetch('api/auth/signup', {
+    method: 'POST',
+    body: JSON.stringify({ user, birthchart }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  const userData = await userRes.json()
+  console.log("userData", userData)
+
+  // return if error
+  if (userData.message) {
+    return userData.message
+  }
 }

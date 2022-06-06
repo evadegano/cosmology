@@ -1,18 +1,39 @@
 import Link from "next/link"
+import Image from 'next/image'
 import React, { useContext, useState } from 'react'
 import { Context } from "../../context"
+import genBirthChart from "../../services/genBirthChart"
 import utilsStyles from '../../styles/utils.module.css'
 import Router from 'next/router'
 
 
 export default function StepSignup() {
-  const { lang, user, signup, errorMsg, setErrorMsg, userForm, setUserForm, birthchart } = useContext(Context)
+  const { lang, user, signup, googleAuth, errorMsg, setErrorMsg, userForm, setUserForm, birthchart } = useContext(Context)
   const [signupCred, setSignupCred] = useState({
     name: "",
     email: "",
     password: "",
     passwordConfirm: ""
   })
+
+  const googleSignup = async(event) => {
+    event.preventDefault()
+
+    try {
+      const signupRes = await googleAuth()
+      console.log("signupRes", signupRes)
+
+      await genBirthChart(signupRes)
+
+      // redirect user to their profile
+      Router.push(`/user/${signupRes.user.uid}`)
+
+    } catch(err) {
+      console.log(err)
+      setErrorMsg(err.message)
+    }
+
+  }
 
   const handleSubmit = async(event) => {
     // prevent window from reloading
@@ -27,35 +48,7 @@ export default function StepSignup() {
     try {
       // sign user up
       const signupRes = await signup(signupCred.email, signupCred.password, signupCred.name)
-
-      // store user data for db instance
-      const userForDB = {
-        id: signupRes.user.uid,
-        goals: localStorage.getItem('goals'),
-        gender: localStorage.getItem('gender'),
-        lang: lang,
-        birthDate: localStorage.getItem('birthDate'),
-        birthTime:localStorage.getItem('birthTime'),
-        birthLat: localStorage.getItem('birthLat'),
-        birthLong: localStorage.getItem('birthLong')
-      }
-
-      // add user to database
-      const newUserRes = await fetch('api/auth/signup', {
-        method: 'POST',
-        body: JSON.stringify({ user: userForDB, birthchart }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      const userData = await newUserRes.json()
-      console.log("userData", userData);
-
-      // return if error
-      if (userData.message) {
-        setErrorMsg(userData.message)
-        return
-      }
+      await genBirthChart(signupRes)
 
       // redirect user to their profile
       Router.push(`/user/${signupRes.user.uid}`)
@@ -88,27 +81,39 @@ export default function StepSignup() {
   }
 
   return (
-    <div>
-      <h1>Save your results and get access to your curated content!</h1>
+    <div className={utilsStyles.authWrapper}>
+      <h1>Save your results and get access to your curated content</h1>
 
-      <form onSubmit={handleSubmit}>
-        <label>Your first name</label>
-        <input type='text' name='name' value={userForm.name} placeholder='' onChange={handleChange} required />
+      <div className={utilsStyles.flexCol}>
+        <button onClick={googleSignup} className={utilsStyles.secondaryBtn + " " + utilsStyles.authBtn}>
+          <Image 
+            src='/icons/google.png'
+            width={20}
+            height={20}
+            alt='google logo'
+          />
+          Sign up with Google
+        </button>
 
-        <label>Your email address</label>
-        <input type='email' name='email' value={signupCred.email} placeholder='' onChange={handleChange} required />
+        <div className={utilsStyles.lineSeparator}>
+          <hr/>
+          <span>OR</span>
+          <hr/>
+        </div>
 
-        <label>Your password</label>
-        <input type='password' name='password' value={signupCred.password} placeholder='' onChange={handleChange} required />
+        <form onSubmit={handleSubmit} className={utilsStyles.authForm}>
+          <input type='text' name='name' value={userForm.name} placeholder='First name' onChange={handleChange} required />
+          <input type='email' name='email' value={signupCred.email} placeholder='Email address' onChange={handleChange} required />
+          <input type='password' name='password' value={signupCred.password} placeholder='Password' onChange={handleChange} required />
+          <input type='password' name='passwordConfirm' value={signupCred.passwordConfirm} placeholder='Confirm password' onChange={handleChange} required />
 
-        <label>Confirm your password</label>
-        <input type='password' name='passwordConfirm' value={signupCred.passwordConfirm} placeholder='' onChange={handleChange} required />
+          <p>*We will absolutely never share or sell your data. You&rsquo;re welcome to read our <Link href='/info/privacy-policy'><a target='_blank'>Privacy Policy</a></Link> to learn more.</p>
 
-        <p>*We will never share or sell your data. You&rsquo;re welcome to read our <Link href='/privacy-policy'><a>Privacy Policy</a></Link> to learn more.</p>
-
-        <button className={utilsStyles.mainBtn} type="submit">Save & create account</button>
-        {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
-      </form>
+          <button className={utilsStyles.mainBtn} type="submit">Create account</button>
+          {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
+        </form>
+      </div>
+      
     </div>
   )
 }

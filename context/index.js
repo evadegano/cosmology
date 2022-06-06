@@ -5,8 +5,11 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   signInWithEmailAndPassword,
-  signOut } from 'firebase/auth'
-import { auth } from '../config/firebase'
+  signInWithRedirect,
+  updateProfile,
+  signOut 
+} from 'firebase/auth'
+import { auth, googleProvider } from '../config/firebase'
 import en from '../locales/en'
 import fr from '../locales/fr'
 
@@ -64,17 +67,27 @@ export const ContextProvider = (props) => {
 
   const signup = async (email, password, name) => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password)
+      const res = await createUserWithEmailAndPassword(auth, email, password)
       await sendEmailVerification(auth.currentUser)
       await updateProfile(auth.currentUser, { displayName: name })
-
-      return
+      return res
 
     } catch(err) {
+      console.log(err.message)
       setErrorMsg(err.message)
     }
 
     // return createUserWithEmailAndPassword(auth, email, password)
+  }
+
+  const googleAuth = async () => {
+    try {
+      const res = await signInWithRedirect(auth, googleProvider)
+      return res
+
+    } catch(err) {
+      setErrorMsg(err.message)
+    }
   }
 
   const login = (email, password) => {
@@ -99,6 +112,7 @@ export const ContextProvider = (props) => {
     setErrorMsg,
     login,
     signup,
+    googleAuth,
     logout,
     userForm, 
     setUserForm,

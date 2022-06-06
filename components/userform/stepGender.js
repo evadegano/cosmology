@@ -18,6 +18,8 @@ export default function StepGender({ next }) {
       return
     }
 
+    localStorage.setItem('gender', gender)
+
     // go to next form step
     next()
   }

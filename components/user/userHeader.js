@@ -74,7 +74,7 @@ export default function UserHeader() {
         )
         : (
           <div>
-            <h2>{user.displayName}</h2>
+            {user && <h2>{user.displayName}</h2>}
             <button onClick={() => setEditUsername(true)}>edit</button>
           </div>
         )
