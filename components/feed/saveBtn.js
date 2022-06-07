@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from 'react'
 import { Context } from '../../context'
+import utilsStyles from '../../styles/utils.module.css'
 
 export default function SaveBtn({ pin }) {
   const { user } = useContext(Context)
@@ -76,8 +77,8 @@ export default function SaveBtn({ pin }) {
     <div>
       {
         isPinSaved
-        ? <button onClick={deleteSavedPin}>Saved</button>
-        : <button onClick={savePin}>Save</button>
+        ? <button onClick={deleteSavedPin} className={utilsStyles.secondaryBtn}>Saved</button>
+        : <button onClick={savePin} className={utilsStyles.mainBtn}>Save</button>
       }
     </div>
   )

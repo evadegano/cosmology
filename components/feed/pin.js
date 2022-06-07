@@ -34,7 +34,7 @@ export default function Pin({ pin }) {
       
       <div className={styles.pinInnerWrapper} >
         <Image
-          className={styles.pinImg}
+          className={`${styles.pinImg} ${isPinHovered ? styles.darken : ""}`}
           src={pin.pictureUrl}
           alt={pin.title}
           width={500}
@@ -44,10 +44,7 @@ export default function Pin({ pin }) {
         {isPinHovered && (
           <div className={styles.onHoverFeat} >
             <SaveBtn pin={pin} />
-            <div>
-              <button onClick={sharePin}>share</button>
-              <LikeBtn pin={pin} />
-            </div>
+            <LikeBtn pin={pin} />
           </div>
         )}
       </div>

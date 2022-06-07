@@ -143,6 +143,9 @@
   border-radius: var(--mid-radius);
   padding-bottom: 15px;
 }
+.card:hover {
+  cursor: pointer;
+}
 
 .card > h2,
 .card > p {

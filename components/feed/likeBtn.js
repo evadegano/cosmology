@@ -1,5 +1,7 @@
 import { useState, useContext, useEffect } from 'react'
 import { Context } from '../../context'
+import Image from 'next/image'
+import styles from '../../styles/Feed.module.css'
 
 
 export default function LikeBtn({ pin }) {
@@ -77,8 +79,26 @@ export default function LikeBtn({ pin }) {
     <div>
       {
         isPinLiked
-        ? <button onClick={deleteLikedPin}>Liked</button>
-        : <button onClick={likePin}>Like</button>
+        ? (
+            <button onClick={deleteLikedPin} className={styles.likeBtn}>
+              <Image
+                src='/icons/heart_full.png'
+                alt={pin.title}
+                width={30}
+                height={30}
+              />
+            </button>
+          )
+        : (
+            <button onClick={likePin} className={styles.likeBtn}>
+              <Image
+                  src='/icons/heart_hollow.png'
+                  alt={pin.title}
+                  width={30}
+                  height={30}
+                />
+            </button>
+          )
       }
     </div>
   )
