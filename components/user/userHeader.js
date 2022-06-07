@@ -50,15 +50,22 @@ export default function UserHeader() {
   }
 
   return (
-    <header>
+    <header className={utilsStyles.flexCol}>
       <div className={styles.profilePic}>
         <Image
           src="/images/profile.png"
           height={144}
           width={144}
-          alt="Your Name"
+          alt={user.displayName}
         />
-         <button>edit</button>
+         <button>
+          <Image
+            src="/icons/edit.png"
+            height={30}
+            width={30}
+            alt="edit icon"
+          />
+         </button>
       </div>
       
       {
@@ -85,7 +92,7 @@ export default function UserHeader() {
           data
           ? <div>
             {
-              Object.entries(data.birthChart).map(([key,value]) => <p key={key}>{value}</p>)
+              data.birthChart && Object.entries(data.birthChart).map(([key,value]) => <p key={key}>{value}</p>)
 
             }
             </div>

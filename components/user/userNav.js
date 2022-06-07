@@ -25,8 +25,13 @@ export default function UserNav() {
 
   return (
     <nav>
-      <div>logo</div>
-      <button onClick={handleClick}>Logout</button>
+      <Image 
+        src='/logo_small.png'
+        width={40}
+        height={40}
+        alt='Cosmology'
+      />
+      <button onClick={handleClick} className={utilsStyles.simpleBtn}>Logout</button>
 
       {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
     </nav>

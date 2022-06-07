@@ -13,6 +13,13 @@ export default function Blog() {
       <main>
         <div>
           <h2>Human design</h2>
+          <p>Discover yourself energetically, emotionally and psychologycally</p>
+          <button>Dive in</button>
+        </div>
+
+        <div>
+          <h2>Law of Attraction</h2>
+          <p>Manifest the life you want</p>
           <button>Dive in</button>
         </div>
       </main>

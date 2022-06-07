@@ -4,6 +4,12 @@
   align-items: flex-start;
   width: 100vw;
 }
+#userLayout nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
 #sideNavWrapper {
   width: 40%;
   max-width: 400px;
@@ -20,6 +26,9 @@
   background: var(--dark);
   color: var(--white);
 }
+#sideNav > div {
+  margin-top: 60px;
+}
 
 #mainContent {
   display: flex;
@@ -33,5 +42,14 @@
   width: 144px;
   height: 144px;
   border-radius: 50%;
-  border: 2px solid var(--white)
+  border: 2px solid var(--white);
+  position: relative;
+}
+.profilePic button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  transform: translate(50%, -50%);
 }

@@ -4,6 +4,7 @@ import Router from 'next/router'
 import Image from "next/image"
 import Link from "next/link"
 import styles from '../../styles/Feed.module.css'
+import utilsStyles from '../../styles/utils.module.css'
 import SaveBtn from './saveBtn'
 import LikeBtn from './likeBtn'
 
@@ -25,6 +26,7 @@ export default function Pin({ pin }) {
 
   return (
     <div 
+      className={utilsStyles.card}
       onMouseEnter={() => setIsPinHovered(true)}
       onMouseLeave={() => setIsPinHovered(false)}
       onClick={goToPinPage}

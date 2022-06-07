@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { Context } from '../../context'
@@ -22,9 +23,12 @@ export default function UserLayout({ children }) {
       <main id={styles.userLayout}>
         <section id={styles.sideNavWrapper}>
           <div id={styles.sideNav}>
-            <UserNav/>
-            <UserHeader />
-            <UserAstro/>
+            <UserNav />
+
+            <div>
+              <UserHeader/>
+              <UserAstro/>
+            </div>
           </div>
           
         </section>
