@@ -10,7 +10,7 @@ export default function AboutUs() {
       <p>And we do that by sharing with you all the tools and content that we have personally used in our self-empowerment journey.</p>
       <p>Enjoy!</p>
 
-      <p>—— Eva & Janesha from Cosmology —— </p>
+      <p>—— Eva & Janesha, founders of Cosmology —— </p>
     </Layout>
   )
 }
