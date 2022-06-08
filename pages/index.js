@@ -17,7 +17,7 @@ export default function Home() {
   }
 
   return (
-    <Layout lang={lang}>
+    <Layout>
       <main>
         <HomeHeader appName={appName} />
         <HomeSectionIntro appName={appName} />

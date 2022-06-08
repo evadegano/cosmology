@@ -13,9 +13,6 @@ export default function UserNav() {
     event.preventDefault()
 
     try {
-      // redirect user to homepage
-      Router.push('/')
-
       await logout()
 
     } catch(err) {

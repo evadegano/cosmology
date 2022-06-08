@@ -1,15 +1,17 @@
 import React, { useState, createContext, useEffect } from 'react'
+import Router from 'next/router'
 import { useRouter } from 'next/router'
 import { 
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   sendEmailVerification,
   signInWithEmailAndPassword,
-  signInWithRedirect,
+  signInWithPopup,
   updateProfile,
   signOut 
 } from 'firebase/auth'
 import { auth, googleProvider } from '../config/firebase'
+import genBirthChart from '../services/genBirthChart'
 import en from '../locales/en'
 import fr from '../locales/fr'
 
@@ -65,39 +67,77 @@ export const ContextProvider = (props) => {
     return () => unsubscribe()
   }, [])
 
-  const signup = async (email, password, name) => {
+  const emailSignup = async (email, password, name) => {
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password)
+      const { user } = await createUserWithEmailAndPassword(auth, email, password)
       await sendEmailVerification(auth.currentUser)
       await updateProfile(auth.currentUser, { displayName: name })
-      return res
+      await genBirthChart(user)
+
+      localStorage.setItem('user', JSON.stringify(user))
+
+      // redirect user to their profile
+      Router.push(`/user/${user.uid}`)
 
     } catch(err) {
       console.log(err.message)
       setErrorMsg(err.message)
     }
 
-    // return createUserWithEmailAndPassword(auth, email, password)
   }
 
-  const googleAuth = async () => {
+  const googleSignup = async () => {
     try {
-      const res = await signInWithRedirect(auth, googleProvider)
-      return res
+      const { user } = await signInWithPopup(auth, googleProvider)
+      await genBirthChart(user)
+
+      localStorage.setItem('user', JSON.stringify(user))
+
+      // redirect user to their profile
+      Router.push(`/user/${user.uid}`)
 
     } catch(err) {
       setErrorMsg(err.message)
     }
   }
 
-  const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
+  const emailLogin = async (email, password) => {
+    try {
+      const { user } = await signInWithEmailAndPassword(auth, email, password)
+
+      localStorage.setItem('user', JSON.stringify(user))
+
+      // redirect user to their profile
+      Router.push(`/user/${user.uid}`)
+
+    } catch(err) {
+      setErrorMsg(err.message)
+    }
+  }
+
+  const googleLogin = async () => {
+    try {
+      const { user } = await signInWithPopup(auth, googleProvider)
+
+      localStorage.setItem('user', JSON.stringify(user))
+
+      // redirect user to their profile
+      Router.push(`/user/${user.uid}`)
+
+    } catch(err) {
+      setErrorMsg(err.message)
+    } 
   }
 
   const logout = async () => {
     try {
       setUser(null)
       await signOut(auth)
+
+      // redirect user to homepage
+      Router.push('/')
+
+      localStorage.removeItem('user')
 
     } catch(err) {
       console.log(err.message)
@@ -110,9 +150,10 @@ export const ContextProvider = (props) => {
     setUser,
     errorMsg,
     setErrorMsg,
-    login,
-    signup,
-    googleAuth,
+    emailLogin,
+    googleLogin,
+    emailSignup,
+    googleSignup,
     logout,
     userForm, 
     setUserForm,

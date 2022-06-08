@@ -2,38 +2,17 @@ import Link from "next/link"
 import Image from 'next/image'
 import React, { useContext, useState } from 'react'
 import { Context } from "../../context"
-import genBirthChart from "../../services/genBirthChart"
 import utilsStyles from '../../styles/utils.module.css'
-import Router from 'next/router'
 
 
 export default function StepSignup() {
-  const { lang, user, signup, googleAuth, errorMsg, setErrorMsg, userForm, setUserForm, birthchart } = useContext(Context)
+  const { lang, user, emailSignup, googleSignup, errorMsg, setErrorMsg, userForm, setUserForm, birthchart } = useContext(Context)
   const [signupCred, setSignupCred] = useState({
     name: "",
     email: "",
     password: "",
     passwordConfirm: ""
   })
-
-  const googleSignup = async(event) => {
-    event.preventDefault()
-
-    try {
-      const signupRes = await googleAuth()
-      console.log("signupRes", signupRes)
-
-      await genBirthChart(signupRes)
-
-      // redirect user to their profile
-      Router.push(`/user/${signupRes.user.uid}`)
-
-    } catch(err) {
-      console.log(err)
-      setErrorMsg(err.message)
-    }
-
-  }
 
   const handleSubmit = async(event) => {
     // prevent window from reloading
@@ -47,11 +26,7 @@ export default function StepSignup() {
     
     try {
       // sign user up
-      const signupRes = await signup(signupCred.email, signupCred.password, signupCred.name)
-      await genBirthChart(signupRes)
-
-      // redirect user to their profile
-      Router.push(`/user/${signupRes.user.uid}`)
+      await emailSignup(signupCred.email, signupCred.password, signupCred.name)
 
     } catch(err) {
       console.log(err)

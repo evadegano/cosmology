@@ -2,12 +2,13 @@ import React, { useContext, useState } from 'react'
 import { Context } from '../context'
 import Router from 'next/router'
 import Link from 'next/link'
+import Image from 'next/image'
 import Layout, { appName } from '../components/sitewide/layout'
 import utilsStyles from '../styles/utils.module.css'
 
 
 export default function Login() {
-  const { lang, user, login, errorMsg, setErrorMsg } = useContext(Context)
+  const { lang, user, emailLogin, googleLogin, errorMsg, setErrorMsg } = useContext(Context)
 
   const [loginCred, setLoginCred] = useState({
     email: "",
@@ -35,10 +36,7 @@ export default function Login() {
 
     try {
       // log user in using Firebase
-      const loginRes = await login(loginCred.email, loginCred.password)
-
-      // redirect user to their profile
-      Router.push(`/user/${loginRes.user.uid}`)
+      await emailLogin(loginCred.email, loginCred.password)
       
     } catch(err) {
       setErrorMsg(err.message)
@@ -46,23 +44,53 @@ export default function Login() {
   }
 
   return (
-    <Layout lang={lang}>
-      <nav>
-        <Link href='/'><a>Cosmology</a></Link>
+    <Layout>
+      <nav className={utilsStyles.simpleNav}>
+        <Link href='/'>
+          <a onClick={() => { 
+              setUserForm('')
+              setFirstLoad(true)
+            }}>
+            <Image 
+              src='/logo.png'
+              width={1563/8.5}
+              height={377/8.5}
+              alt='Cosmology'
+            />
+          </a>
+        </Link>
       </nav>
 
-      <main>
-        <form onSubmit={handleSubmit}>
-          <label>Your email address:</label>
-          <input type='text' name='email' value={loginCred.email} onChange={handleChange} />
-          
-          <label>Your password:</label>
-          <input type='password' name='password' value={loginCred.password} onChange={handleChange} />
-          
-          <button className={utilsStyles.mainBtn} type="submit">Log in</button>
+      <main id={utilsStyles.loginPage}>
+        <div className={utilsStyles.authWrapper}>
+          <h1>Welcome back!</h1>
 
-          {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
-        </form>
+          <div className={utilsStyles.flexCol}>
+            <button onClick={googleLogin} className={utilsStyles.secondaryBtn + " " + utilsStyles.authBtn}>
+              <Image 
+                src='/icons/google.png'
+                width={20}
+                height={20}
+                alt='google logo'
+              />
+              Log in with Google
+            </button>
+
+            <div className={utilsStyles.lineSeparator}>
+              <hr/>
+              <span>OR</span>
+              <hr/>
+            </div>
+
+            <form onSubmit={handleSubmit} className={utilsStyles.authForm}>
+              <input type='email' name='email' value={loginCred.email} placeholder='Email address' onChange={handleChange} required />
+              <input type='password' name='password' value={loginCred.password} placeholder='Password' onChange={handleChange} required />
+
+              <button className={utilsStyles.mainBtn} type="submit">Log in</button>
+              {errorMsg && <p className={utilsStyles.error}>{errorMsg}</p>}
+            </form>
+          </div>
+        </div>
       </main>
     </Layout>
   )

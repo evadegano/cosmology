@@ -1,5 +1,5 @@
 
-export default async function genBirthChart(signupRes, lang='en') {  
+export default async function genBirthChart(loggedUser, lang='en') {  
   // prep data for database
   let goals = localStorage.getItem('goals')
   goals = goals.split(',').map(goal => Number(goal))
@@ -12,7 +12,7 @@ export default async function genBirthChart(signupRes, lang='en') {
 
   // store user data for db instance
   const user = {
-    id: signupRes.user.uid,
+    id: loggedUser.uid,
     goals,
     gender,
     lang: lang.toUpperCase(),

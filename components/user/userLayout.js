@@ -1,8 +1,5 @@
 import Link from 'next/link'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
 import { useContext } from 'react'
-import { Context } from '../../context'
 import styles from '../../styles/User.module.css'
 import UserAstro from './userAstro'
 import Head from 'next/head'
@@ -11,8 +8,8 @@ import UserHeader from './userHeader'
 
 
 export default function UserLayout({ children }) {
-  const { user } = useContext(Context)
-  const router = useRouter()
+  const { user } = localStorage.getItem('user')
+  console.log('user in feed:', user)
 
   return (
     <div>
@@ -35,11 +32,10 @@ export default function UserLayout({ children }) {
         
         <section id={styles.mainContent}>
           <div>
-            <Link href={`/user/${user.uid}`}><a>Feed</a></Link>
-            <Link href={`/user/${user.uid}/profile`}><a>Saved Pins</a></Link>
-            <Link href={`/user/${user.uid}/chat`}><a>Chat</a></Link>
+            <Link href={`${user ? "/user/" + user.uid : "#"}`}><a>Feed</a></Link>
+            <Link href={`${user ? "/user/" + user.uid + "/profile" : "#"}`}><a>Saved Pins</a></Link>
+            <Link href={`${user ? "/user/" + user.uid + "/chat" : "#"}`}><a>Chat</a></Link>
           </div>
-          
           
           {children}
         </section>

@@ -39,6 +39,15 @@ model BirthChart {
   northNode       ZodiacSign
   southNode       ZodiacSign
   venus           ZodiacSign
+
+}
+
+model Aspect {
+  id              Int         @id @default(autoincrement())
+  planetOne       Planet
+  planetTwo       Planet
+  meaning         String
+  theme           String
 }
 
 model Goal {
@@ -113,6 +122,10 @@ enum ZodiacSign {
   CAPRICORN
   AQUARIUS
   PISCES
+}
+
+enum Planet {
+  VENUS
 }
 
 enum Lang {

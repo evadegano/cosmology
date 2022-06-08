@@ -42,7 +42,7 @@ export default function Footer({ appName, lang }) {
           </div>
         </div>
         
-        {/* newsletter form */}
+        {/* newsletter form 
         <div>
           <h3>Bring the good vibes to your inbox</h3>
           <form id={styles.nlForm}>
@@ -51,6 +51,7 @@ export default function Footer({ appName, lang }) {
           </form>
           <p>Receive our weekly positive affirmations</p>
         </div>
+        */}
       </div>
     </footer>
   )

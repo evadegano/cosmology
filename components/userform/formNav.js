@@ -16,7 +16,7 @@ export default function FormNav({ prev, setFirstLoad }) {
             src='/icons/left-arrow_dark.png'
             width={128/6}
             height={128/6}
-            alt='Cosmology'
+            alt='left arrow icon'
           />
 
         Back

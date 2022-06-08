@@ -151,3 +151,20 @@
 .card > p {
   margin: 10px 15px 0 15px;
 }
+.simpleNav {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 20px;
+}
+#loginPage {
+  width: 100%;
+  height: 100%;
+  background: var(--dark);
+  padding: 40px;
+  flex: 1 1;
+}
+#loginPage * {
+  color: var(--white);
+}

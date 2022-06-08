@@ -1,11 +1,14 @@
 import Script from 'next/script'
+import { useContext } from 'react'
+import { Context } from '../../context'
 import Head from 'next/head'
 import styles from '../../styles/Layout.module.css'
 import Footer from '../footer/footer'
 
 export const appName = 'Cosmology'
 
-export default function Layout({ lang, children }) {
+export default function Layout({ children }) {
+  const { lang } = useContext(Context)
   return (
     <div id={styles.layout}>
       <Head>
