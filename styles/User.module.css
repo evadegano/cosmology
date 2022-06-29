@@ -38,6 +38,15 @@
   flex: 1;
 }
 
+#mainContent_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+
 .profilePic {
   width: 144px;
   height: 144px;
@@ -52,4 +61,10 @@
   background: none;
   border: none;
   transform: translate(50%, -50%);
+}
+
+.activeNav {
+  background-color: var(--primaryColor);
+  border-radius: var(--mid-radius);
+  padding: 5px 20px;
 }

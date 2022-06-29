@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { useContext } from 'react'
+import { Context } from '../../context'
+import { useRouter } from 'next/router'
 import utilsStyles from '../../styles/utils.module.css'
 import styles from '../../styles/User.module.css'
 import UserAstro from './userAstro'
@@ -9,11 +11,16 @@ import UserHeader from './userHeader'
 
 
 export default function UserLayout({ children }) {
-  const { user } = localStorage.getItem('user')
+  const router = useRouter()
+  const { user } = useContext(Context)
   console.log('user in feed:', user)
+
+  console.log("url:", router.pathname)
 
   return (
     <div>
+      {user && 
+        <>
       <Head>
         <title>User profile</title>
       </Head>
@@ -32,15 +39,29 @@ export default function UserLayout({ children }) {
         </section>
         
         <section id={styles.mainContent}>
-          <div className={utilsStyles.inline_centered}>
-            <Link href={`${user ? "/user/" + user.uid : "#"}`}><a>Feed</a></Link>
-            <Link href={`${user ? "/user/" + user.uid + "/profile" : "#"}`}><a>Saved Pins</a></Link>
-            <Link href={`${user ? "/user/" + user.uid + "/chat" : "#"}`}><a>Chat</a></Link>
+          <div id={styles.mainContent_title}>
+            <Link href={`${user ? "/user/" + user.uid : "#"}`}>
+              <a className={`${router.pathname ==  "/user/[id]" ? styles.activeNav : ""}`}>
+                <b>Feed</b>
+              </a>
+            </Link>
+            <Link href={`${user ? "/user/" + user.uid + "/profile" : "#"}`}>
+              <a className={`${router.pathname ==  "/user/[id]/profile" ? styles.activeNav : ""}`}>
+                <b>Saved Pins</b>
+              </a>
+            </Link>
+            <Link href={`${user ? "/user/" + user.uid + "/chat" : "#"}`}>
+              <a className={`${router.pathname ==  "/user/[id]/chat" ? styles.activeNav : ""}`}>
+                <b>Chat</b>
+              </a>
+            </Link>
           </div>
           
           {children}
         </section>
       </main>
+        </>
+      }
     </div>
   )
 }

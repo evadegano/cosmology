@@ -8,6 +8,7 @@ import UserLayout from '../../components/user/userLayout'
 import SaveBtn from "../../components/feed/saveBtn"
 import LikeBtn from "../../components/feed/likeBtn"
 import ShareBtn from '../../components/feed/shareBtn'
+import RedictBtn from "../../components/feed/redirectBtn"
 
 
 export default function PinPage() {
@@ -22,9 +23,7 @@ export default function PinPage() {
         <button type='button' onClick={() => router.back()}>← Back</button>
 
         <div>
-          <div className={styles.pinUrl}>
-            <Link href={pinPageData.redirection}><a>{pinPageData.redirection}</a></Link>
-          </div>
+          <RedictBtn redirection={pinPageData.redirection}/>
           
           <LikeBtn pin={pinPageData} />
           <SaveBtn pin={pinPageData} />

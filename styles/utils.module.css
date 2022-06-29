@@ -147,7 +147,7 @@
   width: 100%;
 }
 .card {
-  box-shadow: rgb(0 0 0 / 10%) 0px 1px 20px 0px;
+  bbox-shadow: rgb(0 0 0 / 10%) 0px 1px 20px 0px;
   border-radius: 15px;
   padding-bottom: 15px;
 }
