@@ -82,20 +82,20 @@ export default function LikeBtn({ pin }) {
         ? (
             <button onClick={deleteLikedPin} className={styles.likeBtn}>
               <Image
-                src='/icons/heart_full.png'
+                src='/icons/heart.png'
                 alt={pin.title}
-                width={30}
-                height={30}
+                width={20}
+                height={20}
               />
             </button>
           )
         : (
             <button onClick={likePin} className={styles.likeBtn}>
               <Image
-                  src='/icons/heart_hollow.png'
+                  src='/icons/heart_dark.png'
                   alt={pin.title}
-                  width={30}
-                  height={30}
+                  width={20}
+                  height={20}
                 />
             </button>
           )

@@ -31,6 +31,14 @@
   border-radius: var(--mid-radius);
   border: 2px solid var(--primaryColor);
 }
+.darkBtn {
+  background-color: var(--dark);
+  color: white;
+  font-size: large;
+  padding: 10px 20px;
+  border-radius: var(--mid-radius);
+  border: none;
+}
 .simpleBtn {
   color: var(--primaryColor);
   text-decoration: 1px underline var(--primaryColor);
@@ -140,7 +148,7 @@
 }
 .card {
   box-shadow: rgb(0 0 0 / 10%) 0px 1px 20px 0px;
-  border-radius: var(--mid-radius);
+  border-radius: 15px;
   padding-bottom: 15px;
 }
 .card:hover {

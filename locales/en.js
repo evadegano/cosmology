@@ -9,10 +9,6 @@ export default {
       {
         text: "About us",
         url: "/info/aboutus"
-      },
-      {
-        text: "Blog",
-        url: "/blog"
       }
     ],
     headerSubtitle: "The app made to nourish your soul.",

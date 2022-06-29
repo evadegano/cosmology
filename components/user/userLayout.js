@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useContext } from 'react'
+import utilsStyles from '../../styles/utils.module.css'
 import styles from '../../styles/User.module.css'
 import UserAstro from './userAstro'
 import Head from 'next/head'
@@ -31,7 +32,7 @@ export default function UserLayout({ children }) {
         </section>
         
         <section id={styles.mainContent}>
-          <div>
+          <div className={utilsStyles.inline_centered}>
             <Link href={`${user ? "/user/" + user.uid : "#"}`}><a>Feed</a></Link>
             <Link href={`${user ? "/user/" + user.uid + "/profile" : "#"}`}><a>Saved Pins</a></Link>
             <Link href={`${user ? "/user/" + user.uid + "/chat" : "#"}`}><a>Chat</a></Link>

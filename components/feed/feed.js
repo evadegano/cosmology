@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
-import { Context } from '../../../../context'
+import { Context } from '../../context'
 import useSWR from 'swr'
-import PinMasonry from "../../../../components/feed/pinMasonry"
+import PinMasonry from "./pinMasonry"
 
 
 export default function Feed() {

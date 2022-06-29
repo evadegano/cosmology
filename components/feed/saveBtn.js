@@ -77,8 +77,8 @@ export default function SaveBtn({ pin }) {
     <div>
       {
         isPinSaved
-        ? <button onClick={deleteSavedPin} className={utilsStyles.secondaryBtn}>Saved</button>
-        : <button onClick={savePin} className={utilsStyles.mainBtn}>Save</button>
+        ? <button onClick={deleteSavedPin} className={utilsStyles.darkBtn}><b>Saved</b></button>
+        : <button onClick={savePin} className={utilsStyles.mainBtn}><b>Save</b></button>
       }
     </div>
   )

@@ -7,6 +7,7 @@ import styles from '../../styles/Feed.module.css'
 import utilsStyles from '../../styles/utils.module.css'
 import SaveBtn from './saveBtn'
 import LikeBtn from './likeBtn'
+import RedictBtn from './redirectBtn'
 
 
 export default function Pin({ pin }) {
@@ -43,8 +44,15 @@ export default function Pin({ pin }) {
 
         {isPinHovered && (
           <div className={styles.onHoverFeat} >
-            <SaveBtn pin={pin} />
-            <LikeBtn pin={pin} />
+            <div>
+              <SaveBtn pin={pin} />
+            </div>
+            
+            <div className={styles.onHoverFeat_foot}>
+              <RedictBtn redirection={pin.redirection}/>
+              <LikeBtn pin={pin} />
+            </div>
+            
           </div>
         )}
       </div>

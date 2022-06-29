@@ -40,9 +40,16 @@
 }
 .pinUrl {
   white-space: nowrap; 
-  width: 200px; 
+  width: 70%; 
   overflow: hidden;
   text-overflow: ellipsis; 
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--mid-radius);
+  padding: 10px;
+  cursor: pointer;
+}
+.pinUrl span {
+  margin-left: 10px;
 }
 
 .pinDesc span {
@@ -50,7 +57,7 @@
 }
 
 .pinImg {
-  border-radius: var(--mid-radius);
+  border-radius: 15px;
 }
 
 .pinImg.darken {
@@ -65,11 +72,21 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
+  padding: 10px 15px;
   height: 100%;
+  width: 100%;
 }
+.onHoverFeat_foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .likeBtn {
-  background: rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 50%;
+  padding-top: 2px;
   height: 40px;
   width: 40px;
   border: none;

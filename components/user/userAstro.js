@@ -3,14 +3,19 @@ import { Context } from '../../context'
 
 export default function UserAstro() {
   const { lang } = useContext(Context)
+  const sunSign = localStorage.getItem('sunSign')
+  const moonSign = localStorage.getItem('moonSign')
+  const risingSign = localStorage.getItem('risingSign')
 
   return (
     <section>
       <h2>{lang.profile.astroTitle}</h2>
 
-      {lang.profile.astroButtons.map(btn => {
-        return <button key={btn}>{btn}</button>
-      })}
+      <div>
+        <div>
+          {sunSign}
+        </div>
+      </div>
     </section>
   )
 }
