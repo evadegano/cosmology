@@ -57,7 +57,9 @@ export default function UserLayout({ children }) {
             </Link>
           </div>
           
-          {children}
+          <div>
+            {children}
+          </div>
         </section>
       </main>
         </>

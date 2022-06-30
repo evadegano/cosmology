@@ -49,7 +49,7 @@ export default function Pin({ pin }) {
             </div>
             
             <div className={styles.onHoverFeat_foot}>
-              <RedictBtn redirection={pin.redirection}/>
+              <RedictBtn redirection={pin.redirection} background="rgba(255, 255, 255, 0.9)" />
               <LikeBtn pin={pin} />
             </div>
             
@@ -58,7 +58,7 @@ export default function Pin({ pin }) {
       </div>
 
       <h2 className={styles.pinTitle}>{pin.title}</h2>
-      {pin.goals.map(goal => <p key={goal.goal}>{goal.goal}</p>)}
+      {/*pin.goals.map(goal => <p key={goal.goal}>{goal.goal}</p>)*/}
 
     </div>
   )

@@ -36,6 +36,8 @@
   justify-content: flex-start;
   align-items: center;
   flex: 1;
+  max-width: 100%;
+  overflow-y: hidden;
 }
 
 #mainContent_title {

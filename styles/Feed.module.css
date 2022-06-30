@@ -41,9 +41,9 @@
 .pinUrl {
   white-space: nowrap; 
   width: 70%; 
+  max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis; 
-  background: rgba(255, 255, 255, 0.9);
   border-radius: var(--mid-radius);
   padding: 5px 10px;
   cursor: pointer;
@@ -93,4 +93,39 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#pinPage {
+  height: 100%;
+  width: 100%;
+}
+
+#pinPage_inner {
+  padding-left: 30px;
+  margin-top: 30px;
+}
+
+#pinPage_header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#pinPage_body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 50px;
+}
+
+#pinPage_img {
+  position: relative;
+  width: 50%;
+  height: fit-content;
+}
+
+#pinPage_descr {
+  flex: 1;
 }
