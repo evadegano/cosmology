@@ -8,7 +8,7 @@ import UserAstro from './userAstro'
 import Head from 'next/head'
 import UserNav from './userNav'
 import UserHeader from './userHeader'
-
+import Loader from '../sitewide/loader'
 
 export default function UserLayout({ children }) {
   const router = useRouter()
@@ -19,50 +19,51 @@ export default function UserLayout({ children }) {
 
   return (
     <div>
-      {user && 
+      {user ? ( 
         <>
-      <Head>
-        <title>User profile</title>
-      </Head>
-      
-      <main id={styles.userLayout}>
-        <section id={styles.sideNavWrapper}>
-          <div id={styles.sideNav}>
-            <UserNav />
+          <Head>
+            <title>User profile</title>
+          </Head>
+          
+          <main id={styles.userLayout}>
+            <section id={styles.sideNavWrapper}>
+              <div id={styles.sideNav}>
+                <UserNav />
 
-            <div>
-              <UserHeader/>
-              <UserAstro/>
-            </div>
-          </div>
-          
-        </section>
-        
-        <section id={styles.mainContent}>
-          <div id={styles.mainContent_title}>
-            <Link href={`${user ? "/user/" + user.uid : "#"}`}>
-              <a className={`${router.pathname ==  "/user/[id]" ? styles.activeNav : ""}`}>
-                <b>Feed</b>
-              </a>
-            </Link>
-            <Link href={`${user ? "/user/" + user.uid + "/profile" : "#"}`}>
-              <a className={`${router.pathname ==  "/user/[id]/profile" ? styles.activeNav : ""}`}>
-                <b>Saved Pins</b>
-              </a>
-            </Link>
-            <Link href={`${user ? "/user/" + user.uid + "/chat" : "#"}`}>
-              <a className={`${router.pathname ==  "/user/[id]/chat" ? styles.activeNav : ""}`}>
-                <b>Chat</b>
-              </a>
-            </Link>
-          </div>
-          
-          <div>
-            {children}
-          </div>
-        </section>
-      </main>
-        </>
+                <div>
+                  <UserHeader/>
+                  <UserAstro/>
+                </div>
+              </div>
+              
+            </section>
+            
+            <section id={styles.mainContent}>
+              <div id={styles.mainContent_title}>
+                <Link href={`${user ? "/user/" + user.uid : "#"}`}>
+                  <a className={`${router.pathname ==  "/user/[id]" ? styles.activeNav : ""}`}>
+                    <b>Feed</b>
+                  </a>
+                </Link>
+                <Link href={`${user ? "/user/" + user.uid + "/profile" : "#"}`}>
+                  <a className={`${router.pathname ==  "/user/[id]/profile" ? styles.activeNav : ""}`}>
+                    <b>Saved Pins</b>
+                  </a>
+                </Link>
+                <Link href={`${user ? "/user/" + user.uid + "/chat" : "#"}`}>
+                  <a className={`${router.pathname ==  "/user/[id]/chat" ? styles.activeNav : ""}`}>
+                    <b>Chat</b>
+                  </a>
+                </Link>
+              </div>
+              
+              <div>
+                {children}
+              </div>
+            </section>
+          </main>
+        </>)
+        : <Loader />
       }
     </div>
   )

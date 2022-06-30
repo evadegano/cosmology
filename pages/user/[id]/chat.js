@@ -3,6 +3,7 @@ import { Context } from '../../../context'
 import UserLayout from "../../../components/user/userLayout"
 import SendMsg from '../../../components/chat/sendMsg'
 import Msg from '../../../components/chat/msg'
+import Loader from '../../../components/sitewide/loader'
 import utilsStyles from '../../../styles/utils.module.css'
 import styles from '../../../styles/Chat.module.css'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
@@ -24,7 +25,7 @@ export default function Chat() {
 
         {
           !messages
-          ? <p>No new messages</p>
+          ? <Loader />
           : messages.map(msg => {
             return (
               <Msg key={msg.createdAt} message={msg} />

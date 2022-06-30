@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Masonry from 'react-masonry-css'
 import styles from "../../styles/Feed.module.css"
 import Pin from './pin'
+import Loader from '../sitewide/loader'
 import useSWR from 'swr'
 
 
@@ -61,7 +62,7 @@ export default function PinMasonry({ pinTypes, filteredPins, data }) {
 
       {
         !data || errorMsg
-        ? <p>We are fetching new pins for you!</p>
+        ? <Loader />
         : filteredPins.map(pin => {
           return <Pin key={pin.id} pin={pin} />
         })
